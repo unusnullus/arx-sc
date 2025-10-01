@@ -1,0 +1,69 @@
+{
+  "type": "local_node",
+  "id": "local-chain-5df46cd8-ce47-47d6-8cc9-4792d31de89d",
+  "displayName": "Local Chain 1",
+  "state": {
+    "accounts": [
+      {
+        "address": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "balance": 1e22
+      },
+      {
+        "address": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "balance": 1e22
+      },
+      {
+        "address": "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
+        "balance": 1e22
+      },
+      {
+        "address": "0x90f79bf6eb2c4f870365e785982e1f101e93b906",
+        "balance": 1e22
+      },
+      {
+        "address": "0x15d34aaf54267db7d7c367839aaf71a00a2c6a65",
+        "balance": 1e22
+      },
+      {
+        "address": "0x9965507d1a55bcc2695c58ba16fb37d819b0a4dc",
+        "balance": 1e22
+      },
+      {
+        "address": "0x976ea74026e726554db657fa54763abd0c3a0aa9",
+        "balance": 1e22
+      },
+      {
+        "address": "0x14dc79964da2c08b23698b3d3cc7ca32193d9955",
+        "balance": 1e22
+      },
+      {
+        "address": "0x23618e81e3f5cdf7f54c3d65f7fbc0abf5b21e8f",
+        "balance": 1e22
+      },
+      {
+        "address": "0xa0ee7a142d267c1f36714e4a8f75612f20a79720",
+        "balance": 1e22
+      }
+    ],
+    "deployment": [],
+    "history": []
+  },
+  "network": {
+    "wakeDump": {
+      "metadata": { "labels": {}, "deployedLibraries": {} },
+      "chainDump": "0x1f8b08000000000000ffed564d6b243710fd2f3acfa1f451fa98a309d91c7208813d2d8ba92a95ecc633dd4e773b3bc1f8bf07cd8c0dbb98254bfa1288faa2d6d77b2a49afdeb3e1c3240f66ff6cc6a723eb6cf6064e60768675d436c840f35f97b67f58ccceacc35197958e8fe789d6eccc1d2db787e138ac66efafe3768669d1a66af6f66df2ced4a1b5419e0eeb15d5eccce3ac7fce34569a7e88c87708f261e25b3d892ecb6da74663bd7d9c07d11e876bfb79cc1d2d66dfa95e7fae83eccbcbce90c8f434ae4b9f03271baaa45262a8e404323b1f4b665fbd4812f2ce165f4b413c477a1afb2ae7101ce85c377072566d5190c2c42ebc5295a95ebacdce2ceb34d35d27d9f1e164b1fa40d430b8982aa79ac4c7947d216ac9120039891437c5743edaacd9aa6f28b5a586417c8dd8526301e286ecace6b625a69710a4d6ca910a4023c798b156578a82afd6350aae78962d318362e1107248ec53c19431e7e24028e5c6cd45010e05e37730bf4248eddf15051fc14600c8368283ec7ccae031bbec7c6898c1a2c508be53b5d9b58a9c213b7408fd8b60430490e6dfd96b825252492068b375553c810549152c2328549bfadd96bc657c0bb454b8456527a1e5043ea2a68c253bb5cd82d5e2b940dc143345a514c0454d2e2286ca1153230c297ae20a7de7446553cc121121554b882ce26241c1cc6463639f6ab6858142ddf4ee12a826b2c1551793d8e663b24103e596305ad71c502ac9c19698cd9756a3a225aa39b7d8826824ced925978ab4d6b83817373bcf979ea196b5cbb43cdcbee6ae8b54cbc362f69f9ecdbd52edadcfe691661dd75f68b9df2a852cf7e43f8e72d0e592e4aa48a89aab4ac29a883823634c1c456ab054bd75012d97902905eb1bf4f36935400dc5876476e6388cafe9f70768acb4eaefd3b46eb5af75a671215987695cded6c5a8d9369b2c8b20526c2dfb801a8b1368392a72c80a964b894255006c74ae31aa8f9e83eb0e6056d1e1715db6e47a98ee969bc3341d3759f0fff2df2ee65df3f88dabbda3e5d78b0fed8f568af87c6dfeb8687d1bf6b5838db95667b95f633dad33fd442bbd6ad271386d292b57697c67b16e5b69d19f557fd3f943f7a5dd197121a173e79761bdaf337da1c3a6efb63bdf0fdf44e7e2906f2e3de6cda69f35f64649a6f1a68bf0964f7dd63f9e745997b758ab6790105cc94dacd850a8710b924b893dd304974883d51043e1e2835028588ae594d17146342f5f6b9dd97ffabc33d3f1a8f3b9fef2f9bdfefba1e7a041e8707b56dec5ecc7a7c3e1e56f81339f4c470d0000"
+    },
+    "type": "Local Chain",
+    "config": {
+      "sessionId": "local-chain-5df46cd8-ce47-47d6-8cc9-4792d31de89d",
+      "type": "anvil",
+      "uri": "ws://127.0.0.1:55313"
+    }
+  },
+  "stateFingerprint": "3a82e3a6d1ac2e4daae286769e6107faa655d321408b0b1f9df23ede1a63b531",
+  "persistence": {
+    "isDirty": false,
+    "isAutosaveEnabled": true,
+    "lastSaveTimestamp": 1759322545572
+  }
+}

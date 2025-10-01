@@ -1,0 +1,38 @@
+
+> web@0.1.0 build /Users/denissergeev/work/arx-sc/apps/web
+> next build --turbopack
+
+   ▲ Next.js 15.5.4 (Turbopack)
+
+   Creating an optimized production build ...
+ ✓ Finished writing to disk in 55ms
+ ✓ Compiled successfully in 4.7s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/3) ...
+ ✓ Generating static pages (3/3)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                         Size  First Load JS
+┌ ƒ /                            1.14 kB         344 kB
+├ ƒ /_not-found                      0 B         343 kB
+├ ƒ /arxnet                          0 B         343 kB
+├ ƒ /buy                         8.14 kB         351 kB
+└ ƒ /messenger                       0 B         343 kB
++ First Load JS shared by all     346 kB
+  ├ chunks/10b9d139669beb81.js     16 kB
+  ├ chunks/36c0faba7c739a13.js   20.6 kB
+  ├ chunks/39c82f8bbaacaa7b.js   75.4 kB
+  ├ chunks/43235484fb6a0d4f.js    117 kB
+  ├ chunks/6fbf2d3590ed2297.js   16.4 kB
+  ├ chunks/70cc651f875c070a.js   11.6 kB
+  ├ chunks/9cfd34eb5c40c214.js   23.5 kB
+  ├ chunks/b228ea5639693f6a.js   34.9 kB
+  └ chunks/f1b25b1fda513485.js   10.6 kB
+  └ other shared chunks (total)  20.3 kB
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

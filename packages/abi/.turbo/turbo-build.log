@@ -1,0 +1,4 @@
+
+> @arx/abi@0.1.0 build /Users/denissergeev/work/arx-sc/packages/abi
+> tsc -p tsconfig.json
+

@@ -1,0 +1,16 @@
+{
+  "name": "@arx/contracts",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "fmt": "forge fmt",
+    "lint": "forge fmt --check",
+    "deploy": "forge script script/Deploy.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY",
+    "deploy:token": "forge script script/DeployToken.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY",
+    "deploy:sale": "forge script script/DeploySale.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY",
+    "deploy:zap": "forge script script/DeployZap.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY",
+    "wire:permissions": "forge script script/WirePermissions.s.sol --broadcast --rpc-url $RPC_URL --private-key $PRIVATE_KEY"
+  }
+}

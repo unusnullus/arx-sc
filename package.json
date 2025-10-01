@@ -1,0 +1,26 @@
+{
+  "name": "arx-sc",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ARX Token Sale + App monorepo",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.2",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "@tanstack/react-query": "^5.90.2",
+    "@uniswap/v3-core": "^1.0.1",
+    "@uniswap/v3-periphery": "^1.4.4",
+    "eslint": "^9",
+    "husky": "^9",
+    "lint-staged": "^15",
+    "prettier": "^3",
+    "turbo": "^2.5.8"
+  }
+}
