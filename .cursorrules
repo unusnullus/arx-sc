@@ -1,0 +1,76 @@
+# ARX Monorepo – Cursor Context Rules
+
+## Project Overview
+- Monorepo with pnpm workspaces and Turborepo.
+- Primary scope: ARX ERC-20 token, Token Sale, and Zapper flows.
+- Tech: Solidity (Foundry), Next.js (wagmi/RainbowKit), Tailwind UI packages.
+
+## Repository Structure
+- apps/web: Next.js app (Buy page as homepage).
+- packages/contracts: Foundry smart contracts, tests, scripts.
+- packages/ui, packages/abi, packages/config: shared packages.
+
+## Solidity – Architecture & Patterns
+- Upgradeability: Use UUPS (OpenZeppelin upgradeable contracts). No constructors; use initialize(...).
+  - Always implement _authorizeUpgrade(address).
+  - Deploy behind ERC1967Proxy and call initialize once.
+- Token: ARX is ERC20 + Burnable + Permit + AccessControl (MINTER_ROLE). Only sale/zapper integrations should mint.
+- Sale: ArxTokenSale takes USDC, forwards 100% to silo, mints ARX to buyer; supports buyWithUSDC and buyFor with zapper allowlist.
+- Zappers:
+  - GenericZapper: one zap(...) entrypoint; supports ERC-20 and ETH; optional EIP-2612 permit; swap to self then immediate transfer to recipient; validate outToken matches path tail.
+  - ArxZapRouter: single zapAndBuy(...) entrypoint (plus thin wrappers). Swaps to USDC then calls sale.buyFor(buyer, usdcOut). Validate path ends in USDC.
+- Safety:
+  - Reentrancy: checks-effects-interactions. Route swap output to address(this), then transfer/execute external calls. Add slither annotations only when necessary.
+  - ERC-20: Use SafeERC20.safeTransferFrom. For approvals, use allowance-check + forceApprove(spender, 0) then forceApprove(spender, amount); do not use try/catch on library calls.
+  - Input validation: revert on zero amounts; validate addresses; validate swap path output token (USDC or outToken).
+  - Pausability: Routers/Zappers should be Pausable and guard external zap functions with whenNotPaused.
+
+## Solidity – Formatting & Tooling
+- Foundry config: via_ir = true, optimizer enabled.
+- CI uses Foundry stable. Match local Foundry version to avoid fmt drift.
+- Formatting: forge fmt must pass. Imports should be wrapped multi-line style. Example:
+    import {
+        UUPSUpgradeable
+    } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+- NatSpec: Document contracts, params, events, and important invariants.
+- Remappings: Use @openzeppelin/*, @uniswap/* via node_modules remappings.
+- NEVER commit fmt diffs: run `forge fmt` locally before committing. If CI shows diffs, align to CI style (multi-line imports) and pin Foundry version to stable.
+
+## Testing (Foundry)
+- Deploy upgradeable contracts in tests via ERC1967Proxy and initialize(...).
+- Grant MINTER_ROLE to sale where needed.
+- Prefer explicit revert expectations with selectors.
+
+## Frontend (Next.js)
+- Buy page is the homepage (/). Remove other pages beyond ARX buy flow.
+- Web3:
+  - Use wagmi/RainbowKit with SSR-safe providers. Defer RainbowKit render to client side to avoid hydration issues.
+  - Use transpilePackages in Next config for internal packages.
+  - Quotes via Uniswap Quoter; handle BigInt carefully (ES2020+ target).
+- Env-driven chain config, addresses, and RPCs. Support local Anvil (31337).
+
+## CI
+- GitHub Actions: install Foundry stable before lint/test.
+- Lint step runs forge fmt --check. Ensure local formatting matches CI (multi-line wrapped imports).
+- Contracts must compile and tests must pass (forge test).
+
+## Commit Style
+- Use Conventional Commits (feat, fix, chore, refactor, docs, style, ci, test).
+
+## Do / Don’t
+- DO: Use SafeERC20, validate inputs, keep functions small and documented.
+- DO: Keep single entrypoints (zap, zapAndBuy) and thin wrappers.
+- DO: Prefer immediate token delivery post-swap (no pending/claim) unless explicitly required.
+- DON’T: Add constructors to upgradeable contracts.
+- DON’T: Use raw ERC-20 calls or unsafe approve patterns.
+- DON’T: Bypass whenNotPaused on zap flows.
+
+## Quick References
+- Upgradeable init pattern (example):
+  - Deploy impl → new Impl()
+  - Proxy: new ERC1967Proxy(address(impl), abi.encodeWithSelector(Impl.initialize.selector, ...))
+- Approval pattern:
+  - If allowance < amount: forceApprove(spender, 0) then forceApprove(spender, amount)
+- Path validation:
+  - GenericZapper: _lastTokenInPath(path) == address(outToken)
+  - ArxZapRouter: _lastTokenInPath(path) == address(USDC)
