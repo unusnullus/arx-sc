@@ -42,12 +42,15 @@ interface IERC20Permit {
 }
 
 /// @title GenericZapper
-/// @notice Generic zapper for swapping ERC-20 or native ETH to any desired output token
-///         via Uniswap V3, sending the output directly to the provided recipient.
-/// @dev This contract is protocol-agnostic and does not assume a specific post-swap action.
-///      It simply routes swaps and sends the output to a recipient. For integrations
-///      (e.g., token sales, deposit hooks), call the integration directly after receiving
-///      tokens at the recipient.
+/// @notice Protocol-agnostic zapper to swap ERC-20 or native ETH into any output token
+///         via Uniswap V3 and deliver the output directly to a recipient.
+/// @dev
+/// - ERC-20 path: Supports optional EIP-2612 permit to avoid a prior approval.
+/// - ETH path: Wraps to WETH9, swaps via Uniswap V3, and sends output to recipient.
+/// - Approvals: Uses an allowance check + SafeERC20.forceApprove to minimize gas and
+///   handle non-standard ERC-20s safely.
+/// - Composability: This contract does not assume any post-swap action; downstream
+///   integrations can act on the recipient balance.
 contract GenericZapper is Ownable, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
@@ -82,7 +85,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         swapRouter = _router;
     }
 
-    /// @notice Ensure allowance >= amount; reset to 0 first if needed (OZ v5 forceApprove).
+    /// @notice Ensure allowance for `spender` is at least `amount`.
+    /// @dev Resets to 0 first when needed and uses SafeERC20.forceApprove to handle
+    ///      non-standard tokens. No action taken if current allowance is sufficient.
     function _resetAndApprove(IERC20 token, address spender, uint256 amount) internal {
         uint256 current = token.allowance(address(this), spender);
         if (current < amount) {
@@ -93,58 +98,33 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         }
     }
 
-    /// @notice Zap an ERC-20 `tokenIn` to any output token (determined by `path`) via Uniswap V3.
-    /// @dev The output is sent directly to `recipient` by setting the router recipient.
+    /// @notice Zap ERC-20 into an arbitrary output token via Uniswap V3 with optional EIP-2612 permit.
+    /// @dev
+    /// - If `permitOwner != address(0)`, a permit is executed first to grant allowance to this contract,
+    ///   then tokens are pulled from `permitOwner` via transferFrom. Otherwise tokens are pulled from
+    ///   `msg.sender`.
+    /// - Output token is determined by the tail of `path` and delivered directly to `recipient`.
     /// @param tokenIn ERC-20 token to swap from.
-    /// @param amountIn Exact amount of `tokenIn` to swap.
-    /// @param path Uniswap V3 `exactInput` path ending at the desired output token.
-    /// @param minOut Minimum acceptable output amount (slippage protection).
-    /// @param recipient Address to receive the final output tokens.
-    /// @param deadline Unix timestamp after which the transaction should revert.
-    /// @return amountOut Amount of output tokens actually received by `recipient`.
+    /// @param amountIn Exact input amount of `tokenIn` to pull and swap.
+    /// @param path Uniswap V3 `exactInput` path ending in the output token.
+    /// @param minOut Minimum acceptable output amount.
+    /// @param recipient Destination address to receive the output tokens.
+    /// @param deadline Swap deadline (unix timestamp).
+    /// @param permitOwner If non-zero, the address that authorizes allowance via EIP-2612 permit.
+    /// @param permitValue Value approved by permit (must be >= `amountIn`). Ignored if `permitOwner == 0`.
+    /// @param permitDeadline Permit signature deadline. Ignored if `permitOwner == 0`.
+    /// @param v ECDSA v. Ignored if `permitOwner == 0`.
+    /// @param r ECDSA r. Ignored if `permitOwner == 0`.
+    /// @param s ECDSA s. Ignored if `permitOwner == 0`.
+    /// @return amountOut The amount of output tokens received by `recipient`.
     function zapERC20(
         IERC20 tokenIn,
         uint256 amountIn,
         bytes calldata path,
         uint256 minOut,
         address recipient,
-        uint256 deadline
-    ) external nonReentrant returns (uint256 amountOut) {
-        if (amountIn == 0) revert ZeroAmount();
-        if (recipient == address(0)) revert ZeroAddress();
-
-        // Pull tokenIn from the caller and approve the router
-        tokenIn.safeTransferFrom(msg.sender, address(this), amountIn);
-        _resetAndApprove(tokenIn, address(swapRouter), amountIn);
-
-        amountOut = swapRouter.exactInput(
-            ISwapRouterV3.ExactInputParams({
-                path: path,
-                recipient: recipient, // send output directly to recipient
-                deadline: deadline,
-                amountIn: amountIn,
-                amountOutMinimum: minOut
-            })
-        );
-
-        emit Zapped(msg.sender, recipient, address(tokenIn), amountIn, amountOut);
-    }
-
-    /// @notice Zap ERC-20 with EIP-2612 permit to avoid a prior on-chain approval.
-    /// @param owner Address granting allowance via permit; tokens are pulled from this address.
-    /// @param permitValue Allowance value to set via permit (>= amountIn).
-    /// @param permitDeadline Deadline for the permit signature.
-    /// @param v ECDSA v
-    /// @param r ECDSA r
-    /// @param s ECDSA s
-    function zapERC20WithPermit(
-        IERC20 tokenIn,
-        uint256 amountIn,
-        bytes calldata path,
-        uint256 minOut,
-        address recipient,
         uint256 deadline,
-        address owner,
+        address permitOwner,
         uint256 permitValue,
         uint256 permitDeadline,
         uint8 v,
@@ -153,9 +133,15 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     ) external nonReentrant returns (uint256 amountOut) {
         if (amountIn == 0) revert ZeroAmount();
         if (recipient == address(0)) revert ZeroAddress();
-        // Grant allowance to this contract using permit, then pull tokens from owner
-        IERC20Permit(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
-        tokenIn.safeTransferFrom(owner, address(this), amountIn);
+
+        address payer = msg.sender;
+        if (permitOwner != address(0)) {
+            // Grant allowance to this contract using EIP-2612 permit, then pull tokens from `permitOwner`
+            IERC20Permit(address(tokenIn)).permit(permitOwner, address(this), permitValue, permitDeadline, v, r, s);
+            payer = permitOwner;
+        }
+
+        tokenIn.safeTransferFrom(payer, address(this), amountIn);
         _resetAndApprove(tokenIn, address(swapRouter), amountIn);
 
         amountOut = swapRouter.exactInput(
@@ -168,7 +154,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
             })
         );
 
-        emit Zapped(owner, recipient, address(tokenIn), amountIn, amountOut);
+        emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
     }
 
     /// @notice Zap native ETH to any output token (determined by `pathFromWETH`) via Uniswap V3.
