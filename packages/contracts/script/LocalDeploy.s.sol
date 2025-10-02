@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {Script} from "forge-std/Script.sol";
-import {console2 as console} from "forge-std/console2.sol";
-import {ARX} from "../src/ARX.sol";
-import {ArxTokenSale} from "../src/ArxTokenSale.sol";
-import {MockUSDC} from "../src/mocks/MockUSDC.sol";
-import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { Script } from "forge-std/Script.sol";
+import { console2 as console } from "forge-std/console2.sol";
+import { ARX } from "../src/ARX.sol";
+import { ArxTokenSale } from "../src/ArxTokenSale.sol";
+import { MockUSDC } from "../src/mocks/MockUSDC.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract LocalDeploy is Script {
     function run() external {
@@ -30,5 +30,3 @@ contract LocalDeploy is Script {
         vm.stopBroadcast();
     }
 }
-
-

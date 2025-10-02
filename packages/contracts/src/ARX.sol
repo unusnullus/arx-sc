@@ -21,4 +21,3 @@ contract ARX is ERC20, ERC20Burnable, ERC20Permit, AccessControl, IARX {
         _mint(to, amount);
     }
 }
-

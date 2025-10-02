@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {Script} from "forge-std/Script.sol";
-import {ARX} from "../src/ARX.sol";
+import { Script } from "forge-std/Script.sol";
+import { ARX } from "../src/ARX.sol";
 
 contract DeployToken is Script {
     function run() external returns (ARX token) {
@@ -13,6 +13,3 @@ contract DeployToken is Script {
         vm.stopBroadcast();
     }
 }
-
-
-
