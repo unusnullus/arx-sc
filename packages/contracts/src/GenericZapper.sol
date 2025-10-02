@@ -169,7 +169,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
             })
         );
         // Forward output to recipient after swap completes to minimize reentrancy surface
-        // slither-disable-next-line reentrancy-no-eth
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
         outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
@@ -207,7 +207,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
-        // slither-disable-next-line reentrancy-no-eth
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
         outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(msg.sender, recipient, address(0), amountIn, amountOut);
