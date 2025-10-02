@@ -59,6 +59,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     /// @notice Uniswap V3 router used for swaps.
     ISwapRouterV3 public immutable swapRouter;
 
+    /// @notice Account -> token -> pending amount available to claim (pull model to minimize reentrancy surface).
+    mapping(address => mapping(IERC20 => uint256)) public pending;
+
     /// @notice Emitted after a successful zap.
     /// @param sender Caller who provided the assets to swap
     /// @param recipient Address that received the final output tokens
@@ -72,6 +75,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         uint256 amountIn,
         uint256 amountOut
     );
+
+    /// @notice Emitted when an account claims pending output tokens.
+    event Claimed(address indexed account, IERC20 indexed token, uint256 amount);
 
     error ZeroAddress();
     error ZeroAmount();
@@ -168,9 +174,8 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
-        // Forward output to recipient after swap completes to minimize reentrancy surface
-        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
-        outToken.safeTransfer(recipient, amountOut);
+        // Accrue to pending and let recipient pull via claim to avoid external calls here
+        pending[recipient][outToken] += amountOut;
 
         emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
     }
@@ -207,10 +212,19 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
-        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
-        outToken.safeTransfer(recipient, amountOut);
+        pending[recipient][outToken] += amountOut;
 
         emit Zapped(msg.sender, recipient, address(0), amountIn, amountOut);
+    }
+
+    /// @notice Claim accumulated output tokens.
+    function claim(IERC20 token) external nonReentrant {
+        uint256 amount = pending[msg.sender][token];
+        if (amount == 0) return;
+        pending[msg.sender][token] = 0;
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
+        token.safeTransfer(msg.sender, amount);
+        emit Claimed(msg.sender, token, amount);
     }
 
     receive() external payable {}
