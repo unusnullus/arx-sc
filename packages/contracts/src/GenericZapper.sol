@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
-import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -51,13 +54,13 @@ interface IERC20Permit {
 ///   handle non-standard ERC-20s safely.
 /// - Composability: This contract does not assume any post-swap action; downstream
 ///   integrations can act on the recipient balance.
-contract GenericZapper is Ownable, ReentrancyGuard {
+contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     using SafeERC20 for IERC20;
 
     /// @notice WETH9 contract used to wrap/unwrap native ETH for swaps.
-    IWETH9 public immutable WETH9;
+    IWETH9 public WETH9;
     /// @notice Uniswap V3 router used for swaps.
-    ISwapRouterV3 public immutable swapRouter;
+    ISwapRouterV3 public swapRouter;
 
     // No pending balances; output is transferred immediately to recipient post-swap.
 
@@ -75,20 +78,30 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         uint256 amountOut
     );
 
-    // No claim events since we transfer immediately.
+  
 
     error ZeroAddress();
     error ZeroAmount();
     error InvalidOutToken();
 
-    /// @param _owner Owner address with permission to update settings if extended.
-    /// @param _weth9 Address of WETH9 contract.
-    /// @param _router Address of Uniswap V3 swap router.
-    constructor(address _owner, IWETH9 _weth9, ISwapRouterV3 _router) Ownable(_owner) {
-        if (address(_weth9) == address(0) || address(_router) == address(0)) revert ZeroAddress();
-        WETH9 = _weth9;
-        swapRouter = _router;
+    /// @notice Initialize the upgradeable zapper.
+    /// @param owner_ Owner address with permission to pause/unpause/upgrade.
+    /// @param weth9_ Address of WETH9 contract.
+    /// @param router_ Address of Uniswap V3 swap router.
+    function initialize(address owner_, IWETH9 weth9_, ISwapRouterV3 router_) public initializer {
+        if (address(weth9_) == address(0) || address(router_) == address(0)) revert ZeroAddress();
+        __Ownable_init(owner_);
+        __ReentrancyGuard_init();
+        __Pausable_init();
+        __UUPSUpgradeable_init();
+        WETH9 = weth9_;
+        swapRouter = router_;
     }
+
+    function pause() external onlyOwner { _pause(); }
+    function unpause() external onlyOwner { _unpause(); }
+
+    function _authorizeUpgrade(address) internal override onlyOwner {}
 
     /// @notice Return the last token in a Uniswap V3 path (the output token).
     function _lastTokenInPath(bytes calldata path) internal pure returns (address token) {
@@ -145,7 +158,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         uint8 permitV,
         bytes32 permitR,
         bytes32 permitS
-    ) external payable nonReentrant returns (uint256 amountOut) {
+    ) external payable whenNotPaused nonReentrant returns (uint256 amountOut) {
         if (recipient == address(0)) revert ZeroAddress();
         if (address(outToken) != _lastTokenInPath(path)) revert InvalidOutToken();
 
