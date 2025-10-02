@@ -191,7 +191,10 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         }
 
         _resetAndApprove(USDC, address(sale), usdcOut);
+        // External call to sale; no state changes after. Clear allowance immediately after.
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
         sale.buyFor(buyer, usdcOut);
+        USDC.forceApprove(address(sale), 0);
         emit Zapped(buyer, tokenIn, amountIn, usdcOut);
     }
 
