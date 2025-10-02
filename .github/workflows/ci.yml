@@ -17,14 +17,14 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-      - name: Install deps
-        run: pnpm install --no-frozen-lockfile
-      - name: Lint
-        run: pnpm lint
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
+      - name: Install deps
+        run: pnpm install --no-frozen-lockfile
+      - name: Lint
+        run: pnpm lint
       - name: Forge tests
         run: |
           cd packages/contracts
