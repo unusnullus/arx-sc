@@ -86,6 +86,47 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
                                    USDC -> Silo, ARX minted to buyer
 ```
 
+## Governance & Voting
+
+- Vote token: `ARX` implements `ERC20Votes` (upgradeable) with 6 decimals.
+  - Holders can `delegate` to themselves or others; votes are checkpointed for `getVotes` queries.
+  - Permit-enabled approvals and burnable supply.
+
+- Timelock: `ArxTimelock` (UUPS + `TimelockControllerUpgradeable`)
+  - Enforces a delay for queued proposals before execution.
+  - Roles: `PROPOSER_ROLE`, `EXECUTOR_ROLE`, `CANCELLER_ROLE` (granted to governor by default in deploy script).
+
+- Governor: `ArxGovernor` (UUPS + `Governor*Upgradeable`)
+  - Counting: `GovernorCountingSimpleUpgradeable`
+  - Votes: `GovernorVotesUpgradeable` (from ARX checkpoints)
+  - Quorum: `GovernorVotesQuorumFractionUpgradeable` (configurable fraction)
+  - Execution: `GovernorTimelockControlUpgradeable` (routes queue/execute through timelock)
+  - Parameters set at init: quorum fraction, voting delay (blocks), voting period (blocks)
+
+- Governance flow
+
+```
+[Holder] --delegate--> [Votes on ARX]
+   |
+   v
+[Propose on Governor]
+   |
+   v  (if succeeded)
+[Queue on Timelock] --delay--> [Execute via Timelock]
+```
+
+- Common operations
+  - Delegate: call `ARX.delegate(address delegatee)`
+  - Create proposal: `Governor.propose(targets, values, calldatas, description)`
+  - Queue: `Governor.queue(..., descriptionHash)` (Timelock schedules batch)
+  - Execute: `Governor.execute(..., descriptionHash)` (Timelock executes batch)
+
+- Deploy script wiring (Sepolia)
+  - Deploys ARX + Sale
+  - Deploys `ArxTimelock` (delay from `TIMELOCK_DELAY`) and `ArxGovernor`
+  - Grants `PROPOSER_ROLE` and `EXECUTOR_ROLE` to Governor on Timelock
+  - Emits `.env` entries: `NEXT_PUBLIC_ARX_TIMELOCK`, `NEXT_PUBLIC_ARX_GOVERNOR`
+
 ## Frontend: User Journey
 
 1. Connect wallet (RainbowKit). App detects chain from `NEXT_PUBLIC_CHAIN_ID` and config.
@@ -212,6 +253,9 @@ Populate `apps/web/.env.local` (or `.env`) with chain RPC and deployed addresses
   - `src/ARX.sol` — ERC20 + Permit + Burnable + AccessControl
   - `src/ArxTokenSale.sol` — owner setters, zapper allowlist, forward-to-silo, mint
   - `src/ArxZapRouter.sol` — Uniswap V3 exactInput to USDC, approves sale, calls `buyFor`
+  - Governance:
+    - `src/governance/ArxTimelock.sol` — Timelock (UUPS)
+    - `src/governance/ArxGovernor.sol` — Governor (UUPS)
   - Scripts:
     - `DeployToken.s.sol`, `DeploySale.s.sol`, `DeployZap.s.sol`, `WirePermissions.s.sol`
     - `LocalDeploy.s.sol` (Anvil: MockUSDC + ARX + Sale)
