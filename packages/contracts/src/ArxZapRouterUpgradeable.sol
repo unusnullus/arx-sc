@@ -5,6 +5,7 @@ import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/I
 import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -35,7 +36,7 @@ interface IERC20PermitLike {
 }
 
 /// @title ArxZapRouter (Upgradeable)
-contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, UUPSUpgradeable {
+contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     using SafeERC20 for IERC20;
 
     IERC20 public USDC;
@@ -52,12 +53,16 @@ contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, Reentranc
         if (address(_usdc) == address(0) || address(_weth9) == address(0) || address(_router) == address(0) || address(_sale) == address(0)) revert ZeroAddress();
         __Ownable_init(_owner);
         __ReentrancyGuard_init();
+        __Pausable_init();
         __UUPSUpgradeable_init();
         USDC = _usdc;
         WETH9 = _weth9;
         swapRouter = _router;
         sale = _sale;
     }
+
+    function pause() external onlyOwner { _pause(); }
+    function unpause() external onlyOwner { _unpause(); }
 
     function setSale(IArxSaleLike _sale) external onlyOwner { if (address(_sale) == address(0)) revert ZeroAddress(); sale = _sale; }
 
@@ -69,7 +74,7 @@ contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, Reentranc
         }
     }
 
-    function zapERC20AndBuy(IERC20 tokenIn, uint256 amountIn, bytes calldata path, uint256 minUsdcOut, address buyer, uint256 deadline) external nonReentrant {
+    function zapERC20AndBuy(IERC20 tokenIn, uint256 amountIn, bytes calldata path, uint256 minUsdcOut, address buyer, uint256 deadline) external whenNotPaused nonReentrant {
         if (amountIn == 0) revert ZeroAmount();
         tokenIn.safeTransferFrom(msg.sender, address(this), amountIn);
         _resetAndApprove(tokenIn, address(swapRouter), amountIn);
@@ -79,7 +84,7 @@ contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, Reentranc
         emit Zapped(buyer, address(tokenIn), amountIn, usdcOut);
     }
 
-    function zapETHAndBuy(bytes calldata pathFromWETH, uint256 minUsdcOut, address buyer, uint256 deadline) external payable nonReentrant {
+    function zapETHAndBuy(bytes calldata pathFromWETH, uint256 minUsdcOut, address buyer, uint256 deadline) external payable whenNotPaused nonReentrant {
         uint256 amountIn = msg.value; if (amountIn == 0) revert ZeroAmount();
         WETH9.deposit{ value: amountIn }();
         _resetAndApprove(IERC20(address(WETH9)), address(swapRouter), amountIn);
@@ -102,7 +107,7 @@ contract ArxZapRouterUpgradeable is Initializable, OwnableUpgradeable, Reentranc
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external nonReentrant {
+    ) external whenNotPaused nonReentrant {
         if (amountIn == 0) revert ZeroAmount();
         IERC20PermitLike(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
         tokenIn.safeTransferFrom(owner, address(this), amountIn);
