@@ -4,7 +4,6 @@ pragma solidity ^0.8.26;
 import { Script } from "forge-std/Script.sol";
 import { ARX } from "../src/ARX.sol";
 import { ArxTokenSale } from "../src/ArxTokenSale.sol";
-import { ArxZapRouter, ISwapRouter, IWETH9, IArxTokenSale } from "../src/ArxZapRouter.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DeployScript is Script {
@@ -23,10 +22,7 @@ contract DeployScript is Script {
         ArxTokenSale sale = new ArxTokenSale(deployer, IERC20(usdc), arx, silo, price);
         arx.grantRole(arx.MINTER_ROLE(), address(sale));
 
-        ArxZapRouter zap =
-            new ArxZapRouter(deployer, IERC20(usdc), IWETH9(weth9), ISwapRouter(swapRouter));
-        zap.setSale(IArxTokenSale(address(sale)));
-        sale.setZapper(address(zap), true);
+        // No zap router in minimal setup
 
         vm.stopBroadcast();
     }

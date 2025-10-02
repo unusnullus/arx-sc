@@ -10,6 +10,7 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
+    "dev:local": "concurrently -k -n anvil,deploy,web -c blue,magenta,green \"anvil -b 2\" \"sh -c 'until curl -s http://127.0.0.1:8545 >/dev/null; do sleep 1; done; cd packages/contracts && forge script script/LocalDeploy.s.sol --broadcast --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -vv'\" \"pnpm --filter web dev\"",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -17,6 +18,8 @@
     "@tanstack/react-query": "^5.90.2",
     "@uniswap/v3-core": "^1.0.1",
     "@uniswap/v3-periphery": "^1.4.4",
+    "concurrently": "^9.2.1",
+    "curl": "^0.1.4",
     "eslint": "^9",
     "husky": "^9",
     "lint-staged": "^15",
