@@ -84,8 +84,8 @@ contract ArxTokenSaleTest is Test {
         vm.prank(buyer);
         sale.buyWithUSDC(50e6); // 50 USDC
 
-        // ARX out = 50 * 1e18 / 5e6 = 10e18
-        assertEq(arx.balanceOf(buyer), 10 ether);
+        // ARX out = 50 * 10^6 / 5e6 = 10 * 10^6
+        assertEq(arx.balanceOf(buyer), 10e6);
         assertEq(usdc.balanceOf(silo), 50e6);
     }
 
@@ -99,7 +99,7 @@ contract ArxTokenSaleTest is Test {
         sale.buyFor(buyer, 20e6);
         vm.stopPrank();
 
-        assertEq(arx.balanceOf(buyer), (20e6 * 1e18) / price);
+        assertEq(arx.balanceOf(buyer), (20e6 * (10 ** arx.decimals())) / price);
         assertEq(usdc.balanceOf(silo), 20e6);
     }
 
