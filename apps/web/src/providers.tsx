@@ -1,8 +1,13 @@
 "use client";
+import "@rainbow-me/rainbowkit/styles.css";
 import { WagmiProvider, http } from "wagmi";
 import { mainnet, sepolia, baseSepolia, foundry } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RainbowKitProvider, getDefaultConfig } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider,
+  getDefaultConfig,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
 import { PropsWithChildren, useMemo } from "react";
 
 const queryClient = new QueryClient();
@@ -37,7 +42,7 @@ export default function Providers({ children }: PropsWithChildren) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
+        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
