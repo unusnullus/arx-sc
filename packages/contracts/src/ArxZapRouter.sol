@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
-import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -49,15 +52,15 @@ interface IERC20Permit {
 /// @title ArxZapRouter
 /// @notice Zaps ERC-20 or ETH into USDC via Uniswap V3, then buys ARX for a buyer in a single transaction.
 /// @dev Approvals are reset using OZ v5 SafeERC20.forceApprove to avoid non-standard ERC-20 issues.
-contract ArxZapRouter is Ownable, ReentrancyGuard {
+contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     using SafeERC20 for IERC20;
 
     /// @notice USDC token used by the sale (6 decimals expected).
-    IERC20 public immutable USDC;
+    IERC20 public USDC;
     /// @notice WETH9 contract for wrapping/unwrapping native ETH.
-    IWETH9 public immutable WETH9;
+    IWETH9 public WETH9;
     /// @notice Uniswap V3 swap router.
-    ISwapRouter public immutable swapRouter;
+    ISwapRouter public swapRouter;
     /// @notice ARX sale contract.
     IArxTokenSale public sale;
 
@@ -71,14 +74,21 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
     /// @param _usdc USDC token address.
     /// @param _weth9 WETH9 token address.
     /// @param _router Uniswap V3 swap router address.
-    constructor(address _owner, IERC20 _usdc, IWETH9 _weth9, ISwapRouter _router) Ownable(_owner) {
+    function initialize(address _owner, IERC20 _usdc, IWETH9 _weth9, ISwapRouter _router) public initializer {
         if (address(_usdc) == address(0) || address(_weth9) == address(0) || address(_router) == address(0)) {
             revert ZeroAddress();
         }
+        __Ownable_init(_owner);
+        __ReentrancyGuard_init();
+        __Pausable_init();
+        __UUPSUpgradeable_init();
         USDC = _usdc;
         WETH9 = _weth9;
         swapRouter = _router;
     }
+
+    function pause() external onlyOwner { _pause(); }
+    function unpause() external onlyOwner { _unpause(); }
 
     /// @notice Set the sale contract used for final ARX purchase.
     function setSale(IArxTokenSale _sale) external onlyOwner {
@@ -110,7 +120,7 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
         uint256 minUsdcOut,
         address buyer,
         uint256 deadline
-    ) external nonReentrant {
+    ) external whenNotPaused nonReentrant {
         if (amountIn == 0) revert ZeroAmount();
         // Pull tokenIn from user
         tokenIn.safeTransferFrom(msg.sender, address(this), amountIn);
@@ -145,7 +155,7 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external nonReentrant {
+    ) external whenNotPaused nonReentrant {
         if (amountIn == 0) revert ZeroAmount();
         IERC20Permit(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
         tokenIn.safeTransferFrom(owner, address(this), amountIn);
@@ -174,7 +184,7 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
         uint256 minUsdcOut,
         address buyer,
         uint256 deadline
-    ) external payable nonReentrant {
+    ) external payable whenNotPaused nonReentrant {
         uint256 amountIn = msg.value;
         if (amountIn == 0) revert ZeroAmount();
         // Wrap ETH -> WETH9
@@ -198,5 +208,7 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
     }
 
     receive() external payable {}
+
+    function _authorizeUpgrade(address) internal override onlyOwner {}
 }
 // Removed in minimal setup (zap router not used)
