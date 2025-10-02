@@ -8,7 +8,7 @@ import {
   getDefaultConfig,
   darkTheme,
 } from "@rainbow-me/rainbowkit";
-import { PropsWithChildren, useMemo } from "react";
+import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +16,8 @@ const chains = [mainnet, sepolia, baseSepolia, foundry] as const;
 
 export default function Providers({ children }: PropsWithChildren) {
   const isBrowser = typeof window !== "undefined";
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const fallbackConfig = useMemo(() => {
     return createConfig({
       chains,
@@ -63,7 +65,13 @@ export default function Providers({ children }: PropsWithChildren) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
+        {mounted ? (
+          <RainbowKitProvider theme={darkTheme()}>
+            {children}
+          </RainbowKitProvider>
+        ) : (
+          children
+        )}
       </QueryClientProvider>
     </WagmiProvider>
   );
