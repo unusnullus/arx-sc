@@ -51,7 +51,13 @@ export default function Providers({ children }: PropsWithChildren) {
 
   if (!isBrowser || !wagmiConfig) {
     // Avoid initializing WalletConnect on the server to prevent indexedDB errors
-    return <WagmiProvider config={fallbackConfig}>{children}</WagmiProvider>;
+    return (
+      <WagmiProvider config={fallbackConfig}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </WagmiProvider>
+    );
   }
 
   return (
