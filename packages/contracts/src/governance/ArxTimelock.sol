@@ -2,9 +2,10 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { TimelockControllerUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
-import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+import { UUPSUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { TimelockControllerUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
 
 /// @title ArxTimelock
 /// @notice Upgradeable timelock controller for ARX governance.
@@ -24,5 +25,5 @@ contract ArxTimelock is Initializable, TimelockControllerUpgradeable, UUPSUpgrad
         __UUPSUpgradeable_init();
     }
 
-    function _authorizeUpgrade(address) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
+    function _authorizeUpgrade(address) internal override onlyRole(DEFAULT_ADMIN_ROLE) { }
 }

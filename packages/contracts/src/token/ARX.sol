@@ -14,8 +14,7 @@ import { ERC20VotesUpgradeable } from
     "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20VotesUpgradeable.sol";
 import { AccessControlUpgradeable } from
     "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import { NoncesUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/utils/NoncesUpgradeable.sol";
+import { NoncesUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/NoncesUpgradeable.sol";
 import { IARX } from "./IARX.sol";
 
 /// @title ARX Token

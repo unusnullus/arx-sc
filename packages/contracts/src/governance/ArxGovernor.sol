@@ -2,13 +2,20 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { GovernorUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/GovernorUpgradeable.sol";
-import { GovernorCountingSimpleUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorCountingSimpleUpgradeable.sol";
-import { GovernorVotesUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesUpgradeable.sol";
-import { GovernorVotesQuorumFractionUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesQuorumFractionUpgradeable.sol";
-import { GovernorTimelockControlUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorTimelockControlUpgradeable.sol";
-import { TimelockControllerUpgradeable } from "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
+import { UUPSUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { GovernorUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/GovernorUpgradeable.sol";
+import { GovernorCountingSimpleUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorCountingSimpleUpgradeable.sol";
+import { GovernorVotesUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesUpgradeable.sol";
+import { GovernorVotesQuorumFractionUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesQuorumFractionUpgradeable.sol";
+import { GovernorTimelockControlUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorTimelockControlUpgradeable.sol";
+import { TimelockControllerUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
 import { IVotes } from "@openzeppelin/contracts/governance/utils/IVotes.sol";
 
 /// @title ArxGovernor
@@ -120,7 +127,11 @@ contract ArxGovernor is
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) internal override(GovernorUpgradeable, GovernorTimelockControlUpgradeable) returns (uint256) {
+    )
+        internal
+        override(GovernorUpgradeable, GovernorTimelockControlUpgradeable)
+        returns (uint256)
+    {
         return super._cancel(targets, values, calldatas, descriptionHash);
     }
 
@@ -142,5 +153,5 @@ contract ArxGovernor is
         return super.supportsInterface(interfaceId);
     }
 
-    function _authorizeUpgrade(address) internal override onlyGovernance {}
+    function _authorizeUpgrade(address) internal override onlyGovernance { }
 }
