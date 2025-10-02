@@ -2,8 +2,9 @@
 pragma solidity ^0.8.26;
 
 import { Test } from "forge-std/Test.sol";
-import { ARX, IARX } from "../src/ARX.sol";
-import { ArxTokenSale } from "../src/ArxTokenSale.sol";
+import { ARX } from "../src/token/ARX.sol";
+import { IARX } from "../src/token/IARX.sol";
+import { ArxTokenSale } from "../src/sale/ArxTokenSale.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 

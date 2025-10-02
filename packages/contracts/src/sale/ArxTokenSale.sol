@@ -10,7 +10,7 @@ import { ReentrancyGuardUpgradeable } from
     "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import { IARX } from "./ARX.sol";
+import { IARX } from "../token/IARX.sol";
 
 /// @title ArxTokenSale
 /// @notice USDC-denominated token sale for ARX token.

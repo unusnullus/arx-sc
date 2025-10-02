@@ -2,8 +2,8 @@
 pragma solidity ^0.8.26;
 
 import { Script } from "forge-std/Script.sol";
-import { ArxTokenSale } from "../src/ArxTokenSale.sol";
-import { IARX } from "../src/ARX.sol";
+import { ArxTokenSale } from "../src/sale/ArxTokenSale.sol";
+import { IARX } from "../src/token/IARX.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 

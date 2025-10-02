@@ -2,9 +2,9 @@
 pragma solidity ^0.8.26;
 
 import { Script } from "forge-std/Script.sol";
-import { ARX } from "../src/ARX.sol";
-import { ArxTokenSale } from "../src/ArxTokenSale.sol";
-import { ArxZapRouter, IArxTokenSale } from "../src/ArxZapRouter.sol";
+import { ARX } from "../src/token/ARX.sol";
+import { ArxTokenSale } from "../src/sale/ArxTokenSale.sol";
+import { ArxZapRouter, IArxTokenSale } from "../src/zap/ArxZapRouter.sol";
 
 contract WirePermissions is Script {
     function run() external {
