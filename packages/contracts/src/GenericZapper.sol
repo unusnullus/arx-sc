@@ -69,16 +69,14 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         swapRouter = _router;
     }
 
-    /// @notice Resets and sets an allowance on `token` for `spender` to `amount`.
-    /// @dev Tries OZ v5 SafeERC20.forceApprove; falls back to approve where needed.
+    /// @notice Ensure allowance >= amount; reset to 0 first if needed (OZ v5 forceApprove).
     function _resetAndApprove(IERC20 token, address spender, uint256 amount) internal {
-        // Reset to 0 first to satisfy non-standard tokens
-        try token.forceApprove(spender, 0) {} catch {
-            token.approve(spender, 0);
-        }
-        // Then set desired allowance
-        try token.forceApprove(spender, amount) {} catch {
-            token.approve(spender, amount);
+        uint256 current = token.allowance(address(this), spender);
+        if (current < amount) {
+            if (current > 0) {
+                token.forceApprove(spender, 0);
+            }
+            token.forceApprove(spender, amount);
         }
     }
 

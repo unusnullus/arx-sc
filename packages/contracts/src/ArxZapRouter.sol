@@ -75,12 +75,12 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
     }
 
     function _resetAndApprove(IERC20 token, address spender, uint256 amount) internal {
-        // If token supports forceApprove (OZ v5 SafeERC20), use it; otherwise fallback
-        try token.forceApprove(spender, 0) {} catch {
-            token.approve(spender, 0);
-        }
-        try token.forceApprove(spender, amount) {} catch {
-            token.approve(spender, amount);
+        uint256 current = token.allowance(address(this), spender);
+        if (current < amount) {
+            if (current > 0) {
+                token.forceApprove(spender, 0);
+            }
+            token.forceApprove(spender, amount);
         }
     }
 
