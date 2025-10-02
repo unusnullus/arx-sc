@@ -7,6 +7,7 @@ import { ARX } from "../src/ARX.sol";
 import { ArxTokenSale } from "../src/ArxTokenSale.sol";
 import { MockUSDC } from "../src/mocks/MockUSDC.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 contract LocalDeploy is Script {
     function run() external {
@@ -21,8 +22,19 @@ contract LocalDeploy is Script {
         vm.startBroadcast(pk);
         MockUSDC usdc = new MockUSDC();
         usdc.mint(owner, 1_000_000e6);
-        ARX arx = new ARX(owner);
-        ArxTokenSale sale = new ArxTokenSale(owner, IERC20(address(usdc)), arx, owner, 5_000_000);
+
+        // Deploy ARX implementation and proxy
+        ARX arxImpl = new ARX();
+        bytes memory dataArx = abi.encodeWithSelector(ARX.initialize.selector, owner);
+        ERC1967Proxy arxProxy = new ERC1967Proxy(address(arxImpl), dataArx);
+        ARX arx = ARX(address(arxProxy));
+
+        // Deploy Sale implementation and proxy
+        ArxTokenSale saleImpl = new ArxTokenSale();
+        bytes memory dataSale = abi.encodeWithSelector(ArxTokenSale.initialize.selector, owner, IERC20(address(usdc)), arx, owner, 5_000_000);
+        ERC1967Proxy saleProxy = new ERC1967Proxy(address(saleImpl), dataSale);
+        ArxTokenSale sale = ArxTokenSale(address(saleProxy));
+
         arx.grantRole(arx.MINTER_ROLE(), address(sale));
         console.log("USDC:", address(usdc));
         console.log("ARX:", address(arx));

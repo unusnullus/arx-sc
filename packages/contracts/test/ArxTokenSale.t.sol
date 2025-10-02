@@ -5,6 +5,7 @@ import { Test } from "forge-std/Test.sol";
 import { ARX, IARX } from "../src/ARX.sol";
 import { ArxTokenSale } from "../src/ArxTokenSale.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 contract MockUSDC is IERC20 {
     string public name = "MockUSDC";
@@ -51,9 +52,18 @@ contract ArxTokenSaleTest is Test {
 
     function setUp() public {
         vm.startPrank(admin);
-        arx = new ARX(admin);
+        ARX arxImpl = new ARX();
+        bytes memory dataArx = abi.encodeWithSelector(ARX.initialize.selector, admin);
+        ERC1967Proxy arxProxy = new ERC1967Proxy(address(arxImpl), dataArx);
+        arx = ARX(address(arxProxy));
+
         usdc = new MockUSDC();
-        sale = new ArxTokenSale(admin, IERC20(address(usdc)), IARX(address(arx)), silo, price);
+
+        ArxTokenSale saleImpl = new ArxTokenSale();
+        bytes memory dataSale = abi.encodeWithSelector(ArxTokenSale.initialize.selector, admin, IERC20(address(usdc)), IARX(address(arx)), silo, price);
+        ERC1967Proxy saleProxy = new ERC1967Proxy(address(saleImpl), dataSale);
+        sale = ArxTokenSale(address(saleProxy));
+
         arx.grantRole(arx.MINTER_ROLE(), address(sale));
         vm.stopPrank();
 
