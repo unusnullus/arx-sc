@@ -2,6 +2,15 @@
 
 Production-grade monorepo for ARX token, token sale, zap router and web app.
 
+## What is ARX NET Slice?
+
+ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance and utility inside the ARX ecosystem. The project ships a complete on-chain sale architecture with upgradeable contracts, a zap router for 1‑click conversion (any token/ETH → USDC → ARX), and a modern web app to onboard users with clear quoting and slippage controls.
+
+- Token: `ARX` (name: "ARX NET Slice", symbol: `ARX`, 6 decimals, Permit, Burnable)
+- Sale: `ArxTokenSale` accepts USDC and mints ARX at an owner‑set price; forwards 100% of USDC to a treasury (silo)
+- Zaps: `ArxZapRouter` takes ERC‑20/ETH, swaps to USDC via Uniswap V3, then calls `sale.buyFor()` to deliver ARX in a single transaction
+- Frontend: Next.js app with wallet connect, token selector (USDC/ETH), Uniswap Quoter pricing, slippage controls, and live transaction preview
+
 ## Overview
 
 - Smart contracts (Foundry):
@@ -15,7 +24,76 @@ Production-grade monorepo for ARX token, token sale, zap router and web app.
 - Tooling: pnpm workspaces, Turborepo, ESLint/Prettier, Husky + lint-staged
 - CI: GitHub Actions (lint + forge tests)
 
-Price formula: `arxOut = (usdcAmount * 1e18) / priceUSDC` where `priceUSDC` uses 6 decimals.
+Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 decimals).
+
+## Architecture & Contract Binding (Schema)
+
+- Upgradeability
+  - All core contracts are UUPS upgradeable behind `ERC1967Proxy` and initialized via `initialize(...)`.
+  - Upgrades authorized by owner/admin in `_authorizeUpgrade`.
+
+- Binding (addresses and roles)
+  - `ArxTokenSale.USDC` → USDC ERC-20 (6 decimals)
+  - `ArxTokenSale.ARX` → `ARX` token (UUPS proxy)
+  - `ArxTokenSale.silo` → treasury that receives 100% of USDC
+  - `ArxTokenSale.zappers` → allowlist for routers/zappers that can call `buyFor`
+  - `ARX.MINTER_ROLE` → granted to `ArxTokenSale` so it can mint to buyers
+  - `ArxZapRouter` holds: `USDC`, `WETH9`, `swapRouter (UniswapV3)`, and the bound `sale`
+  - `GenericZapper` holds: `WETH9` and `swapRouter`
+
+- Data flow (direct buy)
+  1. User approves `ArxTokenSale` to spend USDC
+  2. User calls `sale.buyWithUSDC(usdcAmount)`
+  3. `sale` transfers USDC → `silo`, computes ARX, mints to `msg.sender`
+
+- Data flow (zap + buy)
+  1. User calls `ArxZapRouter.zapAndBuy` (or `zapETHAndBuy`) with a path that ends in USDC
+  2. Router swaps input → USDC via Uniswap V3, output to router
+  3. Router approves `sale` and calls `sale.buyFor(buyer, usdcOut)`
+  4. `sale` transfers USDC → `silo`, mints ARX to `buyer`
+
+- Generic Zapper (standalone)
+  - `GenericZapper.zap(tokenIn, outToken, ...)` swaps ERC-20 or ETH to `outToken`, validates that `path` tail matches `outToken`, and immediately transfers outputs to `recipient` (no claim state).
+  - Optional EIP-2612 permit supported via `(permitOwner, permitValue, permitDeadline, permitV, permitR, permitS)`; ETH path wraps via WETH9.
+
+- Security & safety
+  - Approvals: allowance-check + `forceApprove` (OZ v5) for non-standard tokens
+  - Reentrancy: checks-effects-interactions; route swap output to self before external calls; clear allowances after use
+  - Validation: revert on zero amounts; validate zap path last token (`USDC` for router, `outToken` for generic)
+  - Pausable: routers/zappers are pausable; external zap functions guarded with `whenNotPaused`
+
+- High-level schema (on-chain flows)
+
+```
+[User Wallet]
+   |  approve USDC
+   v
+[ArxTokenSale (Proxy)] --USDC--> [Silo Treasury]
+          |  mint
+          v
+      [ARX (Proxy)]  (to Buyer)
+
+[User Wallet] --(ETH/ERC-20 + path)--> [ArxZapRouter]
+      |           swap via Uniswap V3 to USDC (to router)
+      v                                              |
+  [ISwapRouter]  ------------------------------------
+                                                   approve
+                                                     |
+                                                     v
+                                 [ArxTokenSale.buyFor(buyer, usdc)]
+                                                     |
+                                                     v
+                                   USDC -> Silo, ARX minted to buyer
+```
+
+## Frontend: User Journey
+
+1. Connect wallet (RainbowKit). App detects chain from `NEXT_PUBLIC_CHAIN_ID` and config.
+2. Choose payment token: ETH or USDC.
+   - USDC: approve sale and call `buyWithUSDC()`.
+   - ETH: quote via Uniswap Quoter; if zap addresses are provided, call `zapETHAndBuy()`.
+3. Set slippage and deadline; preview expected ARX.
+4. Submit transaction and see confirmations.
 
 ## Repository Structure
 
