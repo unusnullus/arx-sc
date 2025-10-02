@@ -105,8 +105,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     ///   `msg.sender`.
     /// - Output token is determined by the tail of `path` and delivered directly to `recipient`.
     /// @param tokenIn ERC-20 token to swap from.
+    /// @param outToken ERC-20 token expected as the final output of `path`.
     /// @param amountIn Exact input amount of `tokenIn` to pull and swap.
-    /// @param path Uniswap V3 `exactInput` path ending in the output token.
+    /// @param path Uniswap V3 `exactInput` path ending in `outToken`.
     /// @param minOut Minimum acceptable output amount.
     /// @param recipient Destination address to receive the output tokens.
     /// @param deadline Swap deadline (unix timestamp).
@@ -119,6 +120,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     /// @return amountOut The amount of output tokens received by `recipient`.
     function zapERC20(
         IERC20 tokenIn,
+        IERC20 outToken,
         uint256 amountIn,
         bytes calldata path,
         uint256 minOut,
@@ -147,24 +149,28 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         amountOut = swapRouter.exactInput(
             ISwapRouterV3.ExactInputParams({
                 path: path,
-                recipient: recipient,
+                recipient: address(this),
                 deadline: deadline,
                 amountIn: amountIn,
                 amountOutMinimum: minOut
             })
         );
+        // Forward output to recipient after swap completes to minimize reentrancy surface
+        outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
     }
 
     /// @notice Zap native ETH to any output token (determined by `pathFromWETH`) via Uniswap V3.
     /// @dev This function wraps ETH to WETH9, performs the swap, and sends output to `recipient`.
-    /// @param pathFromWETH Uniswap V3 `exactInput` path that starts with WETH9 and ends at the output token.
+    /// @param outToken ERC-20 token expected as the final output of `pathFromWETH`.
+    /// @param pathFromWETH Uniswap V3 `exactInput` path that starts with WETH9 and ends at `outToken`.
     /// @param minOut Minimum acceptable output amount (slippage protection).
     /// @param recipient Address to receive the output tokens.
     /// @param deadline Unix timestamp after which the transaction should revert.
     /// @return amountOut Amount of output tokens actually received by `recipient`.
     function zapETH(
+        IERC20 outToken,
         bytes calldata pathFromWETH,
         uint256 minOut,
         address recipient,
@@ -181,12 +187,13 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         amountOut = swapRouter.exactInput(
             ISwapRouterV3.ExactInputParams({
                 path: pathFromWETH,
-                recipient: recipient,
+                recipient: address(this),
                 deadline: deadline,
                 amountIn: amountIn,
                 amountOutMinimum: minOut
             })
         );
+        outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(msg.sender, recipient, address(0), amountIn, amountOut);
     }
