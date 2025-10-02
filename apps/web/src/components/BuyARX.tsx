@@ -4,6 +4,8 @@ import {
   useChainId,
   usePublicClient,
   useWalletClient,
+  useSwitchChain,
+  useBalance,
 } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useMemo, useState } from "react";
@@ -19,8 +21,12 @@ import {
 
 export default function BuyARX() {
   const { address, isConnected } = useAccount();
-  const chainId = useChainId();
-  const publicClient = usePublicClient();
+  const currentChainId = useChainId();
+  const targetChainId = useMemo(
+    () => Number(process.env.NEXT_PUBLIC_CHAIN_ID || 31337),
+    [],
+  );
+  const publicClient = usePublicClient({ chainId: targetChainId });
   const { data: wallet } = useWalletClient();
   const [slippageBps, setSlippageBps] = useState(100);
   const [deadlineMinutes, setDeadlineMinutes] = useState(
@@ -28,13 +34,48 @@ export default function BuyARX() {
   );
   const [amountIn, setAmountIn] = useState<string>("");
   const [quoteUsdcOut, setQuoteUsdcOut] = useState<bigint | null>(null);
-  const cfg = useMemo(() => addressesByChain[chainId] || {}, [chainId]);
+  const [payToken, setPayToken] = useState<"ETH" | "USDC">("USDC");
+  const cfg = useMemo(
+    () => addressesByChain[targetChainId] || {},
+    [targetChainId],
+  );
+  const { switchChain } = useSwitchChain();
+
+  const { data: ethBal } = useBalance({
+    address,
+    chainId: targetChainId,
+    query: { enabled: !!address },
+  });
+  const { data: usdcBal } = useBalance({
+    address,
+    token: cfg.USDC as `0x${string}` | undefined,
+    chainId: targetChainId,
+    query: { enabled: !!address && !!cfg.USDC },
+  });
+
+  async function ensureChain() {
+    if (currentChainId !== targetChainId && switchChain) {
+      try {
+        await switchChain({ chainId: targetChainId });
+      } catch {}
+    }
+  }
 
   async function onQuote() {
+    if (payToken === "USDC") {
+      const usdcAmt = BigInt(
+        Math.floor(Number(amountIn || 0) * 1e6).toString(),
+      );
+      setQuoteUsdcOut(usdcAmt);
+      return;
+    }
     if (!publicClient || !cfg.UNISWAP_V3_QUOTER) return;
     const tokenIn = cfg.WETH9 as `0x${string}` | undefined;
     const tokenOut = cfg.USDC as `0x${string}` | undefined;
-    if (!tokenIn || !tokenOut) return;
+    if (!tokenIn || !tokenOut) {
+      setPayToken("USDC");
+      return;
+    }
     const fee = 500;
     const path = encodePacked(
       ["address", "uint24", "address"],
@@ -47,6 +88,7 @@ export default function BuyARX() {
       abi: UNISWAP_QUOTER_V2_ABI,
       functionName: "quoteExactInput",
       args: [path, amount],
+      chainId: targetChainId,
     });
     const out = Array.isArray(result)
       ? (result[0] as bigint)
@@ -56,6 +98,7 @@ export default function BuyARX() {
 
   async function onBuy() {
     if (!wallet || !publicClient) return;
+    await ensureChain();
     const deadline = BigInt(
       Math.floor(Date.now() / 1000) + deadlineMinutes * 60,
     );
@@ -64,8 +107,7 @@ export default function BuyARX() {
     const usdc = cfg.USDC as `0x${string}` | undefined;
     const weth9 = cfg.WETH9 as `0x${string}` | undefined;
 
-    // Local fallback: if no zap/uniswap configured, do direct USDC purchase
-    if (!zap || !weth9 || !cfg.UNISWAP_V3_QUOTER) {
+    if (payToken === "USDC") {
       if (!sale || !usdc) return;
       const amountUsdc = BigInt(
         Math.floor(Number(amountIn || 0) * 1e6).toString(),
@@ -75,21 +117,27 @@ export default function BuyARX() {
         abi: ERC20_ABI,
         functionName: "approve",
         args: [sale, amountUsdc],
+        chainId: targetChainId,
       });
       await wallet.writeContract({
         address: sale,
         abi: ARX_TOKEN_SALE_ABI,
         functionName: "buyWithUSDC",
         args: [amountUsdc],
+        chainId: targetChainId,
       });
       return;
     }
 
-    // Zap ETH path
+    // ETH zap path (requires zap + WETH9 + USDC configured)
+    if (!zap || !weth9 || !usdc) {
+      setPayToken("USDC");
+      return;
+    }
     const fee = 500;
     const pathFromWETH = encodePacked(
       ["address", "uint24", "address"],
-      [weth9!, fee, usdc!],
+      [weth9, fee, usdc],
     );
     const value = BigInt(Math.floor(Number(amountIn || 0) * 1e18).toString());
     await wallet.writeContract({
@@ -98,6 +146,7 @@ export default function BuyARX() {
       functionName: "zapETHAndBuy",
       args: [pathFromWETH, BigInt(0), address!, deadline],
       value,
+      chainId: targetChainId,
     });
   }
   return (
@@ -115,9 +164,25 @@ export default function BuyARX() {
           <div className="text-xs text-neutral-400 break-all">
             Wallet: {address}
           </div>
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-3 md:grid-cols-4">
             <div>
-              <label className="text-sm">Amount In (ETH)</label>
+              <label className="text-sm">Pay with</label>
+              <select
+                className="w-full rounded bg-neutral-900 p-2"
+                value={payToken}
+                onChange={(e) => setPayToken(e.target.value as "ETH" | "USDC")}
+              >
+                <option value="ETH">ETH</option>
+                <option value="USDC">USDC</option>
+              </select>
+              <div className="text-xs text-neutral-500 mt-1">
+                {payToken === "ETH"
+                  ? `Balance: ${ethBal ? Number(ethBal.value) / 1e18 : 0} ETH`
+                  : `Balance: ${usdcBal ? Number(usdcBal.value) / 1e6 : 0} USDC`}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm">Amount In ({payToken})</label>
               <input
                 className="w-full rounded bg-neutral-900 p-2"
                 type="number"

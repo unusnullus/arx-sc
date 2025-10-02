@@ -31,6 +31,27 @@ export const addressesByChain: Record<number, ChainAddresses> = {
       | `0x${string}`
       | undefined,
   },
+  // Sepolia
+  11155111: {
+    ARX: process.env.NEXT_PUBLIC_ARX as `0x${string}` | undefined,
+    ARX_TOKEN_SALE: process.env.NEXT_PUBLIC_ARX_TOKEN_SALE as
+      | `0x${string}`
+      | undefined,
+    ARX_ZAP_ROUTER: process.env.NEXT_PUBLIC_ARX_ZAP_ROUTER as
+      | `0x${string}`
+      | undefined,
+    USDC: process.env.NEXT_PUBLIC_USDC as `0x${string}` | undefined,
+    WETH9: process.env.NEXT_PUBLIC_WETH9 as `0x${string}` | undefined,
+    UNISWAP_V3_SWAPROUTER: process.env.NEXT_PUBLIC_UNISWAP_V3_SWAPROUTER as
+      | `0x${string}`
+      | undefined,
+    UNISWAP_V3_QUOTER: process.env.NEXT_PUBLIC_UNISWAP_V3_QUOTER as
+      | `0x${string}`
+      | undefined,
+    SILO_TREASURY: process.env.NEXT_PUBLIC_SILO_TREASURY as
+      | `0x${string}`
+      | undefined,
+  },
   // Base Sepolia (example placeholders)
   84532: {
     ARX: undefined,

@@ -1,7 +1,12 @@
 "use client";
 import "@rainbow-me/rainbowkit/styles.css";
 import { WagmiProvider, http, createConfig } from "wagmi";
-import { mainnet, sepolia, baseSepolia, foundry } from "wagmi/chains";
+import {
+  mainnet,
+  sepolia as baseSepoliaChain,
+  baseSepolia,
+  foundry,
+} from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   RainbowKitProvider,
@@ -12,7 +17,27 @@ import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 
 const queryClient = new QueryClient();
 
-const chains = [mainnet, sepolia, baseSepolia, foundry] as const;
+// Force Sepolia RPC to Infura
+const SEPOLIA = {
+  ...baseSepoliaChain,
+  rpcUrls: {
+    ...baseSepoliaChain.rpcUrls,
+    default: {
+      http: [
+        process.env.NEXT_PUBLIC_RPC_SEPOLIA ||
+          baseSepoliaChain.rpcUrls.default.http[0],
+      ],
+    },
+    public: {
+      http: [
+        process.env.NEXT_PUBLIC_RPC_SEPOLIA ||
+          baseSepoliaChain.rpcUrls.public.http[0],
+      ],
+    },
+  },
+} as const;
+
+const chains = [mainnet, SEPOLIA, baseSepolia, foundry] as const;
 
 export default function Providers({ children }: PropsWithChildren) {
   const isBrowser = typeof window !== "undefined";
@@ -23,7 +48,7 @@ export default function Providers({ children }: PropsWithChildren) {
       chains,
       transports: {
         [mainnet.id]: http(process.env.NEXT_PUBLIC_RPC_MAINNET),
-        [sepolia.id]: http(process.env.NEXT_PUBLIC_RPC_SEPOLIA),
+        [SEPOLIA.id]: http(process.env.NEXT_PUBLIC_RPC_SEPOLIA),
         [baseSepolia.id]: http(process.env.NEXT_PUBLIC_RPC_BASE_SEPOLIA),
         [foundry.id]: http(
           process.env.NEXT_PUBLIC_RPC_LOCAL || "http://127.0.0.1:8545",
@@ -41,7 +66,7 @@ export default function Providers({ children }: PropsWithChildren) {
       chains,
       transports: {
         [mainnet.id]: http(process.env.NEXT_PUBLIC_RPC_MAINNET),
-        [sepolia.id]: http(process.env.NEXT_PUBLIC_RPC_SEPOLIA),
+        [SEPOLIA.id]: http(process.env.NEXT_PUBLIC_RPC_SEPOLIA),
         [baseSepolia.id]: http(process.env.NEXT_PUBLIC_RPC_BASE_SEPOLIA),
         [foundry.id]: http(
           process.env.NEXT_PUBLIC_RPC_LOCAL || "http://127.0.0.1:8545",

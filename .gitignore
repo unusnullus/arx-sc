@@ -9,5 +9,9 @@ build
 artifacts
 foundry.toml.lock
 .env*
+**/.env*
+apps/web/.env.local
+apps/web/.env.sepolia
 
-
+scripts/deploy-sepolia.sh
+packages/contracts/broadcast/

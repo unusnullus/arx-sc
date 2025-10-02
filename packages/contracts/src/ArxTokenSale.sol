@@ -10,8 +10,7 @@ import { ReentrancyGuardUpgradeable } from
     "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import { IARX } from "../token/IARX.sol";
-import { IERC20Metadata } from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import { IARX } from "./token/IARX.sol";
 
 /// @title ArxTokenSale
 /// @notice USDC-denominated token sale for ARX token.
@@ -29,8 +28,6 @@ contract ArxTokenSale is
     IERC20 public USDC; // 6 decimals
     /// @notice ARX token to mint to buyers on successful purchase.
     IARX public ARX;
-    /// @notice Decimals of ARX token used in pricing conversion.
-    uint8 public arxDecimals;
 
     /// @notice Treasury address that receives 100% of USDC paid by buyers.
     address public silo;
@@ -71,7 +68,6 @@ contract ArxTokenSale is
         __UUPSUpgradeable_init();
         USDC = _usdc;
         ARX = _arx;
-        arxDecimals = IERC20Metadata(address(_arx)).decimals();
         silo = _silo;
         priceUSDC = _priceUSDC;
         emit PriceSet(_priceUSDC);
@@ -108,7 +104,7 @@ contract ArxTokenSale is
     function buyWithUSDC(uint256 usdcAmount) external nonReentrant {
         if (usdcAmount == 0) revert ZeroAmount();
         USDC.safeTransferFrom(msg.sender, silo, usdcAmount);
-        uint256 arxAmount = (usdcAmount * (10 ** uint256(arxDecimals))) / priceUSDC;
+        uint256 arxAmount = (usdcAmount * 1e18) / priceUSDC;
         ARX.mint(msg.sender, arxAmount);
         emit Purchased(msg.sender, usdcAmount, arxAmount);
     }
@@ -120,7 +116,7 @@ contract ArxTokenSale is
         if (!zappers[msg.sender]) revert NotZapper();
         if (usdcAmount == 0) revert ZeroAmount();
         USDC.safeTransferFrom(msg.sender, silo, usdcAmount);
-        uint256 arxAmount = (usdcAmount * (10 ** uint256(arxDecimals))) / priceUSDC;
+        uint256 arxAmount = (usdcAmount * 1e18) / priceUSDC;
         ARX.mint(buyer, arxAmount);
         emit Purchased(buyer, usdcAmount, arxAmount);
     }
