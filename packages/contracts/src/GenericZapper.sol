@@ -59,8 +59,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     /// @notice Uniswap V3 router used for swaps.
     ISwapRouterV3 public immutable swapRouter;
 
-    /// @notice Account -> token -> pending amount available to claim (pull model to minimize reentrancy surface).
-    mapping(address => mapping(IERC20 => uint256)) public pending;
+    // No pending balances; output is transferred immediately to recipient post-swap.
 
     /// @notice Emitted after a successful zap.
     /// @param sender Caller who provided the assets to swap
@@ -76,8 +75,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         uint256 amountOut
     );
 
-    /// @notice Emitted when an account claims pending output tokens.
-    event Claimed(address indexed account, IERC20 indexed token, uint256 amount);
+    // No claim events since we transfer immediately.
 
     error ZeroAddress();
     error ZeroAmount();
@@ -119,7 +117,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     /// - Provide `tokenIn` as address(0) for native ETH; `amountIn` must equal msg.value.
     /// - For ERC-20, if `permitOwner != address(0)`, a permit is executed and tokens are pulled from `permitOwner`.
     /// - Output token must match the last address in the Uniswap V3 `path`.
-    /// - Swap output is accrued to `pending[recipient][outToken]` for later pull via {claim} to minimize reentrancy.
+    /// - Swap output is transferred immediately to `recipient` after routing to this contract.
     /// @param tokenIn Address of ERC-20 to swap from, or address(0) for native ETH.
     /// @param outToken ERC-20 token expected as the final output of `path`.
     /// @param amountIn Exact input amount. For ETH, must equal msg.value.
@@ -190,7 +188,8 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
-        pending[recipient][outToken] += amountOut;
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
+        outToken.safeTransfer(recipient, amountOut);
         emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
     }
 
@@ -214,19 +213,12 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
-        pending[recipient][outToken] += amountOut;
+        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
+        outToken.safeTransfer(recipient, amountOut);
         emit Zapped(msg.sender, recipient, address(0), amountIn, amountOut);
     }
 
-    /// @notice Claim accumulated output tokens.
-    function claim(IERC20 token) external nonReentrant {
-        uint256 amount = pending[msg.sender][token];
-        if (amount == 0) return;
-        pending[msg.sender][token] = 0;
-        // slither-disable-next-line reentrancy-no-eth,reentrancy-benign
-        token.safeTransfer(msg.sender, amount);
-        emit Claimed(msg.sender, token, amount);
-    }
+    // No claim function; outputs are sent immediately.
 
     receive() external payable {}
 }
