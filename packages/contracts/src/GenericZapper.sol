@@ -2,21 +2,25 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
-import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
+import { UUPSUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { OwnableUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { ReentrancyGuardUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /// @notice Uniswap V3 swap router interface (exactInput).
 interface ISwapRouterV3 {
     struct ExactInputParams {
-        bytes path;              // token/fee hops encoded per Uniswap spec
-        address recipient;       // final recipient of the swapped output
-        uint256 deadline;        // timestamp after which tx reverts
-        uint256 amountIn;        // exact input amount
-        uint256 amountOutMinimum;// slippage protection
+        bytes path; // token/fee hops encoded per Uniswap spec
+        address recipient; // final recipient of the swapped output
+        uint256 deadline; // timestamp after which tx reverts
+        uint256 amountIn; // exact input amount
+        uint256 amountOutMinimum; // slippage protection
     }
 
     function exactInput(ExactInputParams calldata params)
@@ -54,7 +58,13 @@ interface IERC20Permit {
 ///   handle non-standard ERC-20s safely.
 /// - Composability: This contract does not assume any post-swap action; downstream
 ///   integrations can act on the recipient balance.
-contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
+contract GenericZapper is
+    Initializable,
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    PausableUpgradeable,
+    UUPSUpgradeable
+{
     using SafeERC20 for IERC20;
 
     /// @notice WETH9 contract used to wrap/unwrap native ETH for swaps.
@@ -78,8 +88,6 @@ contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgr
         uint256 amountOut
     );
 
-  
-
     error ZeroAddress();
     error ZeroAmount();
     error InvalidOutToken();
@@ -98,10 +106,15 @@ contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgr
         swapRouter = router_;
     }
 
-    function pause() external onlyOwner { _pause(); }
-    function unpause() external onlyOwner { _unpause(); }
+    function pause() external onlyOwner {
+        _pause();
+    }
 
-    function _authorizeUpgrade(address) internal override onlyOwner {}
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+
+    function _authorizeUpgrade(address) internal override onlyOwner { }
 
     /// @notice Return the last token in a Uniswap V3 path (the output token).
     function _lastTokenInPath(bytes calldata path) internal pure returns (address token) {
@@ -171,11 +184,20 @@ contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgr
             IERC20 erc20In = IERC20(tokenIn);
             address payer = msg.sender;
             if (permitOwner != address(0)) {
-                IERC20Permit(tokenIn).permit(permitOwner, address(this), permitValue, permitDeadline, permitV, permitR, permitS);
+                IERC20Permit(tokenIn).permit(
+                    permitOwner,
+                    address(this),
+                    permitValue,
+                    permitDeadline,
+                    permitV,
+                    permitR,
+                    permitS
+                );
                 payer = permitOwner;
             }
             if (amountIn == 0) revert ZeroAmount();
-            amountOut = _zapERC20(erc20In, outToken, amountIn, path, minOut, recipient, deadline, payer);
+            amountOut =
+                _zapERC20(erc20In, outToken, amountIn, path, minOut, recipient, deadline, payer);
         }
     }
 
@@ -233,6 +255,5 @@ contract GenericZapper is Initializable, OwnableUpgradeable, ReentrancyGuardUpgr
 
     // No claim function; outputs are sent immediately.
 
-    receive() external payable {}
+    receive() external payable { }
 }
-

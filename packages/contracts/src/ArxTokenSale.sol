@@ -2,9 +2,12 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { UUPSUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { OwnableUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { ReentrancyGuardUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { IARX } from "./ARX.sol";
@@ -13,9 +16,15 @@ import { IARX } from "./ARX.sol";
 /// @notice USDC-denominated token sale for ARX token.
 /// @dev Accepts USDC (6 decimals), forwards 100% of USDC to `silo` treasury,
 ///      and mints ARX to the buyer using priceUSDC (6 decimals per 1e18 ARX).
-contract ArxTokenSale is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, UUPSUpgradeable {
+contract ArxTokenSale is
+    Initializable,
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    UUPSUpgradeable
+{
     using SafeERC20 for IERC20;
     /// @notice USDC token used for purchases (6 decimals).
+
     IERC20 public USDC; // 6 decimals
     /// @notice ARX token to mint to buyers on successful purchase.
     IARX public ARX;
@@ -46,7 +55,10 @@ contract ArxTokenSale is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
     /// @param _arx Address of ARX token implementing IARX.
     /// @param _silo Treasury address that receives all USDC.
     /// @param _priceUSDC 6-decimal USDC price per 1e18 ARX (e.g. 5 USDC = 5_000_000).
-    function initialize(address _owner, IERC20 _usdc, IARX _arx, address _silo, uint256 _priceUSDC) public initializer {
+    function initialize(address _owner, IERC20 _usdc, IARX _arx, address _silo, uint256 _priceUSDC)
+        public
+        initializer
+    {
         if (address(_usdc) == address(0) || address(_arx) == address(0) || _silo == address(0)) {
             revert ZeroAddress();
         }
@@ -109,7 +121,5 @@ contract ArxTokenSale is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         emit Purchased(buyer, usdcAmount, arxAmount);
     }
 
-    function _authorizeUpgrade(address) internal override onlyOwner {}
+    function _authorizeUpgrade(address) internal override onlyOwner { }
 }
-
-

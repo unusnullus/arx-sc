@@ -31,7 +31,9 @@ contract LocalDeploy is Script {
 
         // Deploy Sale implementation and proxy
         ArxTokenSale saleImpl = new ArxTokenSale();
-        bytes memory dataSale = abi.encodeWithSelector(ArxTokenSale.initialize.selector, owner, IERC20(address(usdc)), arx, owner, 5_000_000);
+        bytes memory dataSale = abi.encodeWithSelector(
+            ArxTokenSale.initialize.selector, owner, IERC20(address(usdc)), arx, owner, 5_000_000
+        );
         ERC1967Proxy saleProxy = new ERC1967Proxy(address(saleImpl), dataSale);
         ArxTokenSale sale = ArxTokenSale(address(saleProxy));
 

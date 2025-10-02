@@ -2,10 +2,14 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
-import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
+import { UUPSUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import { OwnableUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { ReentrancyGuardUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import { PausableUpgradeable } from
+    "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -57,7 +61,13 @@ interface IERC20Permit {
 /// - Route swap output to this contract first, then approve and call sale.buyFor.
 /// - Path validation ensures the last token in the Uniswap V3 path is USDC to avoid misroutes.
 /// - UUPS upgradeable + Pausable for safe operations and flexibility.
-contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
+contract ArxZapRouter is
+    Initializable,
+    OwnableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    PausableUpgradeable,
+    UUPSUpgradeable
+{
     using SafeERC20 for IERC20;
 
     /// @notice USDC token used by the sale (6 decimals expected).
@@ -80,8 +90,14 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
     /// @param _usdc USDC token address.
     /// @param _weth9 WETH9 token address.
     /// @param _router Uniswap V3 swap router address.
-    function initialize(address _owner, IERC20 _usdc, IWETH9 _weth9, ISwapRouter _router) public initializer {
-        if (address(_usdc) == address(0) || address(_weth9) == address(0) || address(_router) == address(0)) {
+    function initialize(address _owner, IERC20 _usdc, IWETH9 _weth9, ISwapRouter _router)
+        public
+        initializer
+    {
+        if (
+            address(_usdc) == address(0) || address(_weth9) == address(0)
+                || address(_router) == address(0)
+        ) {
             revert ZeroAddress();
         }
         __Ownable_init(_owner);
@@ -93,8 +109,13 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         swapRouter = _router;
     }
 
-    function pause() external onlyOwner { _pause(); }
-    function unpause() external onlyOwner { _unpause(); }
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    function unpause() external onlyOwner {
+        _unpause();
+    }
 
     /// @notice Set the sale contract used for final ARX purchase.
     function setSale(IArxTokenSale _sale) external onlyOwner {
@@ -174,7 +195,15 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
             IERC20 erc20In = IERC20(tokenIn);
             address payer = msg.sender;
             if (permitOwner != address(0)) {
-                IERC20Permit(tokenIn).permit(permitOwner, address(this), permitValue, permitDeadline, permitV, permitR, permitS);
+                IERC20Permit(tokenIn).permit(
+                    permitOwner,
+                    address(this),
+                    permitValue,
+                    permitDeadline,
+                    permitV,
+                    permitR,
+                    permitS
+                );
                 payer = permitOwner;
             }
             erc20In.safeTransferFrom(payer, address(this), amountIn);
@@ -213,7 +242,20 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         address buyer,
         uint256 deadline
     ) external whenNotPaused nonReentrant {
-        zapAndBuy(address(tokenIn), amountIn, path, minUsdcOut, buyer, deadline, address(0), 0, 0, 0, bytes32(0), bytes32(0));
+        zapAndBuy(
+            address(tokenIn),
+            amountIn,
+            path,
+            minUsdcOut,
+            buyer,
+            deadline,
+            address(0),
+            0,
+            0,
+            0,
+            bytes32(0),
+            bytes32(0)
+        );
     }
 
     function zapERC20WithPermitAndBuy(
@@ -230,7 +272,20 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         bytes32 r,
         bytes32 s
     ) external whenNotPaused nonReentrant {
-        zapAndBuy(address(tokenIn), amountIn, path, minUsdcOut, buyer, deadline, owner, permitValue, permitDeadline, v, r, s);
+        zapAndBuy(
+            address(tokenIn),
+            amountIn,
+            path,
+            minUsdcOut,
+            buyer,
+            deadline,
+            owner,
+            permitValue,
+            permitDeadline,
+            v,
+            r,
+            s
+        );
     }
 
     /// @notice Zap native ETH to USDC via Uniswap V3 and buy ARX for `buyer`.
@@ -244,11 +299,24 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         address buyer,
         uint256 deadline
     ) external payable whenNotPaused nonReentrant {
-        zapAndBuy(address(0), msg.value, pathFromWETH, minUsdcOut, buyer, deadline, address(0), 0, 0, 0, bytes32(0), bytes32(0));
+        zapAndBuy(
+            address(0),
+            msg.value,
+            pathFromWETH,
+            minUsdcOut,
+            buyer,
+            deadline,
+            address(0),
+            0,
+            0,
+            0,
+            bytes32(0),
+            bytes32(0)
+        );
     }
 
-    receive() external payable {}
+    receive() external payable { }
 
-    function _authorizeUpgrade(address) internal override onlyOwner {}
+    function _authorizeUpgrade(address) internal override onlyOwner { }
 }
 // Removed in minimal setup (zap router not used)

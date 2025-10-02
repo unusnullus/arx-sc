@@ -60,7 +60,14 @@ contract ArxTokenSaleTest is Test {
         usdc = new MockUSDC();
 
         ArxTokenSale saleImpl = new ArxTokenSale();
-        bytes memory dataSale = abi.encodeWithSelector(ArxTokenSale.initialize.selector, admin, IERC20(address(usdc)), IARX(address(arx)), silo, price);
+        bytes memory dataSale = abi.encodeWithSelector(
+            ArxTokenSale.initialize.selector,
+            admin,
+            IERC20(address(usdc)),
+            IARX(address(arx)),
+            silo,
+            price
+        );
         ERC1967Proxy saleProxy = new ERC1967Proxy(address(saleImpl), dataSale);
         sale = ArxTokenSale(address(saleProxy));
 
