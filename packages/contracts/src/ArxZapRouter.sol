@@ -151,7 +151,7 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         uint8 permitV,
         bytes32 permitR,
         bytes32 permitS
-    ) external payable whenNotPaused nonReentrant {
+    ) public payable whenNotPaused nonReentrant {
         if (amountIn == 0) revert ZeroAmount();
         if (_lastTokenInPath(path) != address(USDC)) revert InvalidUSDCPath();
 
