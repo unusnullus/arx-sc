@@ -17,10 +17,10 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-      - name: Install Foundry
+      - name: Install Foundry (stable)
         uses: foundry-rs/foundry-toolchain@v1
         with:
-          version: nightly
+          version: stable
       - name: Install deps
         run: pnpm install --no-frozen-lockfile
       - name: Lint
