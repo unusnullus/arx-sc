@@ -128,9 +128,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
     /// @param permitOwner Optional address granting allowance via EIP-2612 permit (ERC-20 only).
     /// @param permitValue Permit value (>= amountIn) when `permitOwner` is set.
     /// @param permitDeadline Permit deadline when `permitOwner` is set.
-    /// @param v Permit v.
-    /// @param r Permit r.
-    /// @param s Permit s.
+    /// @param permitV EIP-2612 signature 'v' component for permit (ERC-20 only).
+    /// @param permitR EIP-2612 signature 'r' component for permit (ERC-20 only).
+    /// @param permitS EIP-2612 signature 's' component for permit (ERC-20 only).
     function zap(
         address tokenIn,
         IERC20 outToken,
@@ -142,9 +142,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         address permitOwner,
         uint256 permitValue,
         uint256 permitDeadline,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
+        uint8 permitV,
+        bytes32 permitR,
+        bytes32 permitS
     ) external payable nonReentrant returns (uint256 amountOut) {
         if (recipient == address(0)) revert ZeroAddress();
         if (address(outToken) != _lastTokenInPath(path)) revert InvalidOutToken();
@@ -158,7 +158,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
             IERC20 erc20In = IERC20(tokenIn);
             address payer = msg.sender;
             if (permitOwner != address(0)) {
-                IERC20Permit(tokenIn).permit(permitOwner, address(this), permitValue, permitDeadline, v, r, s);
+                IERC20Permit(tokenIn).permit(permitOwner, address(this), permitValue, permitDeadline, permitV, permitR, permitS);
                 payer = permitOwner;
             }
             if (amountIn == 0) revert ZeroAmount();
