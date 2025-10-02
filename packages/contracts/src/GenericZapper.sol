@@ -75,6 +75,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
 
     error ZeroAddress();
     error ZeroAmount();
+    error InvalidOutToken();
 
     /// @param _owner Owner address with permission to update settings if extended.
     /// @param _weth9 Address of WETH9 contract.
@@ -83,6 +84,15 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         if (address(_weth9) == address(0) || address(_router) == address(0)) revert ZeroAddress();
         WETH9 = _weth9;
         swapRouter = _router;
+    }
+
+    /// @notice Return the last token in a Uniswap V3 path (the output token).
+    function _lastTokenInPath(bytes calldata path) internal pure returns (address token) {
+        bytes memory p = path; // copy to memory for assembly
+        assembly {
+            let len := mload(p)
+            token := shr(96, mload(add(add(p, 32), sub(len, 20))))
+        }
     }
 
     /// @notice Ensure allowance for `spender` is at least `amount`.
@@ -146,6 +156,9 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         tokenIn.safeTransferFrom(payer, address(this), amountIn);
         _resetAndApprove(tokenIn, address(swapRouter), amountIn);
 
+        // Validate declared outToken matches the path tail to avoid forwarding wrong asset
+        if (address(outToken) != _lastTokenInPath(path)) revert InvalidOutToken();
+
         amountOut = swapRouter.exactInput(
             ISwapRouterV3.ExactInputParams({
                 path: path,
@@ -156,6 +169,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
             })
         );
         // Forward output to recipient after swap completes to minimize reentrancy surface
+        // slither-disable-next-line reentrancy-no-eth
         outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(payer, recipient, address(tokenIn), amountIn, amountOut);
@@ -193,6 +207,7 @@ contract GenericZapper is Ownable, ReentrancyGuard {
                 amountOutMinimum: minOut
             })
         );
+        // slither-disable-next-line reentrancy-no-eth
         outToken.safeTransfer(recipient, amountOut);
 
         emit Zapped(msg.sender, recipient, address(0), amountIn, amountOut);
