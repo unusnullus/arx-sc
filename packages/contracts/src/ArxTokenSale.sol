@@ -4,6 +4,7 @@ pragma solidity ^0.8.26;
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { IARX } from "./ARX.sol";
 
 /// @title ArxTokenSale
@@ -11,6 +12,7 @@ import { IARX } from "./ARX.sol";
 /// @dev Accepts USDC (6 decimals), forwards 100% of USDC to `silo` treasury,
 ///      and mints ARX to the buyer using priceUSDC (6 decimals per 1e18 ARX).
 contract ArxTokenSale is Ownable, ReentrancyGuard {
+    using SafeERC20 for IERC20;
     /// @notice USDC token used for purchases (6 decimals).
     IERC20 public immutable USDC; // 6 decimals
     /// @notice ARX token to mint to buyers on successful purchase.
@@ -86,7 +88,7 @@ contract ArxTokenSale is Ownable, ReentrancyGuard {
     /// @param usdcAmount Amount of USDC (6 decimals) to spend.
     function buyWithUSDC(uint256 usdcAmount) external nonReentrant {
         if (usdcAmount == 0) revert ZeroAmount();
-        require(USDC.transferFrom(msg.sender, silo, usdcAmount), "USDC transfer failed");
+        USDC.safeTransferFrom(msg.sender, silo, usdcAmount);
         uint256 arxAmount = (usdcAmount * 1e18) / priceUSDC;
         ARX.mint(msg.sender, arxAmount);
         emit Purchased(msg.sender, usdcAmount, arxAmount);
@@ -98,7 +100,7 @@ contract ArxTokenSale is Ownable, ReentrancyGuard {
     function buyFor(address buyer, uint256 usdcAmount) external nonReentrant {
         if (!zappers[msg.sender]) revert NotZapper();
         if (usdcAmount == 0) revert ZeroAmount();
-        require(USDC.transferFrom(msg.sender, silo, usdcAmount), "USDC transfer failed");
+        USDC.safeTransferFrom(msg.sender, silo, usdcAmount);
         uint256 arxAmount = (usdcAmount * 1e18) / priceUSDC;
         ARX.mint(buyer, arxAmount);
         emit Purchased(buyer, usdcAmount, arxAmount);
