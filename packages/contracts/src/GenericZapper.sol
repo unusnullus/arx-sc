@@ -28,6 +28,19 @@ interface IWETH9 is IERC20 {
     function withdraw(uint256) external;
 }
 
+/// @notice Minimal ERC20Permit interface (EIP-2612).
+interface IERC20Permit {
+    function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
+}
+
 /// @title GenericZapper
 /// @notice Generic zapper for swapping ERC-20 or native ETH to any desired output token
 ///         via Uniswap V3, sending the output directly to the provided recipient.
@@ -115,6 +128,47 @@ contract GenericZapper is Ownable, ReentrancyGuard {
         );
 
         emit Zapped(msg.sender, recipient, address(tokenIn), amountIn, amountOut);
+    }
+
+    /// @notice Zap ERC-20 with EIP-2612 permit to avoid a prior on-chain approval.
+    /// @param owner Address granting allowance via permit; tokens are pulled from this address.
+    /// @param permitValue Allowance value to set via permit (>= amountIn).
+    /// @param permitDeadline Deadline for the permit signature.
+    /// @param v ECDSA v
+    /// @param r ECDSA r
+    /// @param s ECDSA s
+    function zapERC20WithPermit(
+        IERC20 tokenIn,
+        uint256 amountIn,
+        bytes calldata path,
+        uint256 minOut,
+        address recipient,
+        uint256 deadline,
+        address owner,
+        uint256 permitValue,
+        uint256 permitDeadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external nonReentrant returns (uint256 amountOut) {
+        if (amountIn == 0) revert ZeroAmount();
+        if (recipient == address(0)) revert ZeroAddress();
+        // Grant allowance to this contract using permit, then pull tokens from owner
+        IERC20Permit(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
+        tokenIn.safeTransferFrom(owner, address(this), amountIn);
+        _resetAndApprove(tokenIn, address(swapRouter), amountIn);
+
+        amountOut = swapRouter.exactInput(
+            ISwapRouterV3.ExactInputParams({
+                path: path,
+                recipient: recipient,
+                deadline: deadline,
+                amountIn: amountIn,
+                amountOutMinimum: minOut
+            })
+        );
+
+        emit Zapped(owner, recipient, address(tokenIn), amountIn, amountOut);
     }
 
     /// @notice Zap native ETH to any output token (determined by `pathFromWETH`) via Uniswap V3.

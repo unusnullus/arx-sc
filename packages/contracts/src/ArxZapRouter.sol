@@ -34,6 +34,18 @@ interface IWETH9 is IERC20 {
     function withdraw(uint256) external;
 }
 
+interface IERC20Permit {
+    function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
+}
+
 /// @title ArxZapRouter
 /// @notice Zaps ERC-20 or ETH into USDC via Uniswap V3, then buys ARX for a buyer in a single transaction.
 /// @dev Approvals are reset using OZ v5 SafeERC20.forceApprove to avoid non-standard ERC-20 issues.
@@ -115,6 +127,38 @@ contract ArxZapRouter is Ownable, ReentrancyGuard {
             })
         );
         // Approve sale and buy ARX for buyer
+        _resetAndApprove(USDC, address(sale), usdcOut);
+        sale.buyFor(buyer, usdcOut);
+        emit Zapped(buyer, address(tokenIn), amountIn, usdcOut);
+    }
+
+    function zapERC20WithPermitAndBuy(
+        IERC20 tokenIn,
+        uint256 amountIn,
+        bytes calldata path,
+        uint256 minUsdcOut,
+        address buyer,
+        uint256 deadline,
+        address owner,
+        uint256 permitValue,
+        uint256 permitDeadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external nonReentrant {
+        if (amountIn == 0) revert ZeroAmount();
+        IERC20Permit(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
+        tokenIn.safeTransferFrom(owner, address(this), amountIn);
+        _resetAndApprove(tokenIn, address(swapRouter), amountIn);
+        uint256 usdcOut = swapRouter.exactInput(
+            ISwapRouter.ExactInputParams({
+                path: path,
+                recipient: address(this),
+                deadline: deadline,
+                amountIn: amountIn,
+                amountOutMinimum: minUsdcOut
+            })
+        );
         _resetAndApprove(USDC, address(sale), usdcOut);
         sale.buyFor(buyer, usdcOut);
         emit Zapped(buyer, address(tokenIn), amountIn, usdcOut);
