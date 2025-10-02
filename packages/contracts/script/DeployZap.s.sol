@@ -16,7 +16,11 @@ contract DeployZap is Script {
         address router = vm.envAddress("UNISWAP_V3_SWAPROUTER");
         ArxZapRouter impl = new ArxZapRouter();
         bytes memory data = abi.encodeWithSelector(
-            ArxZapRouter.initialize.selector, owner, IERC20(usdc), IWETH9(weth9), ISwapRouter(router)
+            ArxZapRouter.initialize.selector,
+            owner,
+            IERC20(usdc),
+            IWETH9(weth9),
+            ISwapRouter(router)
         );
         ERC1967Proxy proxy = new ERC1967Proxy(address(impl), data);
         zap = ArxZapRouter(payable(address(proxy)));
