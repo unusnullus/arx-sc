@@ -50,8 +50,13 @@ interface IERC20Permit {
 }
 
 /// @title ArxZapRouter
-/// @notice Zaps ERC-20 or ETH into USDC via Uniswap V3, then buys ARX for a buyer in a single transaction.
-/// @dev Approvals are reset using OZ v5 SafeERC20.forceApprove to avoid non-standard ERC-20 issues.
+/// @notice Single-call "zap and buy" for ARX: swap ERC-20 or native ETH into USDC via Uniswap V3,
+///         then purchase ARX for the provided buyer using the sale contract.
+/// @dev
+/// - Safe approvals using allowance check + forceApprove for non-standard tokens.
+/// - Route swap output to this contract first, then approve and call sale.buyFor.
+/// - Path validation ensures the last token in the Uniswap V3 path is USDC to avoid misroutes.
+/// - UUPS upgradeable + Pausable for safe operations and flexibility.
 contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, UUPSUpgradeable {
     using SafeERC20 for IERC20;
 
@@ -69,6 +74,7 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
 
     error ZeroAddress();
     error ZeroAmount();
+    error InvalidUSDCPath();
 
     /// @param _owner Owner address allowed to set sale.
     /// @param _usdc USDC token address.
@@ -96,6 +102,15 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         sale = _sale;
     }
 
+    /// @notice Return the last token in a Uniswap V3 path (the output token).
+    function _lastTokenInPath(bytes calldata path) internal pure returns (address token) {
+        bytes memory p = path;
+        assembly {
+            let len := mload(p)
+            token := shr(96, mload(add(add(p, 32), sub(len, 20))))
+        }
+    }
+
     function _resetAndApprove(IERC20 token, address spender, uint256 amount) internal {
         uint256 current = token.allowance(address(this), spender);
         if (current < amount) {
@@ -104,6 +119,80 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
             }
             token.forceApprove(spender, amount);
         }
+    }
+
+    /// @notice One-function API: swap to USDC via Uniswap V3 and buy ARX for `buyer`.
+    /// @dev
+    /// - If `tokenIn == address(0)`, `amountIn` must equal `msg.value`, and ETH will be wrapped to WETH9.
+    /// - For ERC-20, optional EIP-2612 permit is supported via `permitOwner/permit*`.
+    /// - The provided `path` MUST end with USDC or this reverts.
+    /// @param tokenIn ERC-20 token address to swap from, or address(0) for native ETH.
+    /// @param amountIn Exact input amount. For ETH, must equal msg.value.
+    /// @param path Uniswap V3 encoded path of hops that MUST end in USDC.
+    /// @param minUsdcOut Minimum USDC output after the swap.
+    /// @param buyer Address to receive the purchased ARX.
+    /// @param deadline Unix timestamp after which the swap should revert.
+    /// @param permitOwner If non-zero, the address granting allowance via EIP-2612 permit.
+    /// @param permitValue Permit value (>= amountIn) when `permitOwner` is set.
+    /// @param permitDeadline Permit deadline when `permitOwner` is set.
+    /// @param permitV EIP-2612 signature v.
+    /// @param permitR EIP-2612 signature r.
+    /// @param permitS EIP-2612 signature s.
+    function zapAndBuy(
+        address tokenIn,
+        uint256 amountIn,
+        bytes calldata path,
+        uint256 minUsdcOut,
+        address buyer,
+        uint256 deadline,
+        address permitOwner,
+        uint256 permitValue,
+        uint256 permitDeadline,
+        uint8 permitV,
+        bytes32 permitR,
+        bytes32 permitS
+    ) external payable whenNotPaused nonReentrant {
+        if (amountIn == 0) revert ZeroAmount();
+        if (_lastTokenInPath(path) != address(USDC)) revert InvalidUSDCPath();
+
+        uint256 usdcOut;
+        if (tokenIn == address(0)) {
+            // Native ETH -> WETH9 -> ... -> USDC
+            if (msg.value != amountIn) revert ZeroAmount();
+            WETH9.deposit{ value: amountIn }();
+            _resetAndApprove(IERC20(address(WETH9)), address(swapRouter), amountIn);
+            usdcOut = swapRouter.exactInput(
+                ISwapRouter.ExactInputParams({
+                    path: path,
+                    recipient: address(this),
+                    deadline: deadline,
+                    amountIn: amountIn,
+                    amountOutMinimum: minUsdcOut
+                })
+            );
+        } else {
+            IERC20 erc20In = IERC20(tokenIn);
+            address payer = msg.sender;
+            if (permitOwner != address(0)) {
+                IERC20Permit(tokenIn).permit(permitOwner, address(this), permitValue, permitDeadline, permitV, permitR, permitS);
+                payer = permitOwner;
+            }
+            erc20In.safeTransferFrom(payer, address(this), amountIn);
+            _resetAndApprove(erc20In, address(swapRouter), amountIn);
+            usdcOut = swapRouter.exactInput(
+                ISwapRouter.ExactInputParams({
+                    path: path,
+                    recipient: address(this),
+                    deadline: deadline,
+                    amountIn: amountIn,
+                    amountOutMinimum: minUsdcOut
+                })
+            );
+        }
+
+        _resetAndApprove(USDC, address(sale), usdcOut);
+        sale.buyFor(buyer, usdcOut);
+        emit Zapped(buyer, tokenIn, amountIn, usdcOut);
     }
 
     /// @notice Zap `tokenIn` to USDC via Uniswap V3 and buy ARX for `buyer`.
@@ -121,25 +210,7 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         address buyer,
         uint256 deadline
     ) external whenNotPaused nonReentrant {
-        if (amountIn == 0) revert ZeroAmount();
-        // Pull tokenIn from user
-        tokenIn.safeTransferFrom(msg.sender, address(this), amountIn);
-        // Approve router
-        _resetAndApprove(tokenIn, address(swapRouter), amountIn);
-        // Swap to USDC
-        uint256 usdcOut = swapRouter.exactInput(
-            ISwapRouter.ExactInputParams({
-                path: path,
-                recipient: address(this),
-                deadline: deadline,
-                amountIn: amountIn,
-                amountOutMinimum: minUsdcOut
-            })
-        );
-        // Approve sale and buy ARX for buyer
-        _resetAndApprove(USDC, address(sale), usdcOut);
-        sale.buyFor(buyer, usdcOut);
-        emit Zapped(buyer, address(tokenIn), amountIn, usdcOut);
+        zapAndBuy(address(tokenIn), amountIn, path, minUsdcOut, buyer, deadline, address(0), 0, 0, 0, bytes32(0), bytes32(0));
     }
 
     function zapERC20WithPermitAndBuy(
@@ -156,22 +227,7 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         bytes32 r,
         bytes32 s
     ) external whenNotPaused nonReentrant {
-        if (amountIn == 0) revert ZeroAmount();
-        IERC20Permit(address(tokenIn)).permit(owner, address(this), permitValue, permitDeadline, v, r, s);
-        tokenIn.safeTransferFrom(owner, address(this), amountIn);
-        _resetAndApprove(tokenIn, address(swapRouter), amountIn);
-        uint256 usdcOut = swapRouter.exactInput(
-            ISwapRouter.ExactInputParams({
-                path: path,
-                recipient: address(this),
-                deadline: deadline,
-                amountIn: amountIn,
-                amountOutMinimum: minUsdcOut
-            })
-        );
-        _resetAndApprove(USDC, address(sale), usdcOut);
-        sale.buyFor(buyer, usdcOut);
-        emit Zapped(buyer, address(tokenIn), amountIn, usdcOut);
+        zapAndBuy(address(tokenIn), amountIn, path, minUsdcOut, buyer, deadline, owner, permitValue, permitDeadline, v, r, s);
     }
 
     /// @notice Zap native ETH to USDC via Uniswap V3 and buy ARX for `buyer`.
@@ -185,26 +241,7 @@ contract ArxZapRouter is Initializable, OwnableUpgradeable, ReentrancyGuardUpgra
         address buyer,
         uint256 deadline
     ) external payable whenNotPaused nonReentrant {
-        uint256 amountIn = msg.value;
-        if (amountIn == 0) revert ZeroAmount();
-        // Wrap ETH -> WETH9
-        WETH9.deposit{ value: amountIn }();
-        // Approve router
-        _resetAndApprove(IERC20(address(WETH9)), address(swapRouter), amountIn);
-        // Swap to USDC
-        uint256 usdcOut = swapRouter.exactInput(
-            ISwapRouter.ExactInputParams({
-                path: pathFromWETH,
-                recipient: address(this),
-                deadline: deadline,
-                amountIn: amountIn,
-                amountOutMinimum: minUsdcOut
-            })
-        );
-        // Approve sale and buy ARX for buyer
-        _resetAndApprove(USDC, address(sale), usdcOut);
-        sale.buyFor(buyer, usdcOut);
-        emit Zapped(buyer, address(0), amountIn, usdcOut);
+        zapAndBuy(address(0), msg.value, pathFromWETH, minUsdcOut, buyer, deadline, address(0), 0, 0, 0, bytes32(0), bytes32(0));
     }
 
     receive() external payable {}
