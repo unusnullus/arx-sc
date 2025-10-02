@@ -5,6 +5,7 @@ import { Script } from "forge-std/Script.sol";
 import { ARX } from "../src/ARX.sol";
 import { ArxTokenSale } from "../src/ArxTokenSale.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { ERC1967Proxy } from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 contract DeployScript is Script {
     function run() external {
@@ -18,8 +19,17 @@ contract DeployScript is Script {
         address silo = vm.envAddress("SILO_TREASURY");
         uint256 price = vm.envUint("ARX_PRICE_USDC_6DP");
 
-        ARX arx = new ARX(deployer);
-        ArxTokenSale sale = new ArxTokenSale(deployer, IERC20(usdc), arx, silo, price);
+        ARX arxImpl = new ARX();
+        bytes memory dataArx = abi.encodeWithSelector(ARX.initialize.selector, deployer);
+        ERC1967Proxy arxProxy = new ERC1967Proxy(address(arxImpl), dataArx);
+        ARX arx = ARX(address(arxProxy));
+
+        ArxTokenSale saleImpl = new ArxTokenSale();
+        bytes memory dataSale = abi.encodeWithSelector(
+            ArxTokenSale.initialize.selector, deployer, IERC20(usdc), arx, silo, price
+        );
+        ERC1967Proxy saleProxy = new ERC1967Proxy(address(saleImpl), dataSale);
+        ArxTokenSale sale = ArxTokenSale(address(saleProxy));
         arx.grantRole(arx.MINTER_ROLE(), address(sale));
 
         // No zap router in minimal setup
