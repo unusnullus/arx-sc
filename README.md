@@ -316,6 +316,7 @@ Populate `apps/web/.env.local` (or `.env`) with chain RPC and deployed addresses
   - Services & Access:
     - `src/services/StakingAccess.sol` — ARX staking and tier computation
     - `src/services/ServiceRegistry.sol` — Tier‑gated registry for Relay/VPN/Merchant services
+    - `src/claimable/ArxMultiTokenMerkleClaim.sol` — Multi-root Merkle claim for ERC20 distributions (UUPS)
   - Scripts:
     - `DeployToken.s.sol`, `DeploySale.s.sol`, `DeployZap.s.sol`, `WirePermissions.s.sol`
     - `LocalDeploy.s.sol` (Anvil: MockUSDC + ARX + Sale)
