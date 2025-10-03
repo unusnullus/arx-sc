@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0b0f;
+  --foreground: #e6e7eb;
+  --brand-primary: #7858ff; /* from logo-dark.svg */
+  --brand-secondary: #a48cff;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-border: rgba(255, 255, 255, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--brand-primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a0b0f;
+    --foreground: #e6e7eb;
   }
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(
+      1200px 800px at 80% -10%,
+      rgba(120, 88, 255, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 600px at 10% 110%,
+      rgba(164, 140, 255, 0.1),
+      transparent 60%
+    ),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-geist-sans),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    Helvetica Neue,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+/* Glassy card surface utility */
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Soft brand glow */
+.brand-glow {
+  box-shadow:
+    0 0 0 1px rgba(120, 88, 255, 0.25),
+    0 10px 60px -15px rgba(120, 88, 255, 0.45);
+}
+
+/* Inputs */
+.input-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(120, 88, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(120, 88, 255, 0.2);
+}
+
+/* Sticky top header surface */
+.header-surface {
+  background: rgba(10, 11, 15, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }

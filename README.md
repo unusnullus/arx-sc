@@ -344,8 +344,8 @@ cast send "$NEXT_PUBLIC_ARX_CLAIM" \
 
 - `@arx/contracts`
   - `src/ARX.sol` — ERC20 + Permit + Burnable + AccessControl + ERC20Votes
-  - `src/ArxTokenSale.sol` — owner setters, zapper allowlist, forward-to-silo, mint
-  - `src/ArxZapRouter.sol` — Uniswap V3 exactInput to USDC, approves sale, calls `buyFor`
+  - `src/sale/ArxTokenSale.sol` — owner setters, zapper allowlist, forward-to-silo, mint
+  - `src/zap/ArxZapRouter.sol` — Uniswap V3 exactInput to USDC, approves sale, calls `buyFor`
   - Governance:
     - `src/governance/ArxTimelock.sol` — Timelock (UUPS)
     - `src/governance/ArxGovernor.sol` — Governor (UUPS)
