@@ -34,6 +34,7 @@ contract StakingAccess is
         uint256 amount;
         uint256 availableAt;
     }
+
     mapping(address => Pending) public pendingUnstake;
 
     // Cooldown period for unstake requests (1 month)
