@@ -167,17 +167,15 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
 ### Diagram: Services Architecture
 
 ```mermaid
-flowchart TD
-    A[User Wallet] -->|stake(amount)| B[StakingAccess]
-    B -->|tierOf(user)| C[ServiceRegistry]
-    A -->|register(serviceType, metadata)| C
-    C -->|enabledServices(user)| A
+graph TD
+    A[User Wallet] -->|stake amount| B[StakingAccess]
+    B -->|tierOf| C[ServiceRegistry]
+    A -->|register service| C
+    C -->|enabledServices| A
     subgraph Governance
-      T[ArxTimelock]
-      G[ArxGovernor]
-      T -->|owner| B
+      T[ArxTimelock] -->|owner| B
       T -->|owner| C
-      G -->|propose/queue/execute| T
+      G[ArxGovernor] -->|propose / queue / execute| T
     end
 ```
 
