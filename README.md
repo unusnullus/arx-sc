@@ -164,6 +164,23 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
 [ServiceRegistry] <-- requires tier >= 1 -- register/update services
 ```
 
+### Diagram: Services Architecture
+
+```mermaid
+flowchart TD
+    A[User Wallet] -->|stake(amount)| B[StakingAccess]
+    B -->|tierOf(user)| C[ServiceRegistry]
+    A -->|register(serviceType, metadata)| C
+    C -->|enabledServices(user)| A
+    subgraph Governance
+      T[ArxTimelock]
+      G[ArxGovernor]
+      T -->|owner| B
+      T -->|owner| C
+      G -->|propose/queue/execute| T
+    end
+```
+
 - Deploy script wiring (Sepolia)
   - Deploys `StakingAccess` (owner=Timelock) with tier thresholds array
   - Deploys `ServiceRegistry` (owner=Timelock) with `staking=StakingAccess`
