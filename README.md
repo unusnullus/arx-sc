@@ -17,6 +17,9 @@ ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance an
   - `ARX` — ERC20 + Permit + Burnable + AccessControl (MINTER_ROLE)
   - `ArxTokenSale` — accepts USDC, forwards 100% to silo, mints ARX at USDC price
   - `ArxZapRouter` — swaps any ERC20/ETH to USDC via Uniswap V3, then `buyFor()`
+  - `ArxGovernor` + `ArxTimelock` — upgradeable governance based on ERC20Votes + Timelock
+  - `StakingAccess` — stake ARX (6‑dec) to reach access tiers (1/10/100 ARX by default)
+  - `ServiceRegistry` — EOA self‑registration for services (Relay/VPN/Merchant) gated by staking tiers
 - Web app (Next.js):
   - Landing with parallax roadmap
   - `/buy` flow (wallet connect; quote via Uniswap Quoter; approvals/zap)
@@ -126,6 +129,42 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
   - Deploys `ArxTimelock` (delay from `TIMELOCK_DELAY`) and `ArxGovernor`
   - Grants `PROPOSER_ROLE` and `EXECUTOR_ROLE` to Governor on Timelock
   - Emits `.env` entries: `NEXT_PUBLIC_ARX_TIMELOCK`, `NEXT_PUBLIC_ARX_GOVERNOR`
+
+## Access & Services (Staking + Registry)
+
+- StakingAccess (`packages/contracts/src/services/StakingAccess.sol`)
+  - Stake ARX (6‑dec) to gain access tiers. Defaults (env‑configurable in deploy script):
+    - Tier1: 1 ARX (1_000_000)
+    - Tier2: 10 ARX (10_000_000)
+    - Tier3: 100 ARX (100_000_000)
+  - Functions:
+    - `stake(amount)` / `unstake(amount)` (SafeERC20 transfers)
+    - `tierOf(address)` → uint8 (0/1/2/3)
+    - `setTiers(t1,t2,t3)` (owner‑only; intended for Timelock/Multisig)
+  - Ownership: UUPS + `OwnableUpgradeable`; admin expected to be Timelock/Multisig
+
+- ServiceRegistry (`packages/contracts/src/services/ServiceRegistry.sol`)
+  - EOA self‑registration of services: `Relay`, `VPN`, `Merchant`
+  - Requires `tier >= 1` (configurable logic; thresholds on `StakingAccess`)
+  - Functions:
+    - `register(serviceType, metadata)` → returns `serviceId`
+    - `update(serviceId, metadata, active)` (owner‑only: the registrant)
+  - Ownership: UUPS + `OwnableUpgradeable`; admin expected to be Timelock/Multisig
+
+- Access & Services flow
+
+```
+[User Wallet] --stake ARX--> [StakingAccess]
+   |                             |
+   | tierOf(user)                | holds staked ARX
+   v                             v
+[ServiceRegistry] <-- requires tier >= 1 -- register/update services
+```
+
+- Deploy script wiring (Sepolia)
+  - Deploys `StakingAccess` (owner=Timelock) with tier thresholds
+  - Deploys `ServiceRegistry` (owner=Timelock) with `staking=StakingAccess`
+  - Emits `.env` entries: `NEXT_PUBLIC_STAKING_ACCESS`, `NEXT_PUBLIC_SERVICE_REGISTRY`
 
 ## Frontend: User Journey
 
@@ -250,12 +289,15 @@ Populate `apps/web/.env.local` (or `.env`) with chain RPC and deployed addresses
 ## Packages
 
 - `@arx/contracts`
-  - `src/ARX.sol` — ERC20 + Permit + Burnable + AccessControl
+  - `src/ARX.sol` — ERC20 + Permit + Burnable + AccessControl + ERC20Votes
   - `src/ArxTokenSale.sol` — owner setters, zapper allowlist, forward-to-silo, mint
   - `src/ArxZapRouter.sol` — Uniswap V3 exactInput to USDC, approves sale, calls `buyFor`
   - Governance:
     - `src/governance/ArxTimelock.sol` — Timelock (UUPS)
     - `src/governance/ArxGovernor.sol` — Governor (UUPS)
+  - Services & Access:
+    - `src/services/StakingAccess.sol` — ARX staking and tier computation
+    - `src/services/ServiceRegistry.sol` — Tier‑gated registry for Relay/VPN/Merchant services
   - Scripts:
     - `DeployToken.s.sol`, `DeploySale.s.sol`, `DeployZap.s.sol`, `WirePermissions.s.sol`
     - `LocalDeploy.s.sol` (Anvil: MockUSDC + ARX + Sale)
