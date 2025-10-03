@@ -304,6 +304,42 @@ pnpm -w --filter @arx/contracts run wire:permissions
 
 Populate `apps/web/.env.local` (or `.env`) with chain RPC and deployed addresses, then run `pnpm dev`.
 
+## Claims (Merkle distributions)
+
+- Contract: `src/claimable/ArxMultiTokenMerkleClaim.sol`
+  - UUPS upgradeable; intended owner is Timelock/Multisig
+  - Supports multiple Merkle roots per token (multiple rounds)
+  - Tracks claims per `(user, root)`; `claim(token, totalAmount, proof)` pays `totalAmount - alreadyClaimed`
+
+- Typical flow
+  1. Owner adds Merkle root for a token
+     - Root is computed over leaves `keccak256(abi.encodePacked(user, totalAmount))`
+  2. Users call `claim(token, totalAmount, proof)`
+
+- Example (Sepolia) using `cast` (assuming envs from the deploy script)
+
+```bash
+# Add a root (owner: timelock). For local demo, replace with OWNER pk.
+cast send "$NEXT_PUBLIC_ARX_CLAIM" \
+  "addMerkleRoot(address,bytes32)" \
+  "$NEXT_PUBLIC_USDC" \
+  0x<your_merkle_root> \
+  --rpc-url "$RPC_URL" --private-key "$PRIVATE_KEY"
+
+# User claims
+cast send "$NEXT_PUBLIC_ARX_CLAIM" \
+  "claim(address,uint256,bytes32[])" \
+  "$NEXT_PUBLIC_USDC" 1000000 \
+  "[0x<proof_hash_0>,0x<proof_hash_1>,...]" \
+  --rpc-url "$RPC_URL" --private-key 0x<user_pk>
+```
+
+- Read helpers
+  - `getMerkleRoots(token)` → `bytes32[]`
+  - `getClaimedForTokenAndRoot(user, root)` → `uint256`
+  - `getTotalClaimedForToken(user, token)` → `uint256`
+  - `getTotalClaimedForAllTokens(user)` → `uint256`
+
 ## Packages
 
 - `@arx/contracts`
