@@ -18,8 +18,8 @@ ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance an
   - `ArxTokenSale` — accepts USDC, forwards 100% to silo, mints ARX at USDC price
   - `ArxZapRouter` — swaps any ERC20/ETH to USDC via Uniswap V3, then `buyFor()`
   - `ArxGovernor` + `ArxTimelock` — upgradeable governance based on ERC20Votes + Timelock
-  - `StakingAccess` — stake ARX (6‑dec) to reach access tiers (1/10/100 ARX by default)
-  - `ServiceRegistry` — EOA self‑registration for services (Relay/VPN/Merchant) gated by staking tiers
+  - `StakingAccess` — stake ARX (6‑dec) to reach access tiers (array‑based; defaults 1/10/100 ARX). Two‑step unstake with 30‑day cooldown.
+  - `ServiceRegistry` — EOA self‑registration for services (Relay/VPN/Merchant and C\_\* variants) gated by staking tiers; includes `enabledServices(address)` view.
 - Web app (Next.js):
   - Landing with parallax roadmap
   - `/buy` flow (wallet connect; quote via Uniswap Quoter; approvals/zap)
@@ -133,23 +133,26 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
 ## Access & Services (Staking + Registry)
 
 - StakingAccess (`packages/contracts/src/services/StakingAccess.sol`)
-  - Stake ARX (6‑dec) to gain access tiers. Defaults (env‑configurable in deploy script):
-    - Tier1: 1 ARX (1_000_000)
-    - Tier2: 10 ARX (10_000_000)
-    - Tier3: 100 ARX (100_000_000)
-  - Functions:
-    - `stake(amount)` / `unstake(amount)` (SafeERC20 transfers)
-    - `tierOf(address)` → uint8 (0/1/2/3)
-    - `setTiers(t1,t2,t3)` (owner‑only; intended for Timelock/Multisig)
-  - Ownership: UUPS + `OwnableUpgradeable`; admin expected to be Timelock/Multisig
+  - Stake ARX (6‑dec) to gain access tiers.
+  - Tier thresholds are a dynamic array passed at `initialize(arx, owner, uint256[] tiers)` and updatable via `setTiers(uint256[])` (owner‑only; intended for Timelock/Multisig). Defaults via deploy script: `[1_000_000, 10_000_000, 100_000_000]` (1/10/100 ARX).
+  - Two‑step unstake with cooldown:
+    - `requestUnstake(amount)`: moves amount to pending and starts a 30‑day cooldown.
+    - `claimUnstaked()`: claim after cooldown, transferring tokens back.
+  - Other functions:
+    - `stake(amount)` (SafeERC20)
+    - `tierOf(address)`: computes tier index based on current staked balance (excludes pending unstakes). Returns 0 if below first tier, otherwise number of thresholds met.
+  - Ownership: UUPS + `OwnableUpgradeable` (Timelock/Multisig as admin)
 
 - ServiceRegistry (`packages/contracts/src/services/ServiceRegistry.sol`)
-  - EOA self‑registration of services: `Relay`, `VPN`, `Merchant`
-  - Requires `tier >= 1` (configurable logic; thresholds on `StakingAccess`)
+  - EOA self‑registration of services gated by staking tier (requires `tier >= 1`).
+  - Service types:
+    - Core: `Relay`, `VPN`, `Merchant`
+    - Consumer: `C_VPN`, `C_CLOUD`, `C_CARD`, `C_ESIM`, `C_SECURE_MODE`, `C_ULTRA`
   - Functions:
-    - `register(serviceType, metadata)` → returns `serviceId`
-    - `update(serviceId, metadata, active)` (owner‑only: the registrant)
-  - Ownership: UUPS + `OwnableUpgradeable`; admin expected to be Timelock/Multisig
+    - `register(serviceType, metadata)` → returns `serviceId` and enables the type for the user
+    - `update(serviceId, metadata, active)` (owner‑only: the registrant; updates active state)
+    - `enabledServices(address user)` → `ServiceType[]` of currently enabled types for the user
+  - Ownership: UUPS + `OwnableUpgradeable` (Timelock/Multisig as admin)
 
 - Access & Services flow
 
@@ -162,7 +165,7 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
 ```
 
 - Deploy script wiring (Sepolia)
-  - Deploys `StakingAccess` (owner=Timelock) with tier thresholds
+  - Deploys `StakingAccess` (owner=Timelock) with tier thresholds array
   - Deploys `ServiceRegistry` (owner=Timelock) with `staking=StakingAccess`
   - Emits `.env` entries: `NEXT_PUBLIC_STAKING_ACCESS`, `NEXT_PUBLIC_SERVICE_REGISTRY`
 
