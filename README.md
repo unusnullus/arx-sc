@@ -6,7 +6,7 @@ Production-grade monorepo for ARX token, token sale, zap router and web app.
 
 ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance and utility inside the ARX ecosystem. The project ships a complete on-chain sale architecture with upgradeable contracts, a zap router for 1‑click conversion (any token/ETH → USDC → ARX), and a modern web app to onboard users with clear quoting and slippage controls.
 
-- Token: `ARX` (name: "ARX NET Slice", symbol: `ARX`, 6 decimals, Permit, Burnable)
+- Token: `ARX` (name: "ARX NET Slice", symbol: `ARX`, 6 decimals, Permit, Burnable, ERC20Votes)
 - Sale: `ArxTokenSale` accepts USDC and mints ARX at an owner‑set price; forwards 100% of USDC to a treasury (silo)
 - Zaps: `ArxZapRouter` takes ERC‑20/ETH, swaps to USDC via Uniswap V3, then calls `sale.buyFor()` to deliver ARX in a single transaction
 - Frontend: Next.js app with wallet connect, token selector (USDC/ETH), Uniswap Quoter pricing, slippage controls, and live transaction preview
@@ -14,7 +14,7 @@ ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance an
 ## Overview
 
 - Smart contracts (Foundry):
-  - `ARX` — ERC20 + Permit + Burnable + AccessControl (MINTER_ROLE)
+  - `ARX` — ERC20 + Permit + Burnable + AccessControl (MINTER_ROLE) + ERC20Votes
   - `ArxTokenSale` — accepts USDC, forwards 100% to silo, mints ARX at USDC price
   - `ArxZapRouter` — swaps any ERC20/ETH to USDC via Uniswap V3, then `buyFor()`
   - `ArxGovernor` + `ArxTimelock` — upgradeable governance based on ERC20Votes + Timelock
@@ -28,6 +28,19 @@ ARX NET Slice ("ARX") is a 6‑decimal ERC‑20 token designed for governance an
 - CI: GitHub Actions (lint + forge tests)
 
 Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 decimals).
+
+## Current Testnet Deployment (Sepolia)
+
+- ARX: `0x0cCDaB7eEf5a5071a39bBdbB0C3525D8780E3e1A`
+- ArxTokenSale: `0xFBf0853e6962f219B7A414e548fA0239284A9246`
+- ArxTimelock: `0x056a87133Be7674f4a4F99861FCCa4848b25f3d6`
+- ArxGovernor: `0xe85755b07955155a2723458365452BC6C03FE7e6`
+- StakingAccess: `0xF676135E8eE1239FA7C985fBe3742CF3BeB80b0C`
+- ServiceRegistry: `0x4f5052F8bdf2e5CE3632CA8366055273c9F87AC8`
+- ArxMultiTokenMerkleClaim: `0x1a2A187bC43cd95842Af42Ba7471636Be51FA091`
+
+Use `scripts/deploy-sepolia.sh` (VERIFY=1 optional) to deploy, verify, and write `apps/web/.env.sepolia`.
+Note: On Sepolia, USDC permit (EIP-2612) can reject; the web falls back to approve-only.
 
 ## Architecture & Contract Binding (Schema)
 
@@ -343,7 +356,7 @@ cast send "$NEXT_PUBLIC_ARX_CLAIM" \
 ## Packages
 
 - `@arx/contracts`
-  - `src/ARX.sol` — ERC20 + Permit + Burnable + AccessControl + ERC20Votes
+  - `src/token/ARX.sol` — ERC20 + Permit + Burnable + AccessControl + ERC20Votes
   - `src/sale/ArxTokenSale.sol` — owner setters, zapper allowlist, forward-to-silo, mint
   - `src/zap/ArxZapRouter.sol` — Uniswap V3 exactInput to USDC, approves sale, calls `buyFor`
   - Governance:

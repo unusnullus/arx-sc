@@ -9,6 +9,7 @@ import {
 } from "wagmi";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@arx/ui";
+import { useToast } from "@/components/Toast";
 import { encodePacked, hashMessage, keccak256, parseUnits, toHex } from "viem";
 import { addressesByChain, constants } from "@arx/config";
 import {
@@ -27,6 +28,7 @@ export default function BuyARX() {
   );
   const publicClient = usePublicClient({ chainId: targetChainId });
   const { data: wallet } = useWalletClient();
+  const { push } = useToast();
   const [deadlineMinutes, setDeadlineMinutes] = useState(
     constants.defaultDeadlineMinutes,
   );
@@ -46,6 +48,11 @@ export default function BuyARX() {
     [targetChainId],
   );
   const { switchChain } = useSwitchChain();
+  const amountFloat = useMemo(() => {
+    const v = (amountIn || "").replace(",", ".");
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+  }, [amountIn]);
 
   const { data: ethBal } = useBalance({
     address,
@@ -57,6 +64,12 @@ export default function BuyARX() {
     token: cfg.USDC as `0x${string}` | undefined,
     chainId: targetChainId,
     query: { enabled: !!address && !!cfg.USDC },
+  });
+  const { data: arxBal } = useBalance({
+    address,
+    token: cfg.ARX as `0x${string}` | undefined,
+    chainId: targetChainId,
+    query: { enabled: !!address && !!cfg.ARX },
   });
 
   async function ensureChain() {
@@ -107,17 +120,22 @@ export default function BuyARX() {
         })) as bigint;
         if (active) setUsdcAllowance(alw);
         // detect permit support via nonces
-        try {
-          await publicClient.readContract({
-            address: usdc,
-            abi: ERC20_ABI,
-            functionName: "nonces",
-            args: [address],
-            chainId: targetChainId,
-          });
-          if (active) setHasPermit(true);
-        } catch {
+        // On Sepolia, USDC permit frequently rejects with invalid signature; prefer approve-only
+        if (targetChainId === 11155111) {
           if (active) setHasPermit(false);
+        } else {
+          try {
+            await publicClient.readContract({
+              address: usdc,
+              abi: ERC20_ABI,
+              functionName: "nonces",
+              args: [address],
+              chainId: targetChainId,
+            });
+            if (active) setHasPermit(true);
+          } catch {
+            if (active) setHasPermit(false);
+          }
         }
       } catch {}
     }
@@ -131,9 +149,7 @@ export default function BuyARX() {
 
   async function onQuote() {
     if (payToken === "USDC") {
-      const usdcAmt = BigInt(
-        Math.floor(Number(amountIn || 0) * 1e6).toString(),
-      );
+      const usdcAmt = BigInt(Math.floor(amountFloat * 1e6).toString());
       setQuoteUsdcOut(usdcAmt);
       return;
     }
@@ -149,7 +165,7 @@ export default function BuyARX() {
       ["address", "uint24", "address"],
       [tokenIn, fee, tokenOut],
     );
-    const amount = BigInt(Math.floor(Number(amountIn || 0) * 1e18).toString());
+    const amount = BigInt(Math.floor(amountFloat * 1e18).toString());
     if (amount === BigInt(0)) return;
     const result = await publicClient.readContract({
       address: cfg.UNISWAP_V3_QUOTER,
@@ -177,9 +193,7 @@ export default function BuyARX() {
 
     if (payToken === "USDC") {
       if (!sale || !usdc || !address) return;
-      const amountUsdc = BigInt(
-        Math.floor(Number(amountIn || 0) * 1e6).toString(),
-      );
+      const amountUsdc = BigInt(Math.floor(amountFloat * 1e6).toString());
       // Try permit first; fallback to approve if signature fails
       try {
         const nonce = (await publicClient.readContract({
@@ -242,6 +256,11 @@ export default function BuyARX() {
           args: [address, sale, amountUsdc, permitDeadline, v, r, s],
           chainId: targetChainId,
         });
+        push({
+          variant: "success",
+          title: "Permit signed",
+          description: "USDC permit accepted",
+        });
       } catch {
         // fallback approve
         await wallet.writeContract({
@@ -251,6 +270,11 @@ export default function BuyARX() {
           args: [sale!, amountUsdc],
           chainId: targetChainId,
         });
+        push({
+          variant: "info",
+          title: "Approval submitted",
+          description: "USDC approval tx broadcasted",
+        });
       }
       await wallet.writeContract({
         address: sale,
@@ -258,6 +282,11 @@ export default function BuyARX() {
         functionName: "buyWithUSDC",
         args: [amountUsdc],
         chainId: targetChainId,
+      });
+      push({
+        variant: "success",
+        title: "Purchase submitted",
+        description: "Buy transaction sent",
       });
       return;
     }
@@ -272,7 +301,7 @@ export default function BuyARX() {
       ["address", "uint24", "address"],
       [weth9, fee, usdc],
     );
-    const value = BigInt(Math.floor(Number(amountIn || 0) * 1e18).toString());
+    const value = BigInt(Math.floor(amountFloat * 1e18).toString());
     // Apply slippage protection to USDC out using percent or bps
     const quoted = quoteUsdcOut ?? BigInt(0);
     const effectiveBps = (() => {
@@ -291,6 +320,11 @@ export default function BuyARX() {
       args: [pathFromWETH, minOut, address!, deadline],
       value,
       chainId: targetChainId,
+    });
+    push({
+      variant: "success",
+      title: "Zap submitted",
+      description: "ETH zap and buy sent",
     });
   }
   return (
@@ -315,6 +349,12 @@ export default function BuyARX() {
           <div className="mt-6 space-y-5">
             <div className="text-xs text-neutral-400 break-all">
               Wallet: {address}
+            </div>
+            <div className="text-xs text-neutral-400">
+              ARX balance:{" "}
+              <span className="text-neutral-200">
+                {arxBal ? (Number(arxBal.value) / 1e6).toFixed(2) : 0}
+              </span>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -395,12 +435,14 @@ export default function BuyARX() {
                 <label className="text-sm">Amount In ({payToken})</label>
                 <input
                   className="w-full input-dark"
-                  type="number"
+                  type="text"
+                  inputMode="decimal"
                   placeholder={`Enter ${payToken} amount`}
-                  min="0"
-                  step="any"
                   value={amountIn}
-                  onChange={(e) => setAmountIn(e.target.value)}
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    if (/^\d*(?:[\.,]\d*)?$/.test(next)) setAmountIn(next);
+                  }}
                 />
                 <div className="text-xs text-neutral-500">
                   Use a positive amount; max two decimals for USDC.

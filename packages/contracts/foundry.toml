@@ -10,6 +10,10 @@ via_ir = true
 fs_permissions = [{ access = "read", path = "./" }]
 ffi = true
 allow_paths = ["../../node_modules"]
+remappings = [
+    "@openzeppelin/=../../node_modules/@openzeppelin/",
+    "@uniswap/=../../node_modules/@uniswap/"
+]
 
 [fmt]
 line_length = 100
