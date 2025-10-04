@@ -1,0 +1,24 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7858FF"/>
+      <stop offset="1" stop-color="#A48CFF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#7858FF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7858FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" rx="64" fill="#0A0B0F"/>
+  <circle cx="128" cy="128" r="92" fill="url(#glow)"/>
+  <circle cx="128" cy="128" r="84" stroke="url(#g1)" stroke-opacity="0.35" stroke-width="6"/>
+  <!-- Stylized E / ARX monogram -->
+  <g transform="translate(64,64)">
+    <path d="M24 32h88" stroke="url(#g1)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M24 64h72" stroke="url(#g1)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M24 96h88" stroke="url(#g1)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M108 32L136 16" stroke="url(#g1)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M108 96L136 112" stroke="url(#g1)" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
+
