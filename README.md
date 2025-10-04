@@ -39,6 +39,18 @@ Price formula: `arxOut = (usdcAmount * 10^arxDecimals) / priceUSDC` (ARX uses 6 
 - ServiceRegistry: `0x4f5052F8bdf2e5CE3632CA8366055273c9F87AC8`
 - ArxMultiTokenMerkleClaim: `0x1a2A187bC43cd95842Af42Ba7471636Be51FA091`
 
+### Addresses Table (Sepolia)
+
+| Contract                        | Address                                      | Etherscan                                                                       |
+| ------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------- |
+| ARX (ERC20Votes, UUPS)          | `0x0cCDaB7eEf5a5071a39bBdbB0C3525D8780E3e1A` | https://sepolia.etherscan.io/address/0x0cCDaB7eEf5a5071a39bBdbB0C3525D8780E3e1A |
+| ArxTokenSale (UUPS)             | `0xFBf0853e6962f219B7A414e548fA0239284A9246` | https://sepolia.etherscan.io/address/0xFBf0853e6962f219B7A414e548fA0239284A9246 |
+| ArxTimelock (UUPS)              | `0x056a87133Be7674f4a4F99861FCCa4848b25f3d6` | https://sepolia.etherscan.io/address/0x056a87133Be7674f4a4F99861FCCa4848b25f3d6 |
+| ArxGovernor (UUPS)              | `0xe85755b07955155a2723458365452BC6C03FE7e6` | https://sepolia.etherscan.io/address/0xe85755b07955155a2723458365452BC6C03FE7e6 |
+| StakingAccess (UUPS)            | `0xF676135E8eE1239FA7C985fBe3742CF3BeB80b0C` | https://sepolia.etherscan.io/address/0xF676135E8eE1239FA7C985fBe3742CF3BeB80b0C |
+| ServiceRegistry (UUPS)          | `0x4f5052F8bdf2e5CE3632CA8366055273c9F87AC8` | https://sepolia.etherscan.io/address/0x4f5052F8bdf2e5CE3632CA8366055273c9F87AC8 |
+| ArxMultiTokenMerkleClaim (UUPS) | `0x1a2A187bC43cd95842Af42Ba7471636Be51FA091` | https://sepolia.etherscan.io/address/0x1a2A187bC43cd95842Af42Ba7471636Be51FA091 |
+
 Use `scripts/deploy-sepolia.sh` (VERIFY=1 optional) to deploy, verify, and write `apps/web/.env.sepolia`.
 Note: On Sepolia, USDC permit (EIP-2612) can reject; the web falls back to approve-only.
 
