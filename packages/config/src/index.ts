@@ -75,3 +75,8 @@ export const constants = {
   defaultSlippageBps: 100, // 1%
   defaultDeadlineMinutes: 20,
 };
+
+export const FALLBACK_CHAIN_ID =
+  Number(process.env.NEXT_PUBLIC_CHAIN_ID) ?? 31337;
+
+export * from "./token";

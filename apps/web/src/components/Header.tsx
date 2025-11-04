@@ -48,8 +48,8 @@ export default function Header() {
   }, [publicClient]);
 
   return (
-    <header className="header-surface sticky top-0 z-40">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
+    <header className="header-surface sticky top-0 z-40 flex items-center justify-center">
+      <div className="container px-4 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Image src="/logo-dark.svg" width={28} height={28} alt="ARX" />
           <span className="text-sm font-medium tracking-wide">ARX NET</span>
@@ -78,9 +78,6 @@ export default function Header() {
                 <span>
                   {usdcBal ? (Number(usdcBal.value) / 1e6).toFixed(2) : "-"}
                 </span>
-              </div>
-              <div className="hidden lg:block max-w-[160px] truncate text-neutral-400">
-                {address}
               </div>
             </>
           )}

@@ -1,12 +1,53 @@
 
-> web@0.1.0 build /Users/denissergeev/work/arx-sc/apps/web
-> next build --turbopack
+> web@0.1.0 build /Users/pepelvlad/Documents/work/arx-sc/apps/web
+> next build
 
-   ▲ Next.js 15.5.4 (Turbopack)
+   ▲ Next.js 15.5.4
+   - Environments: .env
 
    Creating an optimized production build ...
- ✓ Finished writing to disk in 55ms
- ✓ Compiled successfully in 4.7s
+ ⚠ Compiled with warnings in 15.1s
+
+../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
+
+Import trace for requested module:
+../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/providers.tsx
+
+../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
+Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
+
+Import trace for requested module:
+../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
+../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
+../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
+../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
+../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/providers.tsx
+
+ ⚠ Compiled with warnings in 10.1s
+
+../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
+
+Import trace for requested module:
+../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/providers.tsx
+
+ ✓ Compiled successfully in 25.2s
    Skipping validation of types
    Skipping linting
    Collecting page data ...
@@ -14,25 +55,4 @@
  ✓ Generating static pages (3/3)
    Finalizing page optimization ...
    Collecting build traces ...
-
-Route (app)                         Size  First Load JS
-┌ ƒ /                            1.14 kB         344 kB
-├ ƒ /_not-found                      0 B         343 kB
-├ ƒ /arxnet                          0 B         343 kB
-├ ƒ /buy                         8.14 kB         351 kB
-└ ƒ /messenger                       0 B         343 kB
-+ First Load JS shared by all     346 kB
-  ├ chunks/10b9d139669beb81.js     16 kB
-  ├ chunks/36c0faba7c739a13.js   20.6 kB
-  ├ chunks/39c82f8bbaacaa7b.js   75.4 kB
-  ├ chunks/43235484fb6a0d4f.js    117 kB
-  ├ chunks/6fbf2d3590ed2297.js   16.4 kB
-  ├ chunks/70cc651f875c070a.js   11.6 kB
-  ├ chunks/9cfd34eb5c40c214.js   23.5 kB
-  ├ chunks/b228ea5639693f6a.js   34.9 kB
-  └ chunks/f1b25b1fda513485.js   10.6 kB
-  └ other shared chunks (total)  20.3 kB
-
-
-ƒ  (Dynamic)  server-rendered on demand
-
+ ELIFECYCLE  Command failed with exit code 130.

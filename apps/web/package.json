@@ -9,12 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@arx/ui": "workspace:*",
-    "@arx/config": "workspace:*",
     "@arx/abi": "workspace:*",
-    "@tanstack/react-query": "^5.90.2",
+    "@arx/config": "workspace:*",
+    "@arx/ui": "workspace:*",
     "@rainbow-me/rainbowkit": "^2.2.8",
+    "@tanstack/react-query": "^5.90.2",
     "class-variance-authority": "^0.7.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.475.0",
+    "motion": "^12.23.24",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",

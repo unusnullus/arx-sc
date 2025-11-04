@@ -8,9 +8,8 @@ import {
   useBalance,
 } from "wagmi";
 import { useEffect, useMemo, useState } from "react";
-import { Button } from "@arx/ui";
-import { useToast } from "@/components/Toast";
-import { encodePacked, hashMessage, keccak256, parseUnits, toHex } from "viem";
+import { Button, toast } from "@arx/ui/components";
+import { encodePacked } from "viem";
 import { addressesByChain, constants } from "@arx/config";
 import {
   ARX_TOKEN_SALE_ABI,
@@ -28,7 +27,6 @@ export default function BuyARX() {
   );
   const publicClient = usePublicClient({ chainId: targetChainId });
   const { data: wallet } = useWalletClient();
-  const { push } = useToast();
   const [deadlineMinutes, setDeadlineMinutes] = useState(
     constants.defaultDeadlineMinutes,
   );
@@ -256,11 +254,7 @@ export default function BuyARX() {
           args: [address, sale, amountUsdc, permitDeadline, v, r, s],
           chainId: targetChainId,
         });
-        push({
-          variant: "success",
-          title: "Permit signed",
-          description: "USDC permit accepted",
-        });
+        toast.success("Permit signed. USDC permit accepted.");
       } catch {
         // fallback approve
         await wallet.writeContract({
@@ -270,24 +264,15 @@ export default function BuyARX() {
           args: [sale!, amountUsdc],
           chainId: targetChainId,
         });
-        push({
-          variant: "info",
-          title: "Approval submitted",
-          description: "USDC approval tx broadcasted",
-        });
+        toast.info("Approval submitted. USDC approval tx broadcasted.");
       }
       await wallet.writeContract({
         address: sale,
         abi: ARX_TOKEN_SALE_ABI,
         functionName: "buyWithUSDC",
         args: [amountUsdc],
-        chainId: targetChainId,
       });
-      push({
-        variant: "success",
-        title: "Purchase submitted",
-        description: "Buy transaction sent",
-      });
+      toast.success("Purchase submitted. Buy transaction sent.");
       return;
     }
 
@@ -321,11 +306,7 @@ export default function BuyARX() {
       value,
       chainId: targetChainId,
     });
-    push({
-      variant: "success",
-      title: "Zap submitted",
-      description: "ETH zap and buy sent",
-    });
+    toast.success("Zap submitted. ETH zap and buy sent.");
   }
   return (
     <div className="mx-auto w-full max-w-3xl">

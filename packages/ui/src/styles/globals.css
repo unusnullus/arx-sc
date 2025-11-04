@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@source "../../../apps/**/*.{ts,tsx}";
+@source "../../../components/**/*.{ts,tsx}";
+@source "../**/*.{ts,tsx}";
+
+@import "tw-animate-css";
+
+:root {
+  --background: #000000;
+  --content-black: #000000;
+  --foreground: #fff;
+  --primary: #6541ff;
+  --secondary: #a28cff;
+  --tertiary: #e6daff;
+  --tertiary-10: #d0bcfe1a;
+  --content-grey: #292929;
+  --content-100: #ffffff;
+  --content-70: #ffffffb2;
+  --content-50: #ffffff80;
+  --content-20: #ffffff33;
+  --white-15: #ffffff26;
+  --white-10: #ffffff1a;
+  --white-7: #ffffff12;
+  --success: #5dd261;
+  --error: #ff4d4f;
+  --purple-linear-gradient: linear-gradient(90deg, #e6daff 0%, #8754fa 40%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-content-black: var(--content-black);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-10: var(--tertiary-10);
+  --color-content-grey: var(--content-grey);
+  --color-content-100: var(--content-100);
+  --color-content-70: var(--content-70);
+  --color-content-50: var(--content-50);
+  --color-content-20: var(--content-20);
+  --color-white-15: var(--white-15);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-white-10: var(--white-10);
+  --color-white-7: var(--white-7);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-purple-linear-gradient: var(--purple-linear-gradient);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-geist-sans),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Ubuntu,
+    Cantarell,
+    Noto Sans,
+    Helvetica Neue,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+/* Glassy card surface utility */
+.surface-card {
+  background: var(--background);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Soft brand glow */
+.brand-glow {
+  box-shadow:
+    0 0 0 1px rgba(120, 88, 255, 0.25),
+    0 10px 60px -15px rgba(120, 88, 255, 0.45);
+}
+
+/* Inputs */
+.input-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(120, 88, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(120, 88, 255, 0.2);
+}
+
+/* Sticky top header surface */
+.header-surface {
+  background: rgba(10, 11, 15, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.text-purple-gradient {
+  background: var(--purple-linear-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

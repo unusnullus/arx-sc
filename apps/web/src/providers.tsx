@@ -31,7 +31,7 @@ const SEPOLIA = {
     public: {
       http: [
         process.env.NEXT_PUBLIC_RPC_SEPOLIA ||
-          baseSepoliaChain.rpcUrls.public.http[0],
+          baseSepoliaChain.rpcUrls.default.http[0],
       ],
     },
   },

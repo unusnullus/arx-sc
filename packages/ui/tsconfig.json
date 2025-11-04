@@ -3,10 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
-    "outDir": "dist",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "composite": true
+    "types": ["react", "react-dom"],
+    "paths": {
+      "@arx/ui/*": ["./src/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
 }
