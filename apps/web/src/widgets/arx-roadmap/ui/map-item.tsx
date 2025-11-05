@@ -28,17 +28,17 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
 
     return (
       <div ref={ref} className="flex gap-22">
-        <div className="w-0.5 flex flex-col items-center relative">
+        <div className="relative flex w-0.5 flex-col items-center">
           <div
             className={cn(
-              "box-content w-4 min-h-4 rounded-full border-12 border-transparent transition-all duration-500",
+              "box-content min-h-4 w-4 rounded-full border-12 border-transparent transition-all duration-500",
               {
                 "border-tertiary-10": isActive,
               },
             )}
           >
             <div
-              className={`box-content w-4 min-h-4 rounded-full transition-all duration-300 ${
+              className={`box-content min-h-4 w-4 rounded-full transition-all duration-300 ${
                 isCompleted
                   ? isActive
                     ? "bg-secondary scale-110"
@@ -48,10 +48,10 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
             />
           </div>
           {!isLast && (
-            <div className="w-0.5 h-full relative overflow-hidden">
-              <div className="absolute w-0 inset-0 border-r-[2px] border-dashed border-content-50" />
+            <div className="relative h-full w-0.5 overflow-hidden">
+              <div className="border-content-50 absolute inset-0 w-0 border-r-[2px] border-dashed" />
               <div
-                className="absolute top-0 left-0 right-0 bg-secondary transition-all duration-500 ease-in-out"
+                className="bg-secondary absolute top-0 right-0 left-0 transition-all duration-500 ease-in-out"
                 style={{
                   height: isCompleted ? `${Math.min(100, progress)}%` : "0%",
                   opacity: isCompleted ? 1 : 0,
@@ -60,16 +60,16 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-8 pb-30 pt-2">
+        <div className="flex flex-col gap-8 pt-2 pb-30">
           <span
-            className={cn("text-content-70 text-lg font-geist-mono", {
+            className={cn("text-content-70 font-geist-mono text-lg", {
               "text-secondary": isActive || isCompleted,
             })}
           >
             {date}
           </span>
           <div className="flex flex-col gap-3">
-            <h5 className="text-4xl font-semibold transition-colors duration-300 text-content-100">
+            <h5 className="text-content-100 text-4xl font-semibold transition-colors duration-300">
               {title}
             </h5>
             <p className="text-content-70 text-lg">{description}</p>

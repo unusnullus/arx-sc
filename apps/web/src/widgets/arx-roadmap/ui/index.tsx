@@ -34,7 +34,7 @@ export const ArxRoadmap = () => {
   return (
     <div
       ref={sectionRef}
-      className="grid grid-cols-1 md:grid-cols-2 gap-10 py-20"
+      className="grid grid-cols-1 gap-10 py-20 md:grid-cols-2"
     >
       <div
         ref={leftColumnRef}
@@ -42,11 +42,11 @@ export const ArxRoadmap = () => {
           isInViewport ? "md:sticky md:top-40 md:self-start" : ""
         }`}
       >
-        <h2 className="text-content-100 text-[60px] font-semibold leading-[105%]">
+        <h2 className="text-content-100 text-[60px] leading-[105%] font-semibold">
           ARX Hyper
           <br /> Roadmap
         </h2>
-        <h2 className="text-xl text-content-70 leading-[160%] max-w-[484px]">
+        <h2 className="text-content-70 max-w-[484px] text-xl leading-[160%]">
           The ARX journey unfolds step by step — from secure messaging to a
           self-sustaining network with wallet, nodes, and governance.
         </h2>

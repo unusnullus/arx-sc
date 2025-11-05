@@ -14,7 +14,7 @@ import Image from "next/image";
 
 export const TokenInfo = () => {
   return (
-    <Card className="w-full bg-white-7 rounded-4xl">
+    <Card className="bg-white-7 w-full rounded-4xl">
       <CardContent className="space-y-6">
         <div className="flex flex-col justify-between sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
@@ -46,20 +46,20 @@ export const TokenInfo = () => {
               alt="ARX"
               width={36}
               height={36}
-              className="size-6 sm:size-7 md:size-8 lg:size-14 rotate-180"
+              className="size-6 rotate-180 sm:size-7 md:size-8 lg:size-14"
             />
             <div className="flex flex-col gap-1">
               <span className="text-content-100 text-base font-semibold sm:text-xl">
                 ARX
               </span>
-              <span className="text-content-70 text-base ">ERC-20</span>
+              <span className="text-content-70 text-base">ERC-20</span>
             </div>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-content-100 text-base font-semibold sm:text-xl">
               $0.9038 / token
             </span>
-            <span className="text-content-70 text-sm text-right">
+            <span className="text-content-70 text-right text-sm">
               Current market rate
             </span>
           </div>

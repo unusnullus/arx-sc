@@ -87,9 +87,9 @@ export const BuyForm = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <div className="flex flex-col gap-2">
-          <div className="bg-black flex flex-col gap-2 rounded-2xl px-4 py-3 pb-4 border border-white-10">
+          <div className="border-white-10 flex flex-col gap-2 rounded-2xl border bg-black px-4 py-3 pb-4">
             <div className="flex items-center justify-between gap-2">
               <span className="text-content-70 text-xs sm:text-sm">
                 Pay with
@@ -106,7 +106,7 @@ export const BuyForm = ({
               </div>
             </div>
           </div>
-          <div className="flex bg-black rounded-2xl border border-white-10 px-4 py-3 items-center justify-between gap-2">
+          <div className="border-white-10 flex items-center justify-between gap-2 rounded-2xl border bg-black px-4 py-3">
             <div className="flex flex-1 flex-col gap-2">
               <span className="text-content-70 text-xs sm:text-sm">Buy</span>
               <div className="flex h-9 items-center gap-2">

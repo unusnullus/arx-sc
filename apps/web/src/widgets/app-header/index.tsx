@@ -5,9 +5,9 @@ import { Button } from "@arx/ui/components";
 
 export const AppHeader = () => {
   return (
-    <header className="sticky top-0 z-40 flex items-center justify-between gap-2 px-10 py-5.5 w-full">
-      <div className="flex items-center justify-between gap-3 w-full">
-        <div className="w-52 flex items-center justify-start">
+    <header className="sticky top-0 z-40 flex w-full items-center justify-between gap-2 px-10 py-5.5 backdrop-blur-md">
+      <div className="flex w-full items-center justify-between gap-3">
+        <div className="flex w-52 items-center justify-start">
           <Image src="/logo.svg" width={104} height={32} alt="ARX" />
         </div>
 
@@ -25,14 +25,14 @@ export const AppHeader = () => {
             <span className="text-content-70 text-base">CoinMarketCap</span>
           </Link>
         </nav>
-        <div className="w-52 flex justify-end">
-          <Button className="bg-content-100 text-content-black rounded-[100px] text-base px-6 py-3 h-12">
+        <div className="flex w-52 justify-end">
+          <Button className="bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base">
             <Image
               src="/wallet-connect.svg"
               width={20}
               height={20}
               alt="Wallet"
-              className="size-5 text-content-black"
+              className="text-content-black size-5"
             />
             <span className="text-content-black text-base font-semibold">
               Connect Wallet

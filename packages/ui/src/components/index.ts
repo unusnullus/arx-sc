@@ -14,3 +14,6 @@ export * from "./switch";
 export * from "./tabs";
 export * from "./tooltip";
 export * from "./dot-bar";
+export * from "./aurora";
+export * from "./text-type";
+export * from "./spotlight-card";

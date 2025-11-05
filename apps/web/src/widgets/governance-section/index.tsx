@@ -11,20 +11,20 @@ const cards = [
 
 export const GovernanceSection = () => {
   return (
-    <div className="flex flex-col items-center py-30 gap-6">
+    <div className="flex flex-col items-center gap-6 py-30">
       <div className="flex flex-col items-center">
-        <h1 className="text-[60px] font-semibold flex items-center gap-2 leading-[105%]">
+        <h1 className="flex items-center gap-2 text-[60px] leading-[105%] font-semibold">
           Stake and govern
         </h1>
-        <h1 className="text-[60px] font-semibold text-content-50 leading-[105%]">
+        <h1 className="text-content-50 text-[60px] leading-[105%] font-semibold">
           the network
         </h1>
       </div>
-      <p className="text-center text-t-secondary text-lg">
+      <p className="text-t-secondary text-center text-lg">
         Stake ARX to earn rewards, run nodes, and take part in shaping network
         parameters.
       </p>
-      <div className="flex items-center justify-between w-full gap-12 mt-30 mb-25">
+      <div className="mt-30 mb-25 flex w-full items-center justify-between gap-12">
         {cards.map((card, index) => (
           <Fragment key={card.title}>
             <div className="flex flex-col gap-3">
@@ -37,7 +37,7 @@ export const GovernanceSection = () => {
               </div>
             </div>
             {index < cards.length - 1 && (
-              <div className="hidden md:block h-28 w-1">
+              <div className="hidden h-28 w-1 md:block">
                 <Separator orientation="vertical" className="h-16" />
               </div>
             )}
@@ -45,19 +45,19 @@ export const GovernanceSection = () => {
         ))}
       </div>
 
-      <div className="mt-32 w-full max-w-[920px] p-[1px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B]">
-        <Card className="w-full bg-background">
+      <div className="mt-32 w-full max-w-[920px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B] p-[1px]">
+        <Card className="bg-background w-full">
           <div className="flex items-center justify-between gap-12 px-14 py-8">
-            <div className="flex flex-col gap-4 flex-1">
+            <div className="flex flex-1 flex-col gap-4">
               <div className="flex flex-col">
-                <h2 className="text-[60px] font-semibold leading-[105%]">
+                <h2 className="text-[60px] leading-[105%] font-semibold">
                   Sustainable
                 </h2>
-                <h2 className="text-[60px] font-semibold text-purple-gradient leading-[105%]">
+                <h2 className="text-purple-gradient text-[60px] leading-[105%] font-semibold">
                   by design
                 </h2>
               </div>
-              <p className="text-content-70 text-lg max-w-xl">
+              <p className="text-content-70 max-w-xl text-lg">
                 Network revenue from Pro, Teams, VPN, and eSIM services supports
                 buy-back and burn. Tail emission declines over 10 years, minting
                 only to the Rewards Pool.

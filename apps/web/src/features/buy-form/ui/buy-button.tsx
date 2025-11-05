@@ -121,7 +121,7 @@ const BuyButtonBase = ({
 
   return (
     <Button
-      className="text-content-100 text-base font-semibold w-full rounded-[100px] h-12 py-3 bg-white-10"
+      className="text-content-100 bg-white-10 h-12 w-full rounded-[100px] py-3 text-base font-semibold"
       onClick={handleBuy}
       disabled={isDisabled}
     >

@@ -1,28 +1,43 @@
 import Image from "next/image";
 
-import { Button } from "@arx/ui/components";
+import { Button, Aurora } from "@arx/ui/components";
 
 export const CtaSection = () => {
   return (
-    <div className="flex flex-col items-center py-30 gap-25 relative">
-      <div className="flex flex-col items-center text-center gap-6">
-        <h1 className="text-[60px] font-semibold flex items-center gap-2 leading-[105%]">
+    <div className="bg-white-5 relative flex w-full flex-col items-center gap-25 overflow-hidden rounded-4xl py-46">
+      <Aurora
+        colorStops={[
+          "#6541ff",
+          "#a28cff",
+          "#ff74d4",
+          "#ffb8de",
+          "#ef697e",
+          "#f98549",
+          "#ffdde1",
+        ]}
+        blend={0.5}
+        amplitude={0.7}
+        speed={1}
+        className="absolute top-0 left-0 z-0 h-full w-full rotate-180"
+      />
+      <div className="z-10 flex flex-col items-center gap-6 text-center">
+        <h1 className="flex items-center gap-2 text-[60px] leading-[105%] font-semibold">
           Help steer the network
           <br />
           you use
         </h1>
-        <h1 className="text-xl text-content-70 leading-[150%]">
+        <h1 className="text-content-70 text-xl leading-[150%]">
           Buy $ARX to vote, stake, and unlock operator roles. <br />
           Your conversations and their reliability should belong to you, not Big
           Tech.
         </h1>
-        <Button className="bg-content-100 text-content-black rounded-[100px] text-base px-6 py-3 h-12 mt-4">
+        <Button className="bg-content-100 text-content-black mt-4 h-12 rounded-[100px] px-6 py-3 text-base">
           <Image
             src="/wallet-connect.svg"
             width={20}
             height={20}
             alt="Wallet"
-            className="size-5 text-content-black"
+            className="text-content-black size-5"
           />
           <span className="text-content-black text-base font-semibold">
             Connect Wallet

@@ -310,10 +310,10 @@ export default function BuyARX() {
   }
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <div className="surface-card p-6 md:p-8 brand-glow">
+      <div className="surface-card brand-glow p-6 md:p-8">
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
               Buy <span className="text-[var(--brand-primary)]">ARX</span>
             </h1>
             <p className="mt-1 text-sm text-neutral-400">
@@ -328,7 +328,7 @@ export default function BuyARX() {
           </p>
         ) : (
           <div className="mt-6 space-y-5">
-            <div className="text-xs text-neutral-400 break-all">
+            <div className="text-xs break-all text-neutral-400">
               Wallet: {address}
             </div>
             <div className="text-xs text-neutral-400">
@@ -339,11 +339,11 @@ export default function BuyARX() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2 relative">
+              <div className="relative space-y-2">
                 <label className="text-sm">Pay with</label>
                 <button
                   type="button"
-                  className="w-full input-dark flex items-center justify-between px-3 py-2"
+                  className="input-dark flex w-full items-center justify-between px-3 py-2"
                   onClick={() => setPayOpen((v) => !v)}
                 >
                   <span className="flex items-center gap-2">
@@ -367,9 +367,9 @@ export default function BuyARX() {
                   <span className="text-neutral-500">▾</span>
                 </button>
                 {payOpen && (
-                  <div className="absolute z-10 mt-1 w-full rounded-md border border-white/10 bg-black/60 backdrop-blur p-1">
+                  <div className="absolute z-10 mt-1 w-full rounded-md border border-white/10 bg-black/60 p-1 backdrop-blur">
                     <button
-                      className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded hover:bg-white/10"
+                      className="flex w-full items-center justify-between gap-2 rounded px-3 py-2 hover:bg-white/10"
                       onClick={() => {
                         setPayToken("ETH");
                         setPayOpen(false);
@@ -389,7 +389,7 @@ export default function BuyARX() {
                       </span>
                     </button>
                     <button
-                      className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded hover:bg-white/10"
+                      className="flex w-full items-center justify-between gap-2 rounded px-3 py-2 hover:bg-white/10"
                       onClick={() => {
                         setPayToken("USDC");
                         setPayOpen(false);
@@ -415,7 +415,7 @@ export default function BuyARX() {
               <div className="space-y-2">
                 <label className="text-sm">Amount In ({payToken})</label>
                 <input
-                  className="w-full input-dark"
+                  className="input-dark w-full"
                   type="text"
                   inputMode="decimal"
                   placeholder={`Enter ${payToken} amount`}
@@ -443,11 +443,11 @@ export default function BuyARX() {
               </button>
               {showAdvanced && (
                 <div className="mt-3 grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2 relative">
+                  <div className="relative space-y-2">
                     <label className="text-sm">Slippage</label>
                     <button
                       type="button"
-                      className="input-dark w-28 px-3 py-2 flex items-center justify-between"
+                      className="input-dark flex w-28 items-center justify-between px-3 py-2"
                       onClick={() => setSlipOpen((v) => !v)}
                     >
                       <span className="text-sm">
@@ -458,16 +458,16 @@ export default function BuyARX() {
                       <span className="text-neutral-500">▾</span>
                     </button>
                     {slipOpen && (
-                      <div className="absolute z-10 mt-1 w-60 rounded-md border border-white/10 bg-black/60 backdrop-blur p-3 space-y-2">
+                      <div className="absolute z-10 mt-1 w-60 space-y-2 rounded-md border border-white/10 bg-black/60 p-3 backdrop-blur">
                         <div className="flex items-center gap-2">
                           <button
-                            className={`px-2 py-1 rounded text-xs ${slipMode === "pct" ? "bg-white/10" : ""}`}
+                            className={`rounded px-2 py-1 text-xs ${slipMode === "pct" ? "bg-white/10" : ""}`}
                             onClick={() => setSlipMode("pct")}
                           >
                             % mode
                           </button>
                           <button
-                            className={`px-2 py-1 rounded text-xs ${slipMode === "bps" ? "bg-white/10" : ""}`}
+                            className={`rounded px-2 py-1 text-xs ${slipMode === "bps" ? "bg-white/10" : ""}`}
                             onClick={() => setSlipMode("bps")}
                           >
                             bps mode
@@ -475,7 +475,7 @@ export default function BuyARX() {
                         </div>
                         {slipMode === "pct" ? (
                           <input
-                            className="w-full input-dark"
+                            className="input-dark w-full"
                             type="number"
                             min="0"
                             max="100"
@@ -488,7 +488,7 @@ export default function BuyARX() {
                           />
                         ) : (
                           <input
-                            className="w-full input-dark"
+                            className="input-dark w-full"
                             type="number"
                             min="0"
                             max="10000"
@@ -509,7 +509,7 @@ export default function BuyARX() {
                   <div className="space-y-2">
                     <label className="text-sm">Deadline (minutes)</label>
                     <input
-                      className="w-full input-dark"
+                      className="input-dark w-full"
                       type="number"
                       value={deadlineMinutes}
                       onChange={(e) =>
@@ -525,11 +525,11 @@ export default function BuyARX() {
               <div className="flex items-baseline gap-4">
                 {salePrice != null && (
                   <div className="text-2xl font-semibold tracking-tight">
-                    <span className="text-neutral-400 text-sm mr-2">Price</span>
+                    <span className="mr-2 text-sm text-neutral-400">Price</span>
                     <span className="text-[var(--brand-primary)]">
                       {Number(salePrice) / 1e6} USDC
                     </span>
-                    <span className="text-neutral-400 text-sm ml-1">/ ARX</span>
+                    <span className="ml-1 text-sm text-neutral-400">/ ARX</span>
                   </div>
                 )}
                 {quoteUsdcOut != null && (
@@ -553,7 +553,7 @@ export default function BuyARX() {
               <Button
                 onClick={onBuy}
                 disabled={!amountIn || Number(amountIn) <= 0}
-                className="bg-[var(--brand-primary)] text-black font-semibold px-8 py-3 rounded-md shadow-[0_10px_30px_-10px_rgba(120,88,255,0.6)] hover:shadow-[0_12px_36px_-10px_rgba(120,88,255,0.8)] transition-shadow"
+                className="rounded-md bg-[var(--brand-primary)] px-8 py-3 font-semibold text-black shadow-[0_10px_30px_-10px_rgba(120,88,255,0.6)] transition-shadow hover:shadow-[0_12px_36px_-10px_rgba(120,88,255,0.8)]"
               >
                 {(() => {
                   if (payToken !== "USDC") return "Buy";

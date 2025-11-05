@@ -36,7 +36,7 @@ export const DotBar = ({ progress }: { progress: number }) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.8", "start 0.5"],
+    offset: ["start 0.8", "end 0.1"],
   });
 
   return (

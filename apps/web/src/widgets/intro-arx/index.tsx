@@ -64,7 +64,7 @@ export const IntroArx = () => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.6", "end 0.8"],
+    offset: ["start 0.6", "end 0.6"],
   });
 
   const words = text.split(" ");
@@ -72,9 +72,8 @@ export const IntroArx = () => {
 
   return (
     <div ref={containerRef} className="flex justify-center">
-      <h2 className="text-[44px] font-semibold leading-[150%] text-center my-30 max-w-[1080px] tracking-[-2%]">
+      <h2 className="my-30 max-w-[1080px] text-center text-[44px] leading-[150%] font-semibold tracking-[-2%]">
         {words.map((word, wordIndex) => {
-          // Вычисляем стартовый индекс букв для этого слова
           const wordStartIndex = words
             .slice(0, wordIndex)
             .join("")

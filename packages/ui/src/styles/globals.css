@@ -21,6 +21,7 @@
   --white-15: #ffffff26;
   --white-10: #ffffff1a;
   --white-7: #ffffff12;
+  --white-5: #ffffff0d;
   --success: #5dd261;
   --error: #ff4d4f;
   --purple-linear-gradient: linear-gradient(90deg, #e6daff 0%, #8754fa 40%);
@@ -44,6 +45,7 @@
   --font-mono: var(--font-geist-mono);
   --color-white-10: var(--white-10);
   --color-white-7: var(--white-7);
+  --color-white-5: var(--white-5);
   --color-success: var(--success);
   --color-error: var(--error);
   --color-purple-linear-gradient: var(--purple-linear-gradient);

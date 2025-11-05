@@ -87,14 +87,14 @@ export const RecentTransaction = () => {
   const filteredTransactions = [
     {
       hash: "0x1234567890123456789012345678901234567890",
-      displayName: "Transaction 1",
+      displayName: "RedeemRequest",
       age: "2025-11-04",
       tokenTransfers: [],
       value: "100",
     },
     {
       hash: "0x1234567890123456789012345678901234567890",
-      displayName: "Transaction 2",
+      displayName: "RedeemRequest",
       age: "2025-11-04",
       status: "failed",
       tokenTransfers: [],
@@ -102,7 +102,7 @@ export const RecentTransaction = () => {
     },
     {
       hash: "0x1234567890123456789012345678901234567890",
-      displayName: "Transaction 3",
+      displayName: "ClaimRedeem",
       age: "2025-11-03",
       status: "success",
       tokenTransfers: [],
@@ -110,7 +110,14 @@ export const RecentTransaction = () => {
     },
     {
       hash: "0x1234567890123456789012345678901234567890",
-      displayName: "Transaction 4",
+      displayName: "RedeemRequest",
+      age: "2025-11-03",
+      tokenTransfers: [],
+      value: "300",
+    },
+    {
+      hash: "0x1234567890123456789012345678901234567890",
+      displayName: "ClaimRedeem",
       age: "2025-11-03",
       status: "success",
       tokenTransfers: [],

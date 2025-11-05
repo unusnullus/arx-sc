@@ -1,6 +1,6 @@
 export default function ArxNetPage() {
   return (
-    <main className="mx-auto max-w-3xl p-6 space-y-4">
+    <main className="mx-auto max-w-3xl space-y-4 p-6">
       <h1 className="text-3xl font-bold">ARX Network</h1>
       <p className="text-neutral-400">
         Stake, roles, and node setup guides will appear here.

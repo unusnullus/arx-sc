@@ -1,4 +1,4 @@
-import { HeroSection } from "@/widgets/hero-section";
+import { BuySection } from "@/widgets/buy-section";
 import { GovernanceSection } from "@/widgets/governance-section";
 import { TokenInfo } from "@/widgets/token-info";
 import { RecentTransaction } from "@/widgets/recent-transactions";
@@ -7,17 +7,20 @@ import { PrivacySection } from "@/widgets/privacy-section";
 import { EdgeKeys } from "@/widgets/edge-keys";
 import { ArxRoadmap } from "@/widgets/arx-roadmap";
 import { CtaSection } from "@/widgets/cta-section";
+import { HeroSection } from "@/widgets/hero-section";
+import { Footer } from "@/widgets/footer";
 
 export default function Home() {
   return (
     <div className="container flex flex-col gap-20">
       <HeroSection />
-      <div className="flex flex-col gap-20 items-center">
-        <div className="flex flex-col gap-6 items-center">
-          <h1 className="text-[60px] font-semibold flex items-center gap-2 leading-[105%]">
+      <BuySection />
+      <div className="flex flex-col items-center gap-20">
+        <div className="flex flex-col items-center gap-6">
+          <h1 className="flex items-center gap-2 text-[60px] leading-[105%] font-semibold">
             Token details & activity
           </h1>
-          <p className="text-content-70 text-lg max-w-md text-center">
+          <p className="text-content-70 max-w-md text-center text-lg">
             Learn more about the ARX token — its role in the Arx Network and
             your recent activity.{" "}
           </p>
@@ -33,6 +36,7 @@ export default function Home() {
       <EdgeKeys />
       <ArxRoadmap />
       <CtaSection />
+      <Footer />
     </div>
   );
 }

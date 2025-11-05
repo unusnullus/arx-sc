@@ -49,31 +49,31 @@ export default function Header() {
 
   return (
     <header className="header-surface sticky top-0 z-40 flex items-center justify-center">
-      <div className="container px-4 py-3 flex items-center justify-between gap-4">
+      <div className="container flex items-center justify-between gap-4 px-4 py-3">
         <div className="flex items-center gap-3">
           <Image src="/logo-dark.svg" width={28} height={28} alt="ARX" />
           <span className="text-sm font-medium tracking-wide">ARX NET</span>
         </div>
         <div className="flex items-center gap-4 text-xs text-neutral-300">
-          <div className="hidden sm:flex items-center gap-1">
+          <div className="hidden items-center gap-1 sm:flex">
             <span className="text-neutral-500">Network</span>
-            <span className="px-2 py-0.5 rounded-full border border-white/10">
+            <span className="rounded-full border border-white/10 px-2 py-0.5">
               {networkName}
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-1">
+          <div className="hidden items-center gap-1 sm:flex">
             <span className="text-neutral-500">Gas</span>
             <span>{gasPriceGwei} gwei</span>
           </div>
           {isConnected && (
             <>
-              <div className="hidden md:flex items-center gap-1">
+              <div className="hidden items-center gap-1 md:flex">
                 <span className="text-neutral-500">ETH</span>
                 <span>
                   {ethBal ? (Number(ethBal.value) / 1e18).toFixed(4) : "-"}
                 </span>
               </div>
-              <div className="hidden md:flex items-center gap-1">
+              <div className="hidden items-center gap-1 md:flex">
                 <span className="text-neutral-500">USDC</span>
                 <span>
                   {usdcBal ? (Number(usdcBal.value) / 1e6).toFixed(2) : "-"}
