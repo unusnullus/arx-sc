@@ -65,7 +65,7 @@ export const SelectCoinBase = ({
 
   return (
     <Select
-      value={selectedToken.address}
+      value={selectedToken?.address ?? ""}
       onValueChange={handleValueChange}
       open={open}
       onOpenChange={handleOpenChange}
