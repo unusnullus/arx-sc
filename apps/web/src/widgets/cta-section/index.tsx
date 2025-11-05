@@ -1,6 +1,5 @@
-import Image from "next/image";
-
-import { Button, Aurora } from "@arx/ui/components";
+import { Aurora } from "@arx/ui/components";
+import { ConnectWallet } from "@/features/connect-wallet";
 
 export const CtaSection = () => {
   return (
@@ -31,18 +30,7 @@ export const CtaSection = () => {
           Your conversations and their reliability should belong to you, not Big
           Tech.
         </h1>
-        <Button className="bg-content-100 text-content-black mt-4 h-12 rounded-[100px] px-6 py-3 text-base">
-          <Image
-            src="/wallet-connect.svg"
-            width={20}
-            height={20}
-            alt="Wallet"
-            className="text-content-black size-5"
-          />
-          <span className="text-content-black text-base font-semibold">
-            Connect Wallet
-          </span>
-        </Button>
+        <ConnectWallet idle />
       </div>
     </div>
   );

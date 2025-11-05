@@ -75,16 +75,6 @@ export const BuyForm = ({
     }
   }, [isConnected, chainId, handleResetInput, availableTokens, token]);
 
-  if (!arxToken || !availableTokens) {
-    return (
-      <div className="flex flex-col gap-6 py-4">
-        <div className="text-muted-foreground text-center">
-          Network not supported
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col">
@@ -112,8 +102,8 @@ export const BuyForm = ({
               <div className="flex h-9 items-center gap-2">
                 <div className="relative">
                   <Image
-                    src={arxToken.logoURI || "/tokens/arx.svg"}
-                    alt={arxToken.name}
+                    src={arxToken?.logoURI || "/tokens/arx.svg"}
+                    alt={arxToken?.name || "ARX"}
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
@@ -136,7 +126,7 @@ export const BuyForm = ({
             <div className="flex-1 text-right">
               {token && amount && (
                 <div className="text-content-70 text-lg">
-                  ~{Number(amount).toFixed(2)} {arxToken.symbol}
+                  ~{Number(amount).toFixed(2)} {arxToken?.symbol || "ARX"}
                 </div>
               )}
             </div>

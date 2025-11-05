@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@arx/ui/components";
+import { ConnectWallet } from "@/features/connect-wallet";
 
 export const AppHeader = () => {
   return (
@@ -26,18 +26,7 @@ export const AppHeader = () => {
           </Link>
         </nav>
         <div className="flex w-52 justify-end">
-          <Button className="bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base">
-            <Image
-              src="/wallet-connect.svg"
-              width={20}
-              height={20}
-              alt="Wallet"
-              className="text-content-black size-5"
-            />
-            <span className="text-content-black text-base font-semibold">
-              Connect Wallet
-            </span>
-          </Button>
+          <ConnectWallet />
         </div>
       </div>
     </header>
