@@ -1,5 +1,6 @@
 import { Aurora } from "@arx/ui/components";
 import { ConnectWallet } from "@/features/connect-wallet";
+import { BuyArxButton } from "@/features/buy-arx-button";
 
 export const CtaSection = () => {
   return (
@@ -31,7 +32,8 @@ export const CtaSection = () => {
           Your conversations and their reliability should belong to you, not Big
           Tech.
         </h1>
-        <ConnectWallet idle />
+        <BuyArxButton className="w-50 md:max-w-50" />
+        <ConnectWallet idle className="w-50" />
       </div>
     </div>
   );

@@ -17,21 +17,25 @@ export const AppHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
+    { href: "https://www.arx.pro/", label: "Arx.Pro", target: "_blank" },
+    {
+      href: "https://sepolia.etherscan.io/address/0x45B19ac7E4fDC7428a206482E94267EC7baA1221",
+      label: "Etherscan",
+      target: "_blank",
+    },
     {
       href: "https://github.com/unusnullus/arx-sc",
       label: "GitHub",
       target: "_blank",
     },
     { href: "https://docs.arx.pro/", label: "Documentation", target: "_blank" },
-    { href: "/", label: "Etherscan", target: "_blank" },
-    { href: "/", label: "CoinMarketCap", target: "_blank" },
   ];
 
   return (
     <header className="sticky top-0 z-40 flex w-full items-center justify-between gap-2 px-4 py-4 backdrop-blur-md md:px-6 md:py-5 lg:px-10 lg:py-5.5">
       <div className="flex w-full items-center justify-between gap-3">
         <div className="flex items-center justify-start md:w-52">
-          <Link href="/" className="cursor-pointer" target="_blank">
+          <Link href="/" className="cursor-pointer">
             <Image
               src="/logo.svg"
               width={104}

@@ -1,7 +1,7 @@
 import { TextType } from "@arx/ui/components";
 import Image from "next/image";
 import { DownloadButton } from "./download-button";
-import { BuyArxButton } from "./buy-arx-button";
+import { BuyArxButton } from "@/features/buy-arx-button";
 
 export const HeroSection = () => {
   return (

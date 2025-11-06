@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { format } from "date-fns";
 import { cn } from "@arx/ui/lib";
 import {
@@ -10,120 +8,87 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Skeleton,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from "@arx/ui/components";
+import { useGetRecentTransactions } from "@/entities/transactions";
+import { ExternalLink } from "lucide-react";
 
 export const RecentTransaction = () => {
-  // if (!zapperAddress) {
-  //   return (
-  //     <Card>
-  //       <CardHeader>
-  //         <CardTitle className="flex items-center justify-between">
-  //           <span className="text-base font-semibold sm:text-lg lg:text-xl">Recent Transactions</span>
-  //         </CardTitle>
-  //       </CardHeader>
-  //       <CardContent>
-  //         <div className="text-base-secondary py-4 text-center">Network not supported</div>
-  //       </CardContent>
-  //     </Card>
-  //   );
-  // }
+  const { transactions, isLoading, error } = useGetRecentTransactions();
 
-  // if (isLoading) {
-  //   return (
-  //     <Card>
-  //       <CardHeader>
-  //         <CardTitle className="flex items-center justify-between">
-  //           <span className="text-base font-semibold sm:text-lg lg:text-xl">Recent Transactions</span>
-  //         </CardTitle>
-  //       </CardHeader>
-  //       <CardContent>
-  //         <div className="flex flex-col">
-  //           {Array.from({ length: 5 }).map((_, index) => (
-  //             <TransactionSkeleton key={index} />
-  //           ))}
-  //         </div>
-  //       </CardContent>
-  //     </Card>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <Card className="gap-3 lg:gap-4">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span className="text-base font-semibold sm:text-lg lg:text-xl">
+              Recent Transactions
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <div
+                key={index}
+                className="border-white-10 flex items-center justify-between border-b py-2 last:border-b-0"
+              >
+                <div className="flex items-center gap-2">
+                  <Skeleton className="size-9 rounded-md" />
+                  <div className="flex flex-col gap-2">
+                    <Skeleton className="h-5 w-24" />
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                </div>
+                <Skeleton className="h-5 w-16" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <Card>
-  //       <CardHeader>
-  //         <CardTitle className="flex items-center justify-between">
-  //           <span className="text-base font-semibold sm:text-lg lg:text-xl">Recent Transactions</span>
-  //         </CardTitle>
-  //       </CardHeader>
-  //       <CardContent>
-  //         <div className="text-base-secondary py-4 text-center">Failed to load transactions</div>
-  //       </CardContent>
-  //     </Card>
-  //   );
-  // }
+  if (error) {
+    return (
+      <Card className="gap-3 lg:gap-4">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span className="text-base font-semibold sm:text-lg lg:text-xl">
+              Recent Transactions
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="h-full">
+          <div className="text-content-50 flex h-full items-center justify-center py-4 text-center">
+            Failed to load transactions
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
-  // if (transactionsData?.transactions.length === 0) {
-  //   return (
-  //     <Card>
-  //       <CardHeader>
-  //         <CardTitle className="flex items-center justify-between">
-  //           <span className="text-base font-semibold sm:text-lg lg:text-xl">Recent Transactions</span>
-  //         </CardTitle>
-  //       </CardHeader>
-  //       <CardContent>
-  //         <div className="text-base-secondary py-4 text-center">No transactions found</div>
-  //       </CardContent>
-  //     </Card>
-  //   );
-  // }
-
-  // const filteredTransactions = transactionsData?.transactions
-  //   ? filterTransactionsByType(transactionsData.transactions, TRANSACTION_TYPE_ALLOWED_TYPES)
-  //       .slice(0, 5)
-  //       .map(formatTransactionForDisplay)
-  //       .filter((tx) => !!tx)
-  //   : [];
-
-  const filteredTransactions = [
-    {
-      hash: "0x1234567890123456789012345678901234267890",
-      displayName: "RedeemRequest",
-      age: "2025-11-04",
-      tokenTransfers: [],
-      value: "100",
-    },
-    {
-      hash: "0x1234567890123456789012345678901234367890",
-      displayName: "RedeemRequest",
-      age: "2025-11-04",
-      status: "failed",
-      tokenTransfers: [],
-      value: "200",
-    },
-    {
-      hash: "0x1234567890123456789012345678904234567890",
-      displayName: "ClaimRedeem",
-      age: "2025-11-03",
-      status: "success",
-      tokenTransfers: [],
-      value: "300",
-    },
-    {
-      hash: "0x1234567890123456789012345678951234567890",
-      displayName: "RedeemRequest",
-      age: "2025-11-03",
-      tokenTransfers: [],
-      value: "300",
-    },
-    {
-      hash: "0x1234567890123456789012345678601234567890",
-      displayName: "ClaimRedeem",
-      age: "2025-11-03",
-      status: "success",
-      tokenTransfers: [],
-      value: "400",
-    },
-  ];
+  if (transactions.length === 0) {
+    return (
+      <Card className="gap-3 lg:gap-4">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span className="text-base font-semibold sm:text-lg lg:text-xl">
+              Recent Transactions
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="h-full">
+          <div className="text-content-50 flex h-full items-center justify-center py-4 text-center">
+            No transactions found
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="gap-3 lg:gap-4">
@@ -132,7 +97,7 @@ export const RecentTransaction = () => {
           <span className="text-base font-semibold sm:text-lg lg:text-xl">
             Recent Transactions
           </span>
-          <Link href="/transactions-history">
+          {/* <Link href="/transactions-history">
             <Button
               variant="link"
               className="text-secondary hover:text-secondary/70 text-sm"
@@ -140,46 +105,51 @@ export const RecentTransaction = () => {
             >
               View All
             </Button>
-          </Link>
+          </Link> */}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col">
-          {filteredTransactions.map((tx) => (
+          {transactions.map(({ tx, arx, datetime, status }) => (
             <div
-              key={tx.hash}
+              key={tx}
               className="border-white-10 flex items-center justify-between border-b py-2 last:border-b-0"
             >
               <div className="flex items-center gap-2">
-                {/* <Tooltip useTouch>
+                <Tooltip useTouch>
                   <TooltipTrigger asChild>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => window.open(`${getExplorerUrl(targetChainId)}/tx/${tx.hash}`, "_blank")}
+                      onClick={() =>
+                        window.open(
+                          `https://sepolia.etherscan.io/tx/${tx}`,
+                          "_blank",
+                        )
+                      }
                     >
                       <ExternalLink className="text-base-secondary size-4" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>View Transaction</TooltipContent>
-                </Tooltip> */}
+                </Tooltip>
                 <div className="flex flex-col gap-1">
                   <span
                     className={cn("text-content-70 text-sm sm:text-base", {
-                      "text-success": tx.status === "success",
-                      "text-error": tx.status === "failed",
+                      "text-success": status === "success",
+                      "text-error": status === "failed",
                     })}
                   >
-                    {tx.displayName}
+                    Purchased
                   </span>
 
                   <span className="text-content-50 text-xs">
-                    {format(new Date(tx.age), "dd MMM yyyy")}
+                    {format(new Date(datetime), "dd MMM yyyy")}
                   </span>
                 </div>
               </div>
               <span className="text-content-50 text-sm sm:text-base">
-                {tx.value}
+                {arx} ARX
               </span>
             </div>
           ))}

@@ -13,7 +13,7 @@ import { format, setMinutes } from "date-fns";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAccount, useReadContract } from "wagmi";
+import { useReadContract } from "wagmi";
 import { useMemo } from "react";
 import { FALLBACK_CHAIN_ID, addressesByChain } from "@arx/config";
 import { ARX_TOKEN_SALE_ABI } from "@arx/abi";
@@ -21,8 +21,7 @@ import { formatUnits } from "viem";
 import { truncateDecimals } from "@arx/ui/lib";
 
 export const TokenInfo = () => {
-  const { chainId } = useAccount();
-  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
+  const targetChainId = FALLBACK_CHAIN_ID;
 
   const cfg = useMemo(
     () => addressesByChain[targetChainId] || {},
@@ -36,6 +35,7 @@ export const TokenInfo = () => {
     query: {
       enabled: !!cfg.ARX_TOKEN_SALE,
     },
+    chainId: targetChainId,
   });
 
   const formattedPrice = useMemo(() => {
@@ -46,7 +46,7 @@ export const TokenInfo = () => {
   }, [priceUSDC]);
 
   return (
-    <Card className="bg-white-7 w-full rounded-4xl">
+    <Card className="bg-white-7 h-fit w-full rounded-4xl">
       <CardContent className="space-y-6">
         <div className="flex flex-col justify-between sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
@@ -55,7 +55,11 @@ export const TokenInfo = () => {
             </span>
             <Tooltip useTouch>
               <TooltipTrigger asChild>
-                <Link href="/" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://sepolia.etherscan.io/address/0xA4DDb0963792972C6D832aF6C88F9bd4fe30064D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="ghost" size="icon">
                     <ExternalLink className="text-base-secondary size-4" />
                   </Button>
