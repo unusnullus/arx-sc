@@ -3,7 +3,10 @@ import { ConnectWallet } from "@/features/connect-wallet";
 
 export const BuySection = () => {
   return (
-    <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:gap-10 md:py-30">
+    <div
+      id="buy"
+      className="flex flex-col items-start justify-between gap-10 md:flex-row md:gap-10 md:py-30"
+    >
       <div className="flex flex-1 items-center">
         <div className="flex max-w-[484px] flex-col items-center gap-6 md:items-start">
           <div className="flex flex-col items-center md:items-start">

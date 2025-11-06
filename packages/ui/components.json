@@ -12,7 +12,7 @@
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@arx/ui/components",
-    "utils": "@arx/ui/lib/utils",
+    "utils": "@arx/ui/lib",
     "hooks": "@arx/ui/hooks",
     "lib": "@arx/ui/lib",
     "ui": "@arx/ui/components"

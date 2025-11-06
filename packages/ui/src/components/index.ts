@@ -10,6 +10,7 @@ export * from "./number-input";
 export * from "./popover";
 export * from "./select";
 export * from "./separator";
+export * from "./sheet";
 export * from "./skeleton";
 export * from "./sonner";
 export * from "./spinner";

@@ -9,8 +9,9 @@ import { TokenMaxBalance } from "@/features/max-balance";
 import { SelectCoin } from "@/features/select-coin";
 import { FALLBACK_CHAIN_ID, Token, getTokensByChainId } from "@arx/config";
 import { Card, CardContent } from "@arx/ui/components";
+import { cn } from "@arx/ui/lib";
 
-export const PoolTransactions = () => {
+export const PoolTransactions = ({ className }: { className?: string }) => {
   const { chainId } = useAccount();
   const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
 
@@ -21,7 +22,12 @@ export const PoolTransactions = () => {
   const { settings } = usePermitSettings();
 
   return (
-    <Card className="bg-white-7 w-full max-w-[586px] gap-0 py-2 md:py-6">
+    <Card
+      className={cn(
+        "bg-white-7 w-full max-w-[586px] gap-0 py-2 md:py-6",
+        className,
+      )}
+    >
       {/* <CardHeader className="px-2 md:px-6">
         <div className="flex items-center justify-end">
           <PermitSelection

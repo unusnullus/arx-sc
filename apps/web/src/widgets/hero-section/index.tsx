@@ -1,6 +1,7 @@
-import { Button, TextType } from "@arx/ui/components";
+import { TextType } from "@arx/ui/components";
 import Image from "next/image";
 import { DownloadButton } from "./download-button";
+import { BuyArxButton } from "./buy-arx-button";
 
 export const HeroSection = () => {
   return (
@@ -25,9 +26,7 @@ export const HeroSection = () => {
         </p>
         <div className="mt-3 flex w-full flex-col items-center justify-center gap-2 md:flex-row md:gap-4">
           <DownloadButton />
-          <Button className="bg-white-10 h-12 w-full max-w-80 rounded-[100px] px-6 py-3 text-base md:max-w-40">
-            <span className="text-base font-semibold">Buy $ARX</span>
-          </Button>
+          <BuyArxButton />
         </div>
       </div>
       <div className="relative flex w-full items-center justify-center">

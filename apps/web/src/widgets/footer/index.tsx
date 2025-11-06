@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const Footer = () => {
   return (
@@ -29,16 +30,31 @@ export const Footer = () => {
               <span className="text-content-100 text-base md:text-lg">
                 Resources
               </span>
-              {["GitHub", "GitBook", "Etherscan", "CoinMarketCap"].map(
-                (item) => (
-                  <span
-                    key={item}
-                    className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300 md:text-lg"
-                  >
-                    {item}
+              {[
+                {
+                  href: "https://github.com/unusnullus/arx-sc",
+                  label: "GitHub",
+                  target: "_blank",
+                },
+                {
+                  href: "https://docs.arx.pro/",
+                  label: "Documentation",
+                  target: "_blank",
+                },
+                { href: "/", label: "Etherscan", target: "_blank" },
+                { href: "/", label: "CoinMarketCap", target: "_blank" },
+              ].map(({ href, label, target }) => (
+                <Link
+                  href={href}
+                  target={target}
+                  key={label}
+                  className="cursor-pointer"
+                >
+                  <span className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300 md:text-lg">
+                    {label}
                   </span>
-                ),
-              )}
+                </Link>
+              ))}
             </div>
             <div className="flex flex-1 flex-col gap-5">
               <span className="text-content-100 text-base md:text-lg">
