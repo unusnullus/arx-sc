@@ -30,10 +30,12 @@ const Card = ({
 }) => {
   return (
     <SpotlightCard className="flex-1" spotlightColor="rgba(101, 65, 255, 0.3)">
-      <div className="bg-white-7 flex h-full flex-1 flex-col items-center justify-between gap-11 rounded-4xl px-9 pt-8">
+      <div className="bg-white-7 flex h-full flex-1 flex-col items-center justify-between gap-8 rounded-4xl px-6 pt-6 md:gap-11 md:px-9 md:pt-8">
         <div className="flex flex-col gap-4">
-          <h2 className="text-4xl leading-[150%] font-semibold">{title}</h2>
-          <p className="text-content-70 text-lg">{text}</p>
+          <h2 className="text-2xl leading-[150%] font-semibold md:text-4xl">
+            {title}
+          </h2>
+          <p className="text-content-70 text-base md:text-lg">{text}</p>
         </div>
         <div className="flex flex-1 items-end justify-center">
           <Image
@@ -51,16 +53,16 @@ const Card = ({
 
 export const PrivacySection = () => {
   return (
-    <div className="flex flex-col items-center gap-25 py-30">
+    <div className="py-10md:py-30 flex flex-col items-center gap-10 md:gap-25">
       <div className="flex flex-col items-center">
-        <h1 className="flex items-center gap-2 text-[60px] leading-[105%] font-semibold">
+        <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
           Privacy is value.
         </h1>
-        <h1 className="text-content-50 text-[60px] leading-[105%] font-semibold">
+        <h1 className="text-content-50 text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
           Ownership is the product.
         </h1>
       </div>
-      <div className="flex w-full justify-between gap-6">
+      <div className="flex w-full flex-col justify-between gap-6 md:flex-row">
         {cards.map((card) => (
           <Card key={card.title} {...card} />
         ))}

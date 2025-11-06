@@ -24,7 +24,7 @@ import { ARX_ZAP_ROUTER_ABI } from "@arx/abi";
 import { PermitParams } from "@/entities/permit/types";
 
 export interface ZapAndBuyParams {
-  token: Token;
+  token?: Token | null;
   amount: string;
   slippageBps?: bigint;
   deadlineMinutes?: number;
@@ -123,10 +123,9 @@ export const useZapAndBuy = () => {
           ? calculateMinUsdcOut(quoteUsdcOut, effectiveSlippageBps)
           : BigInt(0);
 
-        // Handle ETH
-        if (isNativeToken(token.address)) {
+        if (isNativeToken(token?.address)) {
           const pathFromWETH = buildPath(weth9, usdc);
-          const amountWei = parseUnits(amount, token.decimals);
+          const amountWei = parseUnits(amount, token?.decimals ?? 0);
 
           await wallet.writeContract({
             address: zap,
@@ -140,9 +139,8 @@ export const useZapAndBuy = () => {
           return;
         }
 
-        // Handle ERC20 tokens
-        const tokenIn = token.address as `0x${string}`;
-        const amountWei = parseUnits(amount, token.decimals);
+        const tokenIn = token?.address as `0x${string}`;
+        const amountWei = parseUnits(amount, token?.decimals ?? 0);
         const path = buildPath(tokenIn, usdc);
 
         await wallet.writeContract({
@@ -188,7 +186,7 @@ export const useZapAndBuy = () => {
         return;
       }
 
-      if (isNativeToken(token.address)) {
+      if (isNativeToken(token?.address)) {
         toast.error("Permit not supported for native tokens");
         return;
       }
@@ -217,8 +215,8 @@ export const useZapAndBuy = () => {
           ? calculateMinUsdcOut(quoteUsdcOut, effectiveSlippageBps)
           : BigInt(0);
 
-        const tokenIn = token.address as `0x${string}`;
-        const amountWei = parseUnits(amount, token.decimals);
+        const tokenIn = token?.address as `0x${string}`;
+        const amountWei = parseUnits(amount, token?.decimals ?? 0);
         const path = buildPath(tokenIn, usdc);
 
         await wallet.writeContract({

@@ -75,13 +75,13 @@ export const SelectCoinBase = ({
           "w-fit cursor-pointer border-none p-0 shadow-none focus-visible:border-none focus-visible:ring-0",
           triggerClassName,
         )}
-        aria-label={`Selected token: ${selectedToken.name} (${selectedToken.symbol})`}
+        aria-label={`Selected token: ${selectedToken?.name} (${selectedToken?.symbol})`}
       >
         <SelectValue>
           <div className="flex items-center gap-2">
             <Image
-              src={selectedToken.logoURI}
-              alt={`${selectedToken.name} token logo`}
+              src={selectedToken?.logoURI}
+              alt={`${selectedToken?.name} token logo`}
               width={36}
               height={36}
               className="size-6 sm:size-7 md:size-8 lg:size-9"
@@ -90,9 +90,9 @@ export const SelectCoinBase = ({
             />
             <span
               className="text-base-primary text-base font-semibold lg:text-lg"
-              aria-label={`Token symbol: ${selectedToken.symbol}`}
+              aria-label={`Token symbol: ${selectedToken?.symbol}`}
             >
-              {selectedToken.symbol}
+              {selectedToken?.symbol}
             </span>
           </div>
         </SelectValue>
@@ -108,10 +108,10 @@ export const SelectCoinBase = ({
             value={token.address}
             className="rounded-2xl"
             role="option"
-            aria-selected={token.address === selectedToken.address}
+            aria-selected={token.address === selectedToken?.address}
           >
             <SelectCoinItem
-              tokenAddress={token.address}
+              tokenAddress={token?.address}
               userAddress={userAddress}
             />
           </SelectItem>

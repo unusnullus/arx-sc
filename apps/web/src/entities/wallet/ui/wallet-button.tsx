@@ -19,16 +19,18 @@ export const WalletButton = ({
   isError = false,
   onClick,
   className,
+  device,
 }: {
   isLoading?: boolean;
   isError?: boolean;
   onClick?: () => void;
   className?: string;
+  device?: "mobile" | "tablet" | "desktop";
 }) => {
   const deviceType = useDeviceType();
 
   const getButtonText = () => {
-    const deviceText = BUTTON_TEXT[deviceType];
+    const deviceText = BUTTON_TEXT[device || deviceType];
     return isError ? deviceText.retry : deviceText.connect;
   };
 
@@ -85,7 +87,7 @@ export const WalletButton = ({
         height={24}
         loading="lazy"
       />
-      <span className="text-content-black text-sm font-semibold md:text-base">
+      <span className="text-content-black text-base font-semibold">
         {getButtonText()}
       </span>
     </Button>

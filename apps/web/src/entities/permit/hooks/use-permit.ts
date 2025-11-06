@@ -15,7 +15,7 @@ import { Token, isNativeToken } from "@arx/config";
 import { ERC20_ABI } from "@arx/abi";
 import { PermitParams } from "../types";
 
-export const usePermit = (token?: Token) => {
+export const usePermit = (token?: Token | null) => {
   const { address, chainId } = useAccount();
   const [isLoading, setIsLoading] = useState(false);
   const { signTypedDataAsync } = useSignTypedData();

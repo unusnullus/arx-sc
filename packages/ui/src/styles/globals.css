@@ -75,6 +75,9 @@ body {
     Arial,
     "Apple Color Emoji",
     "Segoe UI Emoji";
+  & > div[data-rk] {
+    @apply flex w-full h-full items-center justify-center;
+  }
 }
 
 /* Glassy card surface utility */

@@ -120,7 +120,7 @@ export const Roadmap = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col">
+    <div ref={containerRef} className="flex flex-col pl-2 md:pl-0">
       {roadmapData.map((item, index) => (
         <MapItem
           key={index}

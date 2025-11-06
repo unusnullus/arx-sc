@@ -11,53 +11,58 @@ const cards = [
 
 export const GovernanceSection = () => {
   return (
-    <div className="flex flex-col items-center gap-6 py-30">
+    <div className="flex flex-col items-center gap-6 py-10 md:py-30">
       <div className="flex flex-col items-center">
-        <h1 className="flex items-center gap-2 text-[60px] leading-[105%] font-semibold">
+        <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
           Stake and govern
         </h1>
-        <h1 className="text-content-50 text-[60px] leading-[105%] font-semibold">
+        <h1 className="text-content-50 text-[32px] leading-[105%] font-semibold md:text-[60px]">
           the network
         </h1>
       </div>
-      <p className="text-t-secondary text-center text-lg">
+      <p className="text-t-secondary text-center text-lg md:text-xl">
         Stake ARX to earn rewards, run nodes, and take part in shaping network
         parameters.
       </p>
-      <div className="mt-30 mb-25 flex w-full items-center justify-between gap-12">
+      <div className="mt-4 flex w-full flex-col items-center justify-between gap-12 md:mt-30 md:mb-25 md:flex-row">
         {cards.map((card, index) => (
           <Fragment key={card.title}>
             <div className="flex flex-col gap-3">
-              <span className="text-t-secondary text-base">{card.title}</span>
+              <span className="text-content-70 text-base">{card.title}</span>
               <div className="flex items-center gap-4">
-                <span className="text-foreground text-4xl font-semibold">
+                <span className="text-content-100 text-3xl md:text-4xl md:font-semibold">
                   ≥{card.number}
                 </span>
                 <DotBar progress={card.progress} />
               </div>
             </div>
             {index < cards.length - 1 && (
-              <div className="hidden h-28 w-1 md:block">
-                <Separator orientation="vertical" className="h-16" />
-              </div>
+              <>
+                <div className="hidden h-28 w-1 md:block">
+                  <Separator orientation="vertical" className="h-16" />
+                </div>
+                <div className="block w-full md:hidden">
+                  <Separator />
+                </div>
+              </>
             )}
           </Fragment>
         ))}
       </div>
 
-      <div className="mt-32 w-full max-w-[920px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B] p-[1px]">
+      <div className="mt-10 w-full max-w-[920px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B] p-[1px] md:mt-32">
         <Card className="bg-background w-full">
-          <div className="flex items-center justify-between gap-12 px-14 py-8">
+          <div className="flex flex-col-reverse items-center justify-between gap-12 px-5 py-4 md:flex-row md:px-14 md:py-8">
             <div className="flex flex-1 flex-col gap-4">
               <div className="flex flex-col">
-                <h2 className="text-[60px] leading-[105%] font-semibold">
+                <h2 className="text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
                   Sustainable
                 </h2>
-                <h2 className="text-purple-gradient text-[60px] leading-[105%] font-semibold">
+                <h2 className="text-purple-gradient text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
                   by design
                 </h2>
               </div>
-              <p className="text-content-70 max-w-xl text-lg">
+              <p className="text-content-70 max-w-xl text-center text-base md:text-start">
                 Network revenue from Pro, Teams, VPN, and eSIM services supports
                 buy-back and burn. Tail emission declines over 10 years, minting
                 only to the Rewards Pool.
@@ -70,7 +75,7 @@ export const GovernanceSection = () => {
                 loop
                 muted
                 playsInline
-                className="size-69"
+                className="size-50 md:size-69"
               />
             </div>
           </div>

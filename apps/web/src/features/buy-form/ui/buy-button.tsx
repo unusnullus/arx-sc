@@ -2,11 +2,11 @@
 
 import { memo, useCallback, useMemo } from "react";
 
-import { useAccount, useBalance, useChainId } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 
 import { PermitSettings, usePermit } from "@/entities/permit";
 import { useConnectionCheck } from "@/entities/wallet";
-import { useZapAndBuy } from "@/entities/transactions";
+import { useZapAndBuy, useBuyWithUSDC } from "@/entities/transactions";
 import {
   Token,
   isNativeToken,
@@ -22,15 +22,15 @@ const BuyButtonBase = ({
   permitSettings,
   onResetInput,
 }: {
-  token: Token;
+  token: Token | null;
   amount: string;
   permitSettings: PermitSettings;
   onResetInput: () => void;
 }) => {
-  const { address } = useAccount();
-  const chainId = useChainId();
+  const { address, chainId } = useAccount();
   const { checkConnection } = useConnectionCheck();
   const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
+
   const cfg = useMemo(
     () => addressesByChain[targetChainId] || {},
     [targetChainId],
@@ -38,9 +38,11 @@ const BuyButtonBase = ({
 
   const { data: balance } = useBalance({
     address,
-    ...(!isNativeToken(token.address) && { token: token.address }),
+    ...(!isNativeToken(token?.address) && {
+      token: token?.address,
+    }),
     query: {
-      enabled: !!address && !!token.address,
+      enabled: !!address && !!token?.address,
     },
   });
 
@@ -49,16 +51,28 @@ const BuyButtonBase = ({
     zapAndBuyWithPermit,
     isLoading: isZapLoading,
   } = useZapAndBuy();
+  const { buyWithUSDC, isLoading: isBuyWithUSDCLoading } = useBuyWithUSDC();
   const { createPermit, isLoading: isPermitLoading } = usePermit(token);
+
+  const isUSDC = useMemo(
+    () => cfg.USDC && token?.address.toLowerCase() === cfg.USDC.toLowerCase(),
+    [cfg.USDC, token?.address],
+  );
 
   const handleBuy = useCallback(async () => {
     if (!checkConnection()) return;
 
     try {
+      if (isUSDC) {
+        await buyWithUSDC({ amount });
+        onResetInput();
+        return;
+      }
+
       const percent = permitSettings.slippage ?? 1;
       const slippageBps = BigInt(Math.round(percent * 100));
 
-      if (isNativeToken(token.address)) {
+      if (isNativeToken(token?.address)) {
         await zapAndBuy({
           token,
           amount,
@@ -69,7 +83,6 @@ const BuyButtonBase = ({
       }
 
       if (permitSettings.approve) {
-        // For zapAndBuyWithPermit, spender should be ARX_ZAP_ROUTER
         const spender = cfg.ARX_ZAP_ROUTER as `0x${string}` | undefined;
         if (!spender) {
           console.error("ARX_ZAP_ROUTER address not found");
@@ -100,24 +113,30 @@ const BuyButtonBase = ({
     }
   }, [
     checkConnection,
+    isUSDC,
+    buyWithUSDC,
+    amount,
     permitSettings.slippage,
     permitSettings.approve,
     token,
     zapAndBuy,
-    amount,
     createPermit,
     zapAndBuyWithPermit,
     onResetInput,
     cfg.ARX_ZAP_ROUTER,
   ]);
 
-  const isLoading = isZapLoading || isPermitLoading;
+  const isLoading = isZapLoading || isBuyWithUSDCLoading || isPermitLoading;
   const isInsufficientBalance =
     balance?.value !== undefined &&
-    balance.value < parseUnitsSafe(amount, token.decimals);
+    balance.value < parseUnitsSafe(amount, token?.decimals ?? 0);
 
   const isDisabled =
-    isLoading || !amount || Number(amount) === 0 || isInsufficientBalance;
+    isLoading ||
+    !amount ||
+    Number(amount) === 0 ||
+    isInsufficientBalance ||
+    !token;
 
   return (
     <Button

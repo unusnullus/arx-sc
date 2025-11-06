@@ -23,7 +23,7 @@ const Dot = ({
 
   return (
     <motion.div
-      className="size-0.5 rounded-full bg-foreground"
+      className="size-0.5 rounded-full bg-content-100"
       style={{ opacity: dotOpacity }}
     />
   );

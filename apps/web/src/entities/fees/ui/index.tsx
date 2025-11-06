@@ -29,17 +29,12 @@ export const EstimatedFeesPerGasBase = ({
   if (error) {
     return (
       <div
-        className={cn(
-          "text-error flex items-center gap-1 text-xs sm:text-sm",
-          className,
-        )}
+        className={cn("text-error flex items-center gap-1 text-sm", className)}
         role="alert"
         aria-label="Error fetching network fees"
       >
         <AlertCircle className="h-4" aria-hidden="true" />
-        <span className="text-error text-xs sm:text-sm">
-          Error fetching fees
-        </span>
+        <span className="text-error text-sm">Error fetching fees</span>
       </div>
     );
   }
@@ -48,7 +43,7 @@ export const EstimatedFeesPerGasBase = ({
     return (
       <div
         className={cn(
-          "text-t-secondary flex items-center gap-1 text-xs sm:text-sm",
+          "text-content-70 flex items-center gap-1 text-sm",
           className,
         )}
         aria-label="Loading network fees"
@@ -67,7 +62,7 @@ export const EstimatedFeesPerGasBase = ({
 
   return (
     <div
-      className={cn("text-content-70 text-xs sm:text-sm", className)}
+      className={cn("text-content-70 text-sm", className)}
       aria-label={`Estimated network fee: ${feeAmount} Gwei`}
     >
       {feeAmount} Gwei

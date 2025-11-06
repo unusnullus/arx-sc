@@ -72,7 +72,7 @@ export const IntroArx = () => {
 
   return (
     <div ref={containerRef} className="flex justify-center">
-      <h2 className="my-30 max-w-[1080px] text-center text-[44px] leading-[150%] font-semibold tracking-[-2%]">
+      <h2 className="max-w-[1080px] text-center text-[30px] leading-[150%] font-semibold tracking-[-2%] md:my-30 md:text-[44px]">
         {words.map((word, wordIndex) => {
           const wordStartIndex = words
             .slice(0, wordIndex)

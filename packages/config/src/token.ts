@@ -7,7 +7,7 @@ export interface Token {
   chainId: number;
 }
 
-export const isNativeToken = (address: `0x${string}`): boolean => {
+export const isNativeToken = (address?: `0x${string}`): boolean => {
   return address === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 };
 

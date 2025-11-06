@@ -5,9 +5,11 @@ import { WalletButton, WalletInfo, useConnectWallet } from "@/entities/wallet";
 export const ConnectWallet = ({
   className,
   idle,
+  device,
 }: {
   className?: string;
   idle?: boolean;
+  device?: "mobile" | "tablet" | "desktop";
 }) => {
   const { isConnected, address, handleConnect, handleDisconnect, isLoading } =
     useConnectWallet();
@@ -25,6 +27,7 @@ export const ConnectWallet = ({
       onClick={handleConnect}
       className={className}
       isLoading={isLoading}
+      device={device}
     />
   );
 };

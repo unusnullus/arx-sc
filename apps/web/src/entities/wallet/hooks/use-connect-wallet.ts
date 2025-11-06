@@ -19,12 +19,6 @@ export const useConnectWallet = () => {
   const { openConnectModal, connectModalOpen } = useConnectModal();
 
   useEffect(() => {
-    if (isConnected && address) {
-      toast.success("Wallet connected successfully");
-    }
-  }, [isConnected, address]);
-
-  useEffect(() => {
     if (connectError || isError) {
       const errorMessage = connectError?.message || "Failed to connect wallet";
       toast.error(errorMessage);

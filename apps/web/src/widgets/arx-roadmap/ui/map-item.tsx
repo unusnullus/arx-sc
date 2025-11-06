@@ -27,7 +27,7 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
     const isCompleted = isPassed || isActive;
 
     return (
-      <div ref={ref} className="flex gap-22">
+      <div ref={ref} className="flex gap-10 md:gap-22">
         <div className="relative flex w-0.5 flex-col items-center">
           <div
             className={cn(
@@ -60,19 +60,24 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-8 pt-2 pb-30">
+        <div className="flex flex-col gap-6 pt-2 pb-30 md:gap-8">
           <span
-            className={cn("text-content-70 font-geist-mono text-lg", {
-              "text-secondary": isActive || isCompleted,
-            })}
+            className={cn(
+              "text-content-70 font-geist-mono text-base md:text-lg",
+              {
+                "text-secondary": isActive || isCompleted,
+              },
+            )}
           >
             {date}
           </span>
           <div className="flex flex-col gap-3">
-            <h5 className="text-content-100 text-4xl font-semibold transition-colors duration-300">
+            <h5 className="text-content-100 text-2xl font-semibold transition-colors duration-300 md:text-4xl">
               {title}
             </h5>
-            <p className="text-content-70 text-lg">{description}</p>
+            <p className="text-content-70 text-base md:text-lg">
+              {description}
+            </p>
           </div>
         </div>
       </div>

@@ -6,10 +6,9 @@ import { usePermitSettings } from "@/entities/permit";
 import { CoinAmountInput } from "@/features/coin-amount-input";
 import { BuyForm } from "@/features/buy-form";
 import { TokenMaxBalance } from "@/features/max-balance";
-import { PermitSelection } from "@/features/permit-selection";
 import { SelectCoin } from "@/features/select-coin";
 import { FALLBACK_CHAIN_ID, Token, getTokensByChainId } from "@arx/config";
-import { Card, CardContent, CardHeader } from "@arx/ui/components";
+import { Card, CardContent } from "@arx/ui/components";
 
 export const PoolTransactions = () => {
   const { chainId } = useAccount();
@@ -19,24 +18,19 @@ export const PoolTransactions = () => {
     (token) => token.symbol !== "ARX",
   );
 
-  const { settings, updateSettings } = usePermitSettings();
+  const { settings } = usePermitSettings();
 
   return (
-    <Card className="bg-white-7 w-full max-w-[586px] gap-0">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-semibold">
-              Buy <span className="text-primary">ARX</span>
-            </h2>
-          </div>
+    <Card className="bg-white-7 w-full max-w-[586px] gap-0 py-2 md:py-6">
+      {/* <CardHeader className="px-2 md:px-6">
+        <div className="flex items-center justify-end">
           <PermitSelection
             settings={settings}
             updateSettings={updateSettings}
           />
         </div>
-      </CardHeader>
-      <CardContent>
+      </CardHeader> */}
+      <CardContent className="px-2 md:px-6">
         <BuyForm
           renderSelectCoin={(onSelect: (token: Token) => void) => (
             <SelectCoin onSelect={onSelect} tokens={tokens} />

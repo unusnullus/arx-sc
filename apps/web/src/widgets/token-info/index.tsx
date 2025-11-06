@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Card,
@@ -11,8 +13,38 @@ import { format, setMinutes } from "date-fns";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAccount, useReadContract } from "wagmi";
+import { useMemo } from "react";
+import { FALLBACK_CHAIN_ID, addressesByChain } from "@arx/config";
+import { ARX_TOKEN_SALE_ABI } from "@arx/abi";
+import { formatUnits } from "viem";
+import { truncateDecimals } from "@arx/ui/lib";
 
 export const TokenInfo = () => {
+  const { chainId } = useAccount();
+  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
+
+  const cfg = useMemo(
+    () => addressesByChain[targetChainId] || {},
+    [targetChainId],
+  );
+
+  const { data: priceUSDC } = useReadContract({
+    address: cfg.ARX_TOKEN_SALE as `0x${string}` | undefined,
+    abi: ARX_TOKEN_SALE_ABI,
+    functionName: "priceUSDC",
+    query: {
+      enabled: !!cfg.ARX_TOKEN_SALE,
+    },
+  });
+
+  const formattedPrice = useMemo(() => {
+    if (!priceUSDC) return null;
+
+    const pricePerToken = formatUnits(priceUSDC as bigint, 6);
+    return truncateDecimals(pricePerToken, 4);
+  }, [priceUSDC]);
+
   return (
     <Card className="bg-white-7 w-full rounded-4xl">
       <CardContent className="space-y-6">
@@ -57,7 +89,7 @@ export const TokenInfo = () => {
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-content-100 text-base font-semibold sm:text-xl">
-              $0.9038 / token
+              {formattedPrice ? `$${formattedPrice} / token` : "- / token"}
             </span>
             <span className="text-content-70 text-right text-sm">
               Current market rate
