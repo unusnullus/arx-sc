@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, MotionValue, useScroll, useTransform } from "motion/react";
 
 const text =
-  "Introducing Arx — your private network. Powered by the ARX token, Arx unifies messaging, payments, and connectivity into one secure, self-governed ecosystem.";
+  "Experience Arx — your private network. Where encrypted chats, payments, and connectivity live on the same secure, self-governed layer — powered by the  $ARX token.";
 
 const Letter = ({
   letter,

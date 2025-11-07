@@ -17,8 +17,39 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ARX",
-  description: "ARX is the token that connects users, operators, and builders.",
+  title: "The Arx Network",
+  description:
+    "Speak privately, pay natively, connect securely. Run by the community, not Big Tech. Download Arx and buy $ARX to help govern ArxNet.",
+  applicationName: "ArxNet",
+  openGraph: {
+    title: "The Arx Network",
+    description: "Own your Conversation and money — Get Your ARX",
+    type: "website",
+    url: "https://www.arxnet.io",
+    siteName: "The Arx Network",
+    images: [
+      {
+        url: "https://arxnet.io/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "The Arx Network",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Arx Network",
+    description:
+      "Arx is a fortress for private communication and money—built on a decentralized relay network with an EVM PoS chain.",
+    images: ["https://arxnet.io/opengraph-image"],
+  },
+  metadataBase: new URL("https://arxnet.io"),
+  themeColor: "#171717",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+  },
 };
 
 export default function RootLayout({

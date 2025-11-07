@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, ChevronRight } from "lucide-react";
@@ -15,6 +15,32 @@ import {
 
 export const AppHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    let rafId: number | null = null;
+
+    const handleScroll = () => {
+      if (rafId) return;
+
+      rafId = requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY.current;
+
+        setRotation((prev) => prev + scrollDelta * 0.5);
+        lastScrollY.current = currentScrollY;
+        rafId = null;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const navLinks = [
     { href: "https://www.arx.pro/", label: "Arx.Pro", target: "_blank" },
@@ -36,13 +62,19 @@ export const AppHeader = () => {
       <div className="flex w-full items-center justify-between gap-3">
         <div className="flex items-center justify-start md:w-52">
           <Link href="/" className="cursor-pointer">
-            <Image
-              src="/logo.svg"
-              width={104}
-              height={32}
-              alt="ARX"
-              className="h-6 w-auto md:h-8"
-            />
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logo-arx.svg"
+                width={104}
+                height={32}
+                alt="ARX"
+                className="size-6 w-auto transition-transform duration-0 md:size-8"
+                style={{ transform: `rotate(${rotation}deg)` }}
+              />
+              <span className="text-content-100 text-3xl font-semibold">
+                ARX
+              </span>
+            </div>
           </Link>
         </div>
 
