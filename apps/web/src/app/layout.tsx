@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "The Arx Network",
     images: [
       {
-        url: "https://arxnet.io/opengraph-image",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "The Arx Network",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "The Arx Network",
     description:
       "Arx is a fortress for private communication and money—built on a decentralized relay network with an EVM PoS chain.",
-    images: ["https://arxnet.io/opengraph-image"],
+    images: ["/opengraph-image"],
   },
   metadataBase: new URL("https://arxnet.io"),
   themeColor: "#171717",
