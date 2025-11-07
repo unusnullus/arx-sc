@@ -24,7 +24,7 @@ export const GovernanceSection = () => {
         Stake ARX to earn rewards, run nodes, and take part in shaping network
         parameters.
       </p>
-      <div className="mt-4 flex w-full flex-col items-center justify-between gap-12 md:mt-30 md:mb-25 md:flex-row">
+      <div className="mt-4 flex w-full flex-col items-center justify-between gap-12 md:mt-30 md:mb-25 lg:flex-row">
         {cards.map((card, index) => (
           <Fragment key={card.title}>
             <div className="flex flex-col gap-3">

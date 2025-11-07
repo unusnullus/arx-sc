@@ -9,7 +9,7 @@
    - Environments: .env
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 2.5s
+ [32m[1m✓[22m[39m Ready in 2.3s
  [37m[1m○[22m[39m Compiling / ...
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
@@ -47,230 +47,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 13010ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET /favicon.ico [32m200[39m in 4937ms
- HEAD / [32m200[39m in 1367ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 163ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 453ms
- GET / [32m200[39m in 68ms
-[33m [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.[39m
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
-[33m [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.[39m
+ GET / [32m200[39m in 12509ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -379,7 +156,6 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 14128ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -416,10 +192,8 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET /favicon.ico [32m200[39m in 3740ms
- GET / [32m200[39m in 1447ms
- GET /favicon.ico [32m200[39m in 7ms
- HEAD / [32m200[39m in 448ms
+ GET /favicon.ico [32m200[39m in 4526ms
+ HEAD / [32m200[39m in 3191ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -456,7 +230,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 1199ms
+ GET / [32m200[39m in 785ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -493,7 +267,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 114ms
+ GET / [32m200[39m in 139ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -530,7 +304,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 323ms
+ GET / [32m200[39m in 186ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -567,7 +341,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 210ms
+ GET / [32m200[39m in 166ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -604,8 +378,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 306ms
- GET / [32m200[39m in 675ms
+ GET / [32m200[39m in 111ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -642,6 +415,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
+ GET / [32m200[39m in 185ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -678,8 +452,7 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET /favicon.ico [32m200[39m in 986ms
- HEAD / [32m200[39m in 575ms
+ GET / [32m200[39m in 775ms
 [33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
@@ -716,485 +489,5 @@ Import trace for requested module:
 ../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
 ../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx[39m
- GET / [32m200[39m in 145ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 573ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 433ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 128ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 302ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 89ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 124ms
- GET / [32m200[39m in 829ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 376ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 271ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 143ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 1257ms
-[33m [33m[1m⚠[22m[39m ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
-
-Import trace for requested module:
-../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx
-
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-Module not found: Can't resolve 'pino-pretty' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib'
-
-Import trace for requested module:
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
-../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
-../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
-./src/providers.tsx[39m
- GET / [32m200[39m in 277ms
+ GET / [32m200[39m in 144ms
 [?25h
