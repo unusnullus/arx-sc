@@ -12,20 +12,12 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { getDefaultConfig, darkTheme } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider,
+  getDefaultConfig,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
 import { PropsWithChildren, useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
-
-const RainbowKitProvider = dynamic(
-  () =>
-    import("@rainbow-me/rainbowkit").then((mod) => ({
-      default: mod.RainbowKitProvider,
-    })),
-  {
-    ssr: false,
-    loading: () => null,
-  },
-);
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({}),
