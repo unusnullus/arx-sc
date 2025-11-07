@@ -129,7 +129,7 @@ export const BuyForm = ({
                 <div className="flex h-9 items-center gap-2">
                   <Image
                     src={"/tokens/usdc.svg"}
-                    alt={"USDC"}
+                    alt="USDC token logo"
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
@@ -152,7 +152,7 @@ export const BuyForm = ({
                 <div className="relative">
                   <Image
                     src={arxToken?.logoURI || "/tokens/arx.svg"}
-                    alt={arxToken?.name || "ARX"}
+                    alt={`${arxToken?.name || "ARX"} token logo`}
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
@@ -160,7 +160,7 @@ export const BuyForm = ({
                   {token && (
                     <Image
                       src={token.logoURI || "/tokens/eth.svg"}
-                      alt={token.symbol}
+                      alt={`${token.symbol} token logo`}
                       width={16}
                       height={16}
                       className="border-input absolute -right-1 -bottom-1 size-4 rounded-full border-2 lg:size-5"

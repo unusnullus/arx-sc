@@ -99,7 +99,8 @@ export const useGetRecentTransactions = () => {
         .slice(0, 5);
     },
     enabled: !!publicClient && !!saleAddress,
-    refetchInterval: 30000,
+    gcTime: 5 * 60 * 1000,
+    refetchInterval: 30 * 1000,
   });
 
   return {

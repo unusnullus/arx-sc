@@ -19,12 +19,13 @@ export const Footer = () => {
             href="https://apps.apple.com/us/app/arx-pro/id6752341948"
             target="_blank"
             className="cursor-pointer"
+            aria-label="Download Arx app from App Store"
           >
             <Image
               src="/images/qr.svg"
-              alt="ARX"
-              width={104}
-              height={32}
+              alt="QR code to download Arx app"
+              width={200}
+              height={200}
               className="hidden h-50 w-50 md:block"
             />
           </Link>

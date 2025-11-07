@@ -9,17 +9,43 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: "The Arx Network",
   description:
     "Speak privately, pay natively, connect securely. Run by the community, not Big Tech. Download Arx and buy $ARX to help govern ArxNet.",
+  keywords: [
+    "Arx",
+    "ARX token",
+    "decentralized messaging",
+    "private communication",
+    "crypto wallet",
+    "blockchain",
+    "EVM",
+    "privacy",
+    "encrypted messaging",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   applicationName: "ArxNet",
   openGraph: {
     title: "The Arx Network",
@@ -29,7 +55,7 @@ export const metadata: Metadata = {
     siteName: "The Arx Network",
     images: [
       {
-        url: "/opengraph-image",
+        url: "https://www.arxnet.io/opengraph-image",
         width: 1200,
         height: 630,
         alt: "The Arx Network",
@@ -41,15 +67,9 @@ export const metadata: Metadata = {
     title: "The Arx Network",
     description:
       "Arx is a fortress for private communication and money—built on a decentralized relay network with an EVM PoS chain.",
-    images: ["/opengraph-image"],
+    images: ["https://www.arxnet.io/opengraph-image"],
   },
   metadataBase: new URL("https://www.arxnet.io"),
-  themeColor: "#171717",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    viewportFit: "cover",
-  },
 };
 
 export default function RootLayout({

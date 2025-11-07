@@ -76,6 +76,7 @@ export const GovernanceSection = () => {
                 muted
                 playsInline
                 className="size-50 md:size-69"
+                aria-label="Animation of ARX coin"
               />
             </div>
           </div>

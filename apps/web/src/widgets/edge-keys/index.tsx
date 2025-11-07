@@ -10,6 +10,7 @@ export const EdgeKeys = () => {
             muted
             playsInline
             className="size-32 md:size-40"
+            aria-label="Animation of lock representing security"
           />
         </div>
         <div className="flex flex-col items-center">

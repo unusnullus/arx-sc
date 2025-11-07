@@ -58,11 +58,12 @@ export const ChainSwitcher = ({
                 )}
                 onClick={() => handleChainSwitch(chain.id)}
                 disabled={isSwitching}
+                aria-label={`Switch to ${chain.name} network`}
               >
                 <div className="relative">
                   <Image
                     src={chain.icon}
-                    alt={chain.name}
+                    alt={`${chain.name} network icon`}
                     width={16}
                     height={16}
                     className="h-4 w-4"
@@ -125,11 +126,12 @@ export const ChainSwitcher = ({
                 className="h-11 px-3"
                 onClick={() => handleChainSwitch(chain.id)}
                 disabled={isSwitching}
+                aria-label={`Switch to ${chain.name} network${chain.id === chainId ? " (current)" : ""}`}
               >
                 <div className="relative">
                   <Image
                     src={chain.icon}
-                    alt={chain.name}
+                    alt={`${chain.name} network icon`}
                     width={16}
                     height={16}
                     className="mr-2 h-4 w-4"
@@ -167,6 +169,7 @@ export const ChainSwitcher = ({
                 size="default"
                 className="h-11 px-3"
                 disabled
+                aria-label={`${availableChains.length - maxVisible} more chains available`}
               >
                 <span className="text-sm">
                   +{availableChains.length - maxVisible} more
@@ -193,11 +196,12 @@ export const ChainSwitcher = ({
               className="h-11 px-4"
               onClick={() => handleChainSwitch(chain.id)}
               disabled={isSwitching}
+              aria-label={`Switch to ${chain.name} network${chain.id === chainId ? " (current)" : ""}`}
             >
               <div className="relative">
                 <Image
                   src={chain.icon}
-                  alt={chain.name}
+                  alt={`${chain.name} network icon`}
                   width={20}
                   height={20}
                   className="mr-2 h-5 w-5"

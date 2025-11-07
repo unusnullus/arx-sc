@@ -40,9 +40,9 @@ const Card = ({
         <div className="flex flex-1 items-end justify-center">
           <Image
             src={image}
-            alt={title}
+            alt={`${title} feature illustration showing Arx app interface`}
             width={300}
-            height={100}
+            height={600}
             className="object-contain"
           />
         </div>
@@ -53,7 +53,7 @@ const Card = ({
 
 export const PrivacySection = () => {
   return (
-    <div className="py-10md:py-30 flex flex-col items-center gap-10 md:gap-25">
+    <div className="flex flex-col items-center gap-10 py-10 md:gap-25 md:py-30">
       <div className="flex flex-col items-center">
         <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
           Privacy is value.

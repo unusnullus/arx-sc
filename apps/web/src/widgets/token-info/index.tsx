@@ -59,8 +59,13 @@ export const TokenInfo = () => {
                   href="https://sepolia.etherscan.io/address/0xA4DDb0963792972C6D832aF6C88F9bd4fe30064D"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Open token details on Etherscan"
                 >
-                  <Button variant="ghost" size="icon">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Open token details on Etherscan"
+                  >
                     <ExternalLink className="text-base-secondary size-4" />
                   </Button>
                 </Link>
@@ -82,6 +87,7 @@ export const TokenInfo = () => {
               alt="ARX"
               width={36}
               height={36}
+              priority
               className="size-6 rotate-180 sm:size-7 md:size-8 lg:size-14"
             />
             <div className="flex flex-col gap-1">

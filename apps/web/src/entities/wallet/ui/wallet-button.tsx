@@ -85,7 +85,7 @@ export const WalletButton = ({
         className="text-content-black size-5"
         width={24}
         height={24}
-        loading="lazy"
+        priority
       />
       <span className="text-content-black text-base font-semibold">
         {getButtonText()}

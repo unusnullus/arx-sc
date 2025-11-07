@@ -92,6 +92,7 @@ export const WalletInfo = ({
                   width={20}
                   height={20}
                   role="img"
+                  priority
                   aria-hidden="false"
                 />
               )}

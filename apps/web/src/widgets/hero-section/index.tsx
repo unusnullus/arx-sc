@@ -32,7 +32,8 @@ export const HeroSection = () => {
       <div className="relative flex w-full items-center justify-center">
         <Image
           src="/images/iphone-hand.svg"
-          alt="Iphone Hand"
+          alt="Arx app on iPhone showing secure messaging interface"
+          priority
           width={412}
           height={820}
           className="h-[400px] object-cover md:size-full md:max-h-[892px] md:max-w-[900px] md:object-top"

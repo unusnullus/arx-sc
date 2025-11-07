@@ -68,6 +68,7 @@ export const AppHeader = () => {
                 width={104}
                 height={32}
                 alt="ARX"
+                priority
                 className="size-6 w-auto transition-transform duration-0 md:size-8"
                 style={{ transform: `rotate(${rotation}deg)` }}
               />

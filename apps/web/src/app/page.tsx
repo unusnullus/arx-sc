@@ -1,35 +1,71 @@
-import { BuySection } from "@/widgets/buy-section";
-import { GovernanceSection } from "@/widgets/governance-section";
-import { TokenInfo } from "@/widgets/token-info";
-import { RecentTransaction } from "@/widgets/recent-transactions";
-import { IntroArx } from "@/widgets/intro-arx";
-import { PrivacySection } from "@/widgets/privacy-section";
-import { EdgeKeys } from "@/widgets/edge-keys";
-import { ArxRoadmap } from "@/widgets/arx-roadmap";
-import { CtaSection } from "@/widgets/cta-section";
+import dynamic from "next/dynamic";
+
 import { HeroSection } from "@/widgets/hero-section";
-import { Footer } from "@/widgets/footer";
+import { BuySection } from "@/widgets/buy-section";
+import { TokenDetails } from "@/widgets/token-details";
+
+const GovernanceSection = dynamic(
+  () =>
+    import("@/widgets/governance-section").then((mod) => ({
+      default: mod.GovernanceSection,
+    })),
+  { ssr: true },
+);
+
+const IntroArx = dynamic(
+  () =>
+    import("@/widgets/intro-arx").then((mod) => ({
+      default: mod.IntroArx,
+    })),
+  { ssr: true },
+);
+
+const PrivacySection = dynamic(
+  () =>
+    import("@/widgets/privacy-section").then((mod) => ({
+      default: mod.PrivacySection,
+    })),
+  { ssr: true },
+);
+
+const EdgeKeys = dynamic(
+  () =>
+    import("@/widgets/edge-keys").then((mod) => ({
+      default: mod.EdgeKeys,
+    })),
+  { ssr: true },
+);
+
+const ArxRoadmap = dynamic(
+  () =>
+    import("@/widgets/arx-roadmap").then((mod) => ({
+      default: mod.ArxRoadmap,
+    })),
+  { ssr: true },
+);
+
+const CtaSection = dynamic(
+  () =>
+    import("@/widgets/cta-section").then((mod) => ({
+      default: mod.CtaSection,
+    })),
+  { ssr: true },
+);
+
+const Footer = dynamic(
+  () =>
+    import("@/widgets/footer").then((mod) => ({
+      default: mod.Footer,
+    })),
+  { ssr: true },
+);
 
 export default function Home() {
   return (
     <div className="container flex flex-col gap-20">
       <HeroSection />
       <BuySection />
-      <div className="flex flex-col items-center gap-10 md:gap-20">
-        <div className="flex flex-col items-center gap-6">
-          <h1 className="flex items-center gap-2 text-center text-[32px] leading-[105%] font-semibold md:text-[60px]">
-            Token details & activity
-          </h1>
-          <p className="text-content-70 max-w-md text-center text-lg md:text-xl">
-            Learn more about the ARX token — its role in the Arx Network and
-            your recent activity.{" "}
-          </p>
-        </div>
-        <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2">
-          <TokenInfo />
-          <RecentTransaction />
-        </div>
-      </div>
+      <TokenDetails />
       <GovernanceSection />
       <IntroArx />
       <PrivacySection />
