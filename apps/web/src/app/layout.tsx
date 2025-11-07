@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       "Arx is a fortress for private communication and money—built on a decentralized relay network with an EVM PoS chain.",
     images: ["/opengraph-image"],
   },
-  metadataBase: new URL("https://arxnet.io"),
+  metadataBase: new URL("https://www.arxnet.io"),
   themeColor: "#171717",
   viewport: {
     width: "device-width",
