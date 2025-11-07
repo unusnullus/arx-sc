@@ -58,7 +58,7 @@ export const PrivacySection = () => {
         <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
           Privacy is value.
         </h1>
-        <h1 className="text-content-50 text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
+        <h1 className="text-content-50 text-center text-[32px] leading-[105%] font-semibold md:text-[60px]">
           Ownership is the product.
         </h1>
       </div>
