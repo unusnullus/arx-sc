@@ -27,7 +27,12 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
     const isCompleted = isPassed || isActive;
 
     return (
-      <div ref={ref} className="flex gap-10 md:gap-22">
+      <div
+        ref={ref}
+        className={cn("flex gap-10 transition-opacity duration-300 md:gap-22", {
+          "opacity-70": !isCompleted,
+        })}
+      >
         <div className="relative flex w-0.5 flex-col items-center">
           <div
             className={cn(
@@ -61,14 +66,7 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
           )}
         </div>
         <div className="flex flex-col gap-6 pt-2 pb-30 md:gap-8">
-          <span
-            className={cn(
-              "text-content-70 font-geist-mono text-base md:text-lg",
-              {
-                "text-secondary": isActive || isCompleted,
-              },
-            )}
-          >
+          <span className="text-content-70 font-geist-mono text-base md:text-lg">
             {date}
           </span>
           <div className="flex flex-col gap-3">

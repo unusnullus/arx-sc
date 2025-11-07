@@ -10,7 +10,7 @@ export const DownloadButton = memo(() => {
 
   return (
     <Button
-      className="bg-content-100 h-12 w-full max-w-80 rounded-[100px] px-6 py-3 text-base md:max-w-40"
+      className="bg-content-100 h-12 w-full max-w-80 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF] md:max-w-40"
       onClick={handleDownload}
     >
       <span className="text-content-black text-base font-semibold">

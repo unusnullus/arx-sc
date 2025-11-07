@@ -40,7 +40,7 @@ export const WalletButton = ({
         disabled
         variant="outline"
         className={cn(
-          "bg-content-100 text-content-black hover:bg-content-100/70 h-12 rounded-[100px] px-6 py-3 text-base",
+          "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
           className,
         )}
       >
@@ -59,7 +59,7 @@ export const WalletButton = ({
         variant="destructive"
         onClick={onClick}
         className={cn(
-          "bg-content-100 text-content-black hover:bg-content-100/70 h-12 rounded-[100px] px-6 py-3 text-base",
+          "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
           className,
         )}
       >
@@ -75,7 +75,7 @@ export const WalletButton = ({
     <Button
       onClick={onClick}
       className={cn(
-        "bg-content-100 text-content-black hover:bg-content-100/70 h-12 rounded-[100px] px-6 py-3 text-base",
+        "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
         className,
       )}
     >

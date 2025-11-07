@@ -51,7 +51,7 @@ export const GovernanceSection = () => {
       </div>
 
       <div className="mt-10 w-full max-w-[920px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B] p-[1px] md:mt-32">
-        <Card className="bg-background w-full">
+        <Card className="radial w-full">
           <div className="flex flex-col-reverse items-center justify-between gap-12 px-5 py-4 md:flex-row md:px-14 md:py-8">
             <div className="flex flex-1 flex-col gap-4">
               <div className="flex flex-col">

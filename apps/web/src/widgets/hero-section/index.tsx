@@ -37,8 +37,16 @@ export const HeroSection = () => {
           height={820}
           className="h-[400px] object-cover md:size-full md:max-h-[892px] md:max-w-[900px] md:object-top"
         />
-        <div className="absolute inset-x-0 bottom-0 z-0 h-1/2 mask-t-from-40% backdrop-blur-sm" />
-        <div className="absolute inset-x-0 bottom-0 z-10 h-1/3 bg-gradient-to-t from-black to-black/0" />
+        <div className="progressive-blur-container">
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="blur-filter" />
+          <div className="gradient" />
+        </div>
       </div>
     </div>
   );

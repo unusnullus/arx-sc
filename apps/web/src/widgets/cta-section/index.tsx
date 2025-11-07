@@ -7,16 +7,22 @@ export const CtaSection = () => {
     <div className="bg-white-5 relative flex w-full flex-col items-center gap-10 overflow-hidden rounded-4xl px-6 py-25 md:gap-25 md:px-10 md:py-46">
       <Aurora
         colorStops={[
-          "#6541ff",
-          "#a28cff",
-          "#ff74d4",
-          "#ffb8de",
-          "#ef697e",
-          "#f98549",
-          "#ffdde1",
+          "#9130cb",
+          "#d84ff2",
+          "#6820ea",
+
+          // "#8336d9",
+          // "#a337dc",
+          // "#ce49f1",
+          // "#fb9488",
+          // "#a28cff",
+          // "#ff74d4",
+          // "#ffb8de",
+          // "#f98549",
+          // "#ffdde1",
         ]}
-        blend={0.5}
-        amplitude={0.7}
+        blend={0.3}
+        amplitude={0.5}
         speed={1}
         className="absolute top-0 left-0 z-0 h-full w-full rotate-180"
       />
@@ -32,8 +38,10 @@ export const CtaSection = () => {
           Your conversations and their reliability should belong to you, not Big
           Tech.
         </h1>
-        <BuyArxButton className="w-50 md:max-w-50" />
-        <ConnectWallet idle className="w-50" />
+        <div className="flex flex-col items-center gap-2 md:flex-row">
+          <BuyArxButton className="w-50 md:max-w-50" />
+          <ConnectWallet idle className="w-50" />
+        </div>
       </div>
     </div>
   );

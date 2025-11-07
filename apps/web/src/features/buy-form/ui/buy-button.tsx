@@ -140,9 +140,9 @@ const BuyButtonBase = ({
 
   return (
     <Button
-      className="text-content-100 bg-white-10 h-12 w-full rounded-[100px] py-3 text-base font-semibold"
+      className="text-content-100 bg-white-10 hover:bg-white-15 h-12 w-full rounded-[100px] py-3 text-base font-semibold"
       onClick={handleBuy}
-      disabled={isDisabled}
+      disabled={isDisabled && !!address}
     >
       {isLoading ? (
         <div className="flex items-end gap-0.5">
