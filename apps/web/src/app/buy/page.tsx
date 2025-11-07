@@ -2,8 +2,6 @@ import { PoolTransactions } from "@/widgets/pool-transactions";
 import { TokenInfo } from "@/widgets/token-info";
 import { RecentTransaction } from "@/widgets/recent-transactions";
 
-export const dynamic = "force-dynamic";
-
 export default function BuyPage() {
   return (
     <main className="grid grid-cols-1 gap-4 md:grid-cols-2">
