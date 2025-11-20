@@ -34,7 +34,7 @@ export const ArxRoadmap = () => {
   return (
     <div
       ref={sectionRef}
-      className="grid grid-cols-1 gap-10 md:grid-cols-2 md:py-20"
+      className="grid grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-0 md:py-20"
     >
       <div
         ref={leftColumnRef}
@@ -46,7 +46,7 @@ export const ArxRoadmap = () => {
           transition: "transform 700ms cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <h2 className="text-content-100 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+        <h2 className="text-content-100 text-[38px] leading-[105%] font-semibold md:text-[60px]">
           ARX Hyper
           <br /> Roadmap
         </h2>

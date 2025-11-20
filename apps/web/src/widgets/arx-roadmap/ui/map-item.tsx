@@ -65,7 +65,7 @@ export const MapItem = forwardRef<HTMLDivElement, MapItemProps>(
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-6 pt-2 pb-30 md:gap-8">
+        <div className="flex flex-col gap-6 pt-2 pb-25 md:gap-8 md:pb-30">
           <span className="text-content-70 font-geist-mono text-base md:text-lg">
             {date}
           </span>

@@ -11,12 +11,12 @@ const cards = [
 
 export const GovernanceSection = () => {
   return (
-    <div className="flex flex-col items-center gap-6 py-10 md:py-30">
+    <div className="flex flex-col items-center gap-6 px-4 py-10 md:px-0 md:py-30">
       <div className="flex flex-col items-center">
-        <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+        <h1 className="flex items-center gap-2 text-[38px] leading-[105%] font-semibold md:text-[60px]">
           Stake and govern
         </h1>
-        <h1 className="text-content-50 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+        <h1 className="text-content-50 text-[38px] leading-[105%] font-semibold md:text-[60px]">
           the network
         </h1>
       </div>
@@ -50,15 +50,15 @@ export const GovernanceSection = () => {
         ))}
       </div>
 
-      <div className="mt-10 w-full max-w-[920px] rounded-4xl bg-gradient-to-r from-[#6C6FB4] via-[#42457B00] via-70% to-[#42457B] p-[1px] md:mt-32">
+      <div className="mt-10 w-full max-w-[920px] rounded-[20px] bg-gradient-to-r from-[#6C6FB460] via-[#42457B00] via-75% to-[#42457B] p-[1px] opacity-80 md:mt-32 md:rounded-4xl">
         <Card className="radial w-full">
-          <div className="flex flex-col-reverse items-center justify-between gap-12 px-5 py-4 md:flex-row md:px-14 md:py-8">
+          <div className="flex flex-col-reverse items-center justify-between gap-6 px-5 py-4 md:flex-row md:gap-12 md:px-14 md:py-8">
             <div className="flex flex-1 flex-col gap-4">
               <div className="flex flex-col">
-                <h2 className="text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
+                <h2 className="text-center text-[38px] leading-[105%] font-semibold md:text-start md:text-[60px]">
                   Sustainable
                 </h2>
-                <h2 className="text-purple-gradient text-center text-[32px] leading-[105%] font-semibold md:text-start md:text-[60px]">
+                <h2 className="text-purple-gradient text-center text-[38px] leading-[105%] font-semibold md:text-start md:text-[60px]">
                   by design
                 </h2>
               </div>

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { DownloadApp } from "./download-app";
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col gap-10 py-20 md:gap-24">
+    <footer className="flex flex-col gap-8 px-4 py-20 md:gap-12 md:px-0">
       <div className="flex flex-col justify-between gap-8 md:flex-row">
-        <div className="flex flex-1 items-center justify-between gap-12 md:grow-2 md:flex-col md:items-start">
+        <div className="flex flex-1 items-center justify-between gap-12 md:grow-2 md:flex-col md:items-start md:justify-start">
           <Link href="/" className="cursor-pointer">
             <Image
               src="/logo.svg"
@@ -32,6 +33,9 @@ export const Footer = () => {
           <span className="text-content-100 block text-xs md:hidden">
             © 2025 All rights reserved.
           </span>
+        </div>
+        <div className="flex justify-center md:hidden">
+          <DownloadApp />
         </div>
         <div className="flex flex-1 grow-3 flex-col gap-15">
           <div className="flex justify-between gap-8">
@@ -67,7 +71,7 @@ export const Footer = () => {
                   key={label}
                   className="cursor-pointer"
                 >
-                  <span className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300 md:text-lg">
+                  <span className="text-content-70 hover:text-content-100 cursor-pointer text-[15px] transition-all duration-300 md:text-lg">
                     {label}
                   </span>
                 </Link>
@@ -80,7 +84,7 @@ export const Footer = () => {
               {["Telegram", "Facebook", "LinkedIn", "X.com"].map((item) => (
                 <span
                   key={item}
-                  className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300 md:text-lg"
+                  className="text-content-70 hover:text-content-100 cursor-pointer text-[15px] transition-all duration-300 md:text-lg"
                 >
                   {item}
                 </span>
@@ -88,7 +92,7 @@ export const Footer = () => {
             </div>
           </div>
           <div>
-            <span className="text-content-50 text-xs">
+            <span className="text-content-70 text-xs">
               Arx – private network for messaging, payments, and connectivity.
               Holding or using $ARX does not constitute an investment contract
               or a promise of future value. $ARX is a utility token used for
@@ -97,7 +101,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-8">
+      <div className="border-white-10 flex justify-between gap-8 border-t pt-8 md:pt-12">
         <div className="hidden flex-1 grow-2 md:flex">
           <span className="text-content-100 text-xs">
             © 2025 All rights reserved.

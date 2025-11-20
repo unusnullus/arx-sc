@@ -5,14 +5,14 @@ import { BuyArxButton } from "@/features/buy-arx-button";
 
 export const HeroSection = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-12 py-10 md:gap-30 md:py-35">
-      <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[80px]">
+    <div className="flex flex-col items-center justify-center gap-24 py-10 md:gap-30 md:py-35">
+      <div className="flex flex-col items-center justify-center gap-6 px-4 md:gap-8 md:px-0">
+        <div className="mb-6 flex flex-col items-center justify-center md:mb-0">
+          <h1 className="flex items-center gap-2 text-center text-[38px] leading-[105%] font-semibold tracking-tighter md:text-center md:text-[80px]">
             The Arx Network.
           </h1>
           <TextType
-            className="text-content-50 h-8 text-[32px] leading-[105%] font-semibold md:h-21 md:text-[80px]"
+            className="text-content-50 h-8 text-[38px] leading-[105%] font-semibold tracking-[-0.1em] md:h-21 md:text-[80px]"
             text={["Encrypted.", "Decentralized.", "Community owned."]}
             typingSpeed={75}
             pauseDuration={1500}
@@ -36,7 +36,7 @@ export const HeroSection = () => {
           priority
           width={412}
           height={820}
-          className="h-[400px] object-cover md:size-full md:max-h-[892px] md:max-w-[900px] md:object-top"
+          className="h-[500px] object-cover md:size-full md:h-[400px] md:max-h-[892px] md:max-w-[900px] md:object-top"
         />
         <div className="progressive-blur-container">
           <div className="blur-filter" />

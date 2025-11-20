@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, MotionValue, useScroll, useTransform } from "motion/react";
 
 const text =
-  "Experience Arx — your private network. Where encrypted chats, payments, and connectivity live on the same secure, self-governed layer — powered by the  $ARX token.";
+  "Introducing Arx — your private network. Powered by the ARX token, Arx unifies messaging, payments, and connectivity into one secure, self-governed ecosystem.";
 
 const Letter = ({
   letter,
@@ -71,8 +71,8 @@ export const IntroArx = () => {
   const totalLetters = text.replace(/\s/g, "").length;
 
   return (
-    <div ref={containerRef} className="flex justify-center">
-      <h2 className="max-w-[1080px] text-center text-[30px] leading-[150%] font-semibold tracking-[-2%] md:my-30 md:text-[44px]">
+    <div ref={containerRef} className="flex justify-center px-4 md:px-0">
+      <h2 className="max-w-[1080px] text-center text-[32px] leading-[150%] font-semibold tracking-[-1%] md:my-30 md:text-[44px]">
         {words.map((word, wordIndex) => {
           const wordStartIndex = words
             .slice(0, wordIndex)

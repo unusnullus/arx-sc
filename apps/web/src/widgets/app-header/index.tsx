@@ -60,42 +60,23 @@ export const AppHeader = () => {
   return (
     <header className="sticky top-0 z-40 flex w-full items-center justify-between gap-2 px-4 py-4 backdrop-blur-md md:px-6 md:py-5 lg:px-10 lg:py-5.5">
       <div className="flex w-full items-center justify-between gap-3">
-        <div className="flex items-center justify-start md:w-52">
+        <div className="flex items-center justify-start gap-3 md:w-52">
           <Link href="/" className="cursor-pointer">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 md:gap-2">
               <Image
                 src="/logo-arx.svg"
                 width={104}
                 height={32}
                 alt="ARX"
                 priority
-                className="size-6 w-auto transition-transform duration-0 md:size-8"
+                className="size-5 w-auto transition-transform duration-0 md:size-8"
                 style={{ transform: `rotate(${rotation}deg)` }}
               />
-              <span className="text-content-100 text-3xl font-semibold">
+              <span className="text-content-100 text-xl font-semibold md:text-3xl">
                 ARX
               </span>
             </div>
           </Link>
-        </div>
-
-        <nav className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              target={link.target}
-              className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300"
-            >
-              <span> {link.label}</span>
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3 md:gap-4">
-          <div className="flex justify-end lg:w-52">
-            <ConnectWallet />
-          </div>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <button
@@ -106,7 +87,7 @@ export const AppHeader = () => {
               </button>
             </SheetTrigger>
             <SheetContent
-              side="right"
+              side="left"
               className="bg-background w-full border-none sm:w-80"
             >
               <SheetHeader className="flex h-20 flex-row items-center justify-between px-6 pb-4">
@@ -136,6 +117,25 @@ export const AppHeader = () => {
               </nav>
             </SheetContent>
           </Sheet>
+        </div>
+
+        <nav className="hidden items-center gap-6 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              target={link.target}
+              className="text-content-70 hover:text-content-100 cursor-pointer text-base transition-all duration-300"
+            >
+              <span> {link.label}</span>
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex justify-end lg:w-52">
+            <ConnectWallet />
+          </div>
         </div>
       </div>
     </header>

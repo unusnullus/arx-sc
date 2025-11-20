@@ -46,11 +46,11 @@ export const TokenInfo = () => {
   }, [priceUSDC]);
 
   return (
-    <Card className="bg-white-7 h-fit w-full rounded-4xl">
+    <Card className="bg-white-7 h-fit w-full rounded-[20px] md:rounded-4xl">
       <CardContent className="space-y-6">
         <div className="flex flex-col justify-between sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
-            <span className="text-content-100 font-semibold sm:text-lg lg:text-xl">
+            <span className="text-content-100 text-lg font-semibold lg:text-xl">
               Token Info
             </span>
             <Tooltip useTouch>
@@ -88,17 +88,17 @@ export const TokenInfo = () => {
               width={36}
               height={36}
               priority
-              className="size-6 rotate-180 sm:size-7 md:size-8 lg:size-14"
+              className="size-12 rotate-180 lg:size-14"
             />
             <div className="flex flex-col gap-1">
-              <span className="text-content-100 text-base font-semibold sm:text-xl">
+              <span className="text-content-100 text-lg font-semibold sm:text-xl">
                 ARX
               </span>
               <span className="text-content-70 text-base">ERC-20</span>
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-content-100 text-base font-semibold sm:text-xl">
+            <span className="text-content-100 text-lg font-semibold sm:text-xl">
               {formattedPrice ? `$${formattedPrice} / token` : "- / token"}
             </span>
             <span className="text-content-70 text-right text-sm">
@@ -110,7 +110,7 @@ export const TokenInfo = () => {
         <p className="text-content-70 text-base leading-[150%]">
           A native token securing ArxNet — stake, govern, and earn rewards for
           powering private communication and decentralized infrastructure.{" "}
-          <br />
+          <br className="hidden md:block" />
           Tail emission declines annually for 10 years and mints only to the
           Rewards Pool; governance can tighten further
         </p>

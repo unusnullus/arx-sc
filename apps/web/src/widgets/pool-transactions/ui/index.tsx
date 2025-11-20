@@ -24,7 +24,7 @@ export const PoolTransactions = ({ className }: { className?: string }) => {
   return (
     <Card
       className={cn(
-        "bg-white-7 w-full gap-0 py-2 md:max-w-[586px] md:py-6",
+        "bg-white-7 w-full gap-0 rounded-[20px] py-2 md:max-w-[586px] md:rounded-4xl md:py-6",
         className,
       )}
     >

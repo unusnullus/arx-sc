@@ -62,6 +62,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
   twitter: {
     card: "summary_large_image",
     title: "The Arx Network",
@@ -85,7 +88,7 @@ export default function RootLayout({
         <Providers>
           <div className="relative container h-full">
             <AppHeader />
-            <main className="flex min-h-screen flex-col items-center p-4 md:p-8 md:pt-20">
+            <main className="flex min-h-screen flex-col items-center p-0 md:p-8 md:pt-20">
               {children}
             </main>
           </div>

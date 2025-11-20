@@ -9,7 +9,7 @@ import { cn } from "@arx/ui/lib";
 import { Button } from "@arx/ui/components";
 
 const BUTTON_TEXT = {
-  mobile: { connect: "Connect", retry: "Retry" },
+  mobile: { connect: "Connect Wallet", retry: "Retry" },
   tablet: { connect: "Connect Wallet", retry: "Retry Connection" },
   desktop: { connect: "Connect Wallet", retry: "Retry Connection" },
 } as const;
@@ -40,7 +40,7 @@ export const WalletButton = ({
         disabled
         variant="outline"
         className={cn(
-          "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
+          "bg-content-100 text-content-black h-9 rounded-[100px] px-4 py-[10px] text-base hover:bg-[#E0D0FF] md:h-12 md:px-6 md:py-3",
           className,
         )}
       >
@@ -59,7 +59,7 @@ export const WalletButton = ({
         variant="destructive"
         onClick={onClick}
         className={cn(
-          "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
+          "bg-content-100 text-content-black h-9 rounded-[100px] px-4 py-[10px] text-base hover:bg-[#E0D0FF] md:h-12 md:px-6 md:py-3",
           className,
         )}
       >
@@ -75,7 +75,7 @@ export const WalletButton = ({
     <Button
       onClick={onClick}
       className={cn(
-        "bg-content-100 text-content-black h-12 rounded-[100px] px-6 py-3 text-base hover:bg-[#E0D0FF]",
+        "bg-content-100 text-content-black h-9 rounded-[100px] px-4 py-[10px] text-base hover:bg-[#E0D0FF] md:h-12 md:px-6 md:py-3",
         className,
       )}
     >
