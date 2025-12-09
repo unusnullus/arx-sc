@@ -34,6 +34,7 @@ export const HeroSection = () => {
           src="/images/iphone-hand.svg"
           alt="Arx app on iPhone showing secure messaging interface"
           priority
+          fetchPriority="high"
           width={412}
           height={820}
           className="h-[500px] object-cover md:size-full md:h-[400px] md:max-h-[892px] md:max-w-[900px] md:object-top"

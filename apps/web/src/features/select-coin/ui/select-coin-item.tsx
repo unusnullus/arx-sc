@@ -84,6 +84,8 @@ export const SelectCoinItem = ({
           width={32}
           height={32}
           role="img"
+          priority
+          fetchPriority="high"
           aria-hidden="false"
         />
         <div>

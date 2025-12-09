@@ -86,6 +86,7 @@ export const WalletButton = ({
         width={24}
         height={24}
         priority
+        fetchPriority="high"
       />
       <span className="text-content-black text-base font-semibold">
         {getButtonText()}

@@ -94,6 +94,7 @@ export const WalletInfo = ({
                   role="img"
                   priority
                   aria-hidden="false"
+                  fetchPriority="high"
                 />
               )}
               <span

@@ -85,6 +85,8 @@ export const SelectCoinBase = ({
               width={36}
               height={36}
               className="size-6 sm:size-7 md:size-8 lg:size-9"
+              priority
+              fetchPriority="high"
               role="img"
               aria-hidden="false"
             />

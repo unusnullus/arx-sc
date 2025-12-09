@@ -88,6 +88,7 @@ export const TokenInfo = () => {
               width={36}
               height={36}
               priority
+              fetchPriority="high"
               className="size-12 rotate-180 lg:size-14"
             />
             <div className="flex flex-col gap-1">

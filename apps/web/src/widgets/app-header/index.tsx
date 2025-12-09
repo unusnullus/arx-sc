@@ -69,6 +69,7 @@ export const AppHeader = () => {
                 height={32}
                 alt="ARX"
                 priority
+                fetchPriority="high"
                 className="size-5 w-auto transition-transform duration-0 md:size-8"
                 style={{ transform: `rotate(${rotation}deg)` }}
               />
@@ -98,6 +99,8 @@ export const AppHeader = () => {
                     height={32}
                     alt="ARX"
                     className="h-6 w-auto"
+                    priority
+                    fetchPriority="high"
                   />
                 </Link>
               </SheetHeader>

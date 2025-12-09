@@ -147,6 +147,8 @@ export const PoolBalanceWidget = memo(
                 width={24}
                 height={24}
                 className="size-8"
+                priority
+                fetchPriority="high"
               />
               <span className="text-content-100 text-sm font-semibold md:text-base">
                 USDC
@@ -164,6 +166,8 @@ export const PoolBalanceWidget = memo(
                 width={24}
                 height={24}
                 className="size-8"
+                priority
+                fetchPriority="high"
               />
               <span className="text-content-100 text-sm font-semibold md:text-base">
                 ARX

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SpotlightCard } from "@arx/ui/components";
 
 const cards = [
@@ -37,9 +38,9 @@ const Card = ({
           <p className="text-content-70 text-base md:text-lg">{text}</p>
         </div>
         <div className="flex flex-1 items-end justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}
+            fetchPriority="high"
             alt={`${title} feature illustration showing Arx app interface`}
             className="h-auto w-full max-w-[300px] object-contain"
           />

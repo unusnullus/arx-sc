@@ -103,6 +103,8 @@ export const SwapForm = ({
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
+                    priority
+                    fetchPriority="high"
                   />
                 </div>
                 <span className="text-base-primary text-base font-semibold lg:text-lg">
@@ -150,6 +152,8 @@ export const SwapForm = ({
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
+                    priority
+                    fetchPriority="high"
                   />
                 </div>
                 <span className="text-content-70 text-base font-semibold lg:text-lg">

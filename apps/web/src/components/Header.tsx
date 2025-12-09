@@ -51,7 +51,14 @@ export default function Header() {
     <header className="header-surface sticky top-0 z-40 flex items-center justify-center">
       <div className="container flex items-center justify-between gap-4 px-4 py-3">
         <div className="flex items-center gap-3">
-          <Image src="/logo-dark.svg" width={28} height={28} alt="ARX" />
+          <Image
+            src="/logo-dark.svg"
+            width={28}
+            height={28}
+            alt="ARX"
+            priority
+            fetchPriority="high"
+          />
           <span className="text-sm font-medium tracking-wide">ARX NET</span>
         </div>
         <div className="flex items-center gap-4 text-xs text-neutral-300">
