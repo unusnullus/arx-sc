@@ -22,6 +22,7 @@ import {
 } from "@arx/ui/components";
 import { RATE_POOL_ABI } from "@arx/abi";
 import { cn } from "@arx/ui/lib";
+import Link from "next/link";
 
 export const PoolBalanceWidget = memo(
   ({
@@ -125,12 +126,14 @@ export const PoolBalanceWidget = memo(
                 Pool Balance
               </h1>
               {viewDetails && (
-                <Button
-                  variant="outline"
-                  className="text-content-70 rounded-4xl text-sm"
-                >
-                  View Details
-                </Button>
+                <Link href="/liquidity">
+                  <Button
+                    variant="outline"
+                    className="text-content-70 rounded-4xl text-sm"
+                  >
+                    View Details
+                  </Button>
+                </Link>
               )}
             </div>
           </CardTitle>
