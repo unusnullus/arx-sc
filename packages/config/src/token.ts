@@ -11,6 +11,9 @@ export const isNativeToken = (address?: `0x${string}`): boolean => {
   return address === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
 };
 
+// export const ZERO_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
+export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+
 export const TESTNET_TOKENS: Token[] = [
   {
     address: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",

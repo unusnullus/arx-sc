@@ -7,8 +7,9 @@ import { CoinAmountInput } from "@/features/coin-amount-input";
 import { BuyForm } from "@/features/buy-form";
 import { TokenMaxBalance } from "@/features/max-balance";
 import { SelectCoin } from "@/features/select-coin";
+import { PermitSelection } from "@/features/permit-selection";
 import { FALLBACK_CHAIN_ID, Token, getTokensByChainId } from "@arx/config";
-import { Card, CardContent } from "@arx/ui/components";
+import { Card, CardContent, CardHeader } from "@arx/ui/components";
 import { cn } from "@arx/ui/lib";
 
 export const PoolTransactions = ({ className }: { className?: string }) => {
@@ -19,7 +20,7 @@ export const PoolTransactions = ({ className }: { className?: string }) => {
     (token) => token.symbol !== "ARX",
   );
 
-  const { settings } = usePermitSettings();
+  const { settings, updateSettings } = usePermitSettings();
 
   return (
     <Card
@@ -28,14 +29,14 @@ export const PoolTransactions = ({ className }: { className?: string }) => {
         className,
       )}
     >
-      {/* <CardHeader className="px-2 md:px-6">
+      <CardHeader className="px-2 md:px-6">
         <div className="flex items-center justify-end">
           <PermitSelection
             settings={settings}
             updateSettings={updateSettings}
           />
         </div>
-      </CardHeader> */}
+      </CardHeader>
       <CardContent className="px-2 md:px-6">
         <BuyForm
           renderSelectCoin={(onSelect: (token: Token) => void) => (

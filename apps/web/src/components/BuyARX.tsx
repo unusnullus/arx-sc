@@ -89,7 +89,6 @@ export default function BuyARX() {
         abi: ARX_TOKEN_SALE_ABI,
         functionName: "priceUSDC",
         args: [],
-        chainId: targetChainId,
       });
       setSalePrice(p as bigint);
     } catch {}

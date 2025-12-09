@@ -98,7 +98,7 @@ export const SelectCoinBase = ({
         </SelectValue>
       </SelectTrigger>
       <SelectContent
-        className="w-[300px] rounded-2xl"
+        className="bg-content-grey w-[300px] rounded-2xl border-none"
         role="listbox"
         aria-label="Select token"
       >
@@ -106,7 +106,9 @@ export const SelectCoinBase = ({
           <SelectItem
             key={token.address}
             value={token.address}
-            className="rounded-2xl"
+            className={cn("hover:bg-white-7 rounded-2xl", {
+              "bg-white-7": token.address === selectedToken?.address,
+            })}
             role="option"
             aria-selected={token.address === selectedToken?.address}
           >

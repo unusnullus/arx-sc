@@ -20,7 +20,7 @@ import {
   constants,
   FALLBACK_CHAIN_ID,
 } from "@arx/config";
-import { ARX_ZAP_ROUTER_ABI } from "@arx/abi";
+import { ARX_ZAPPER_ABI, ERC20_ABI } from "@arx/abi";
 import { PermitParams } from "@/entities/permit/types";
 
 export interface ZapAndBuyParams {
@@ -85,6 +85,38 @@ export const useZapAndBuy = () => {
     [],
   );
 
+  const approveIfNeeded = useCallback(
+    async (token: Token, spender: `0x${string}`, amount: bigint) => {
+      if (!publicClient || !wallet || !address) return;
+
+      try {
+        const allowance = (await publicClient
+          .readContract({
+            address: token.address as `0x${string}`,
+            abi: ERC20_ABI,
+            functionName: "allowance",
+            args: [address, spender],
+          })
+          .catch(() => BigInt(0))) as bigint;
+
+        if (allowance >= amount) return;
+
+        const hash = await wallet.writeContract({
+          address: token.address as `0x${string}`,
+          abi: ERC20_ABI,
+          functionName: "approve",
+          args: [spender, amount],
+        });
+
+        await publicClient.waitForTransactionReceipt({ hash });
+      } catch (error) {
+        console.error("Approve failed:", error);
+        throw error;
+      }
+    },
+    [publicClient, wallet, address],
+  );
+
   const zapAndBuy = useCallback(
     async ({
       token,
@@ -100,7 +132,7 @@ export const useZapAndBuy = () => {
 
       await ensureChain();
 
-      const zap = cfg.ARX_ZAP_ROUTER as `0x${string}` | undefined;
+      const zap = cfg.ARX_ZAPPER as `0x${string}` | undefined;
       const usdc = cfg.USDC as `0x${string}` | undefined;
       const weth9 = cfg.WETH9 as `0x${string}` | undefined;
 
@@ -123,31 +155,29 @@ export const useZapAndBuy = () => {
           ? calculateMinUsdcOut(quoteUsdcOut, effectiveSlippageBps)
           : BigInt(0);
 
-        if (isNativeToken(token?.address)) {
-          const pathFromWETH = buildPath(weth9, usdc);
-          const amountWei = parseUnits(amount, token?.decimals ?? 0);
-
-          await wallet.writeContract({
-            address: zap,
-            abi: ARX_ZAP_ROUTER_ABI,
-            functionName: "zapETHAndBuy",
-            args: [pathFromWETH, minUsdcOut, address, deadline],
-            value: amountWei,
-          });
-
-          toast.success("Zap and buy submitted");
-          return;
-        }
-
-        const tokenIn = token?.address as `0x${string}`;
         const amountWei = parseUnits(amount, token?.decimals ?? 0);
-        const path = buildPath(tokenIn, usdc);
+        let tokenIn: `0x${string}`;
+        let path: `0x${string}`;
+
+        if (isNativeToken(token?.address)) {
+          tokenIn =
+            "0x0000000000000000000000000000000000000000" as `0x${string}`;
+          path = buildPath(weth9, usdc);
+        } else {
+          tokenIn = token?.address as `0x${string}`;
+          path = buildPath(tokenIn, usdc);
+
+          if (token) {
+            await approveIfNeeded(token, zap, amountWei);
+          }
+        }
 
         await wallet.writeContract({
           address: zap,
-          abi: ARX_ZAP_ROUTER_ABI,
-          functionName: "zapERC20AndBuy",
+          abi: ARX_ZAPPER_ABI,
+          functionName: "zapAndBuy",
           args: [tokenIn, amountWei, path, minUsdcOut, address, deadline],
+          ...(isNativeToken(token?.address) && { value: amountWei }),
         });
 
         toast.success("Zap and buy submitted");
@@ -169,6 +199,7 @@ export const useZapAndBuy = () => {
       cfg,
       calculateMinUsdcOut,
       buildPath,
+      approveIfNeeded,
     ],
   );
 
@@ -193,7 +224,7 @@ export const useZapAndBuy = () => {
 
       await ensureChain();
 
-      const zap = cfg.ARX_ZAP_ROUTER as `0x${string}` | undefined;
+      const zap = cfg.ARX_ZAPPER as `0x${string}` | undefined;
       const usdc = cfg.USDC as `0x${string}` | undefined;
 
       if (!zap || !usdc) {
@@ -221,8 +252,8 @@ export const useZapAndBuy = () => {
 
         await wallet.writeContract({
           address: zap,
-          abi: ARX_ZAP_ROUTER_ABI,
-          functionName: "zapERC20WithPermitAndBuy",
+          abi: ARX_ZAPPER_ABI,
+          functionName: "zapAndBuyWithPermit",
           args: [
             tokenIn,
             amountWei,
