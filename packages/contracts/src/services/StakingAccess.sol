@@ -2,12 +2,15 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { UUPSUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { OwnableUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { ReentrancyGuardUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {
+    UUPSUpgradeable
+} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import {
+    OwnableUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import {
+    ReentrancyGuardUpgradeable
+} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
@@ -84,7 +87,9 @@ contract StakingAccess is
     /// @param owner_ Initial owner (governance admin, e.g., Timelock/Multisig).
     /// @param _tiers Ascending tier thresholds in ARX base units.
     function initialize(IERC20 arx, address owner_, uint256[] memory _tiers) public initializer {
-        if (address(arx) == address(0) || owner_ == address(0)) revert ZeroAddress();
+        if (address(arx) == address(0) || owner_ == address(0)) {
+            revert ZeroAddress();
+        }
         __Ownable_init(owner_);
         __ReentrancyGuard_init();
         __UUPSUpgradeable_init();
@@ -142,7 +147,9 @@ contract StakingAccess is
         uint256 amount = p.amount;
         if (amount == 0) revert NothingToClaim();
         uint256 availableAt = p.availableAt;
-        if (block.timestamp < availableAt) revert CooldownNotElapsed(availableAt, block.timestamp);
+        if (block.timestamp < availableAt) {
+            revert CooldownNotElapsed(availableAt, block.timestamp);
+        }
         p.amount = 0;
         // keep availableAt as-is (historical), or reset to 0 for clarity
         p.availableAt = 0;
@@ -162,6 +169,26 @@ contract StakingAccess is
             }
         }
         return uint8(len);
+    }
+
+    /// @notice Get all tier thresholds.
+    /// @return Array of tier thresholds in ARX base units (6 decimals).
+    function getAllTiers() public view returns (uint256[] memory) {
+        return tiers;
+    }
+
+    /// @notice Get the number of tier thresholds.
+    /// @return The count of tier thresholds.
+    function getTiersLength() public view returns (uint256) {
+        return tiers.length;
+    }
+
+    /// @notice Check if a user can claim their unstaked tokens.
+    /// @param user Address to check.
+    /// @return True if the cooldown has elapsed and there is an amount to claim.
+    function canClaimUnstaked(address user) public view returns (bool) {
+        Pending memory p = pendingUnstake[user];
+        return p.amount > 0 && block.timestamp >= p.availableAt;
     }
 
     /// @dev UUPS upgrade authorization; restricted to owner (governance).

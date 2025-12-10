@@ -2,12 +2,15 @@
 pragma solidity ^0.8.26;
 
 import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import { OwnableUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { UUPSUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import { ReentrancyGuardUpgradeable } from
-    "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {
+    OwnableUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import {
+    UUPSUpgradeable
+} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import {
+    ReentrancyGuardUpgradeable
+} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { MerkleProof } from "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
@@ -32,7 +35,16 @@ contract ArxMultiTokenMerkleClaim is
     address[] public tokenList;
     mapping(address => mapping(bytes32 => uint256)) public claimed;
 
+    /// @notice Mapping from merkle root to metadata (description or URI).
+    mapping(bytes32 => string) public merkleRootDetails;
+
     error ZeroAddress();
+
+    /// @notice Structure for merkle root details.
+    struct MerkleRootInfo {
+        bytes32 root;
+        string details;
+    }
 
     function initialize(address owner_) public initializer {
         if (owner_ == address(0)) revert ZeroAddress();
@@ -46,6 +58,28 @@ contract ArxMultiTokenMerkleClaim is
         if (merkleRoots[token].length == 0) tokenList.push(token);
         merkleRoots[token].push(root);
         emit MerkleRootAdded(token, root);
+    }
+
+    /// @notice Add merkle root with metadata description.
+    /// @param token Token address.
+    /// @param root Merkle root.
+    /// @param details Description or metadata URI for this root.
+    function addMerkleRootWithDetails(address token, bytes32 root, string calldata details)
+        external
+        onlyOwner
+    {
+        if (token == address(0)) revert ZeroAddress();
+        if (merkleRoots[token].length == 0) tokenList.push(token);
+        merkleRoots[token].push(root);
+        merkleRootDetails[root] = details;
+        emit MerkleRootAdded(token, root);
+    }
+
+    /// @notice Update metadata for an existing merkle root.
+    /// @param root Merkle root.
+    /// @param details Description or metadata URI.
+    function setMerkleRootDetails(bytes32 root, string calldata details) external onlyOwner {
+        merkleRootDetails[root] = details;
     }
 
     function getMerkleRoots(address token) external view returns (bytes32[] memory) {
@@ -109,6 +143,47 @@ contract ArxMultiTokenMerkleClaim is
             for (uint256 j = 0; j < roots.length; j++) {
                 totalClaimed += claimed[user][roots[j]];
             }
+        }
+    }
+
+    /// @notice Check if a claim has been made for a token and root index.
+    /// @param token Token address.
+    /// @param rootIndex Index of the merkle root in the token's root array.
+    /// @param user User address to check.
+    /// @return True if the user has claimed for this root.
+    function isClaimed(address token, uint256 rootIndex, address user)
+        external
+        view
+        returns (bool)
+    {
+        bytes32[] storage roots = merkleRoots[token];
+        if (rootIndex >= roots.length) {
+            return false;
+        }
+        bytes32 root = roots[rootIndex];
+        return claimed[user][root] > 0;
+    }
+
+    /// @notice Get details (description/metadata) for a merkle root.
+    /// @param root Merkle root.
+    /// @return details Description or metadata URI associated with the root.
+    function getMerkleRootDetails(bytes32 root) external view returns (string memory details) {
+        return merkleRootDetails[root];
+    }
+
+    /// @notice Get all merkle roots with their details for a token.
+    /// @param token Token address.
+    /// @return roots Array of merkle roots.
+    /// @return infos Array of MerkleRootInfo structs with root and details.
+    function getMerkleRootsWithDetails(address token)
+        external
+        view
+        returns (bytes32[] memory roots, MerkleRootInfo[] memory infos)
+    {
+        roots = merkleRoots[token];
+        infos = new MerkleRootInfo[](roots.length);
+        for (uint256 i = 0; i < roots.length; i++) {
+            infos[i] = MerkleRootInfo({ root: roots[i], details: merkleRootDetails[roots[i]] });
         }
     }
 
