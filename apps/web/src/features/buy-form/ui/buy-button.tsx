@@ -6,7 +6,7 @@ import { useAccount, useBalance } from "wagmi";
 
 import { PermitSettings, usePermit } from "@/entities/permit";
 import { useConnectionCheck } from "@/entities/wallet";
-import { useZapAndBuy, useBuyWithUSDC } from "@/entities/transactions";
+import { useZapAndBuy } from "@/entities/transactions";
 import {
   Token,
   isNativeToken,
@@ -14,7 +14,7 @@ import {
   FALLBACK_CHAIN_ID,
 } from "@arx/config";
 import { parseUnitsSafe } from "@arx/ui/lib";
-import { Button, Spinner } from "@arx/ui/components";
+import { Button, Spinner, toast } from "@arx/ui/components";
 
 const BuyButtonBase = ({
   token,
@@ -51,24 +51,12 @@ const BuyButtonBase = ({
     zapAndBuyWithPermit,
     isLoading: isZapLoading,
   } = useZapAndBuy();
-  const { buyWithUSDC, isLoading: isBuyWithUSDCLoading } = useBuyWithUSDC();
   const { createPermit, isLoading: isPermitLoading } = usePermit(token);
-
-  const isUSDC = useMemo(
-    () => cfg.USDC && token?.address.toLowerCase() === cfg.USDC.toLowerCase(),
-    [cfg.USDC, token?.address],
-  );
 
   const handleBuy = useCallback(async () => {
     if (!checkConnection()) return;
 
     try {
-      if (isUSDC) {
-        await buyWithUSDC({ amount });
-        onResetInput();
-        return;
-      }
-
       const percent = permitSettings.slippage ?? 1;
       const slippageBps = BigInt(Math.round(percent * 100));
 
@@ -83,9 +71,10 @@ const BuyButtonBase = ({
       }
 
       if (permitSettings.approve) {
-        const spender = cfg.ARX_ZAP_ROUTER as `0x${string}` | undefined;
+        const spender = cfg.ARX_ZAPPER as `0x${string}` | undefined;
+
         if (!spender) {
-          console.error("ARX_ZAP_ROUTER address not found");
+          toast.error("ARX_ZAPPER address not found");
           return;
         }
         const permitParams = await createPermit(amount, spender);
@@ -113,8 +102,6 @@ const BuyButtonBase = ({
     }
   }, [
     checkConnection,
-    isUSDC,
-    buyWithUSDC,
     amount,
     permitSettings.slippage,
     permitSettings.approve,
@@ -123,10 +110,10 @@ const BuyButtonBase = ({
     createPermit,
     zapAndBuyWithPermit,
     onResetInput,
-    cfg.ARX_ZAP_ROUTER,
+    cfg.ARX_ZAPPER,
   ]);
 
-  const isLoading = isZapLoading || isBuyWithUSDCLoading || isPermitLoading;
+  const isLoading = isZapLoading || isPermitLoading;
   const isInsufficientBalance =
     balance?.value !== undefined &&
     balance.value < parseUnitsSafe(amount, token?.decimals ?? 0);

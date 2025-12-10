@@ -14,7 +14,7 @@ export const BuyArxButton = memo(({ className }: { className?: string }) => {
   return (
     <Button
       className={cn(
-        "bg-white-10 hover:bg-white-15 h-12 w-full max-w-80 rounded-[100px] px-6 py-3 text-base md:max-w-40",
+        "bg-white-10 hover:bg-white-15 h-13 w-full max-w-[337px] rounded-[100px] px-6 py-3 text-base md:max-w-40",
         className,
       )}
       onClick={handleBuy}

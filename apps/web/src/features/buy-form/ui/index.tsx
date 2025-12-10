@@ -1,8 +1,8 @@
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 
 import Image from "next/image";
 
-import { useAccount, useReadContract } from "wagmi";
+import { useAccount } from "wagmi";
 
 import { EstimatedFeesPerGas } from "@/entities/fees";
 import { PermitSettings } from "@/entities/permit";
@@ -10,18 +10,16 @@ import { useConnectionCheck } from "@/entities/wallet";
 import {
   FALLBACK_CHAIN_ID,
   Token,
-  addressesByChain,
   getTokenBySymbolSafe,
   getTokensByChainIdSafe,
 } from "@arx/config";
-import { ARX_TOKEN_SALE_ABI } from "@arx/abi";
 import { useDebounceValue } from "@arx/ui/hooks";
-import { parseUnits, formatUnits } from "viem";
 
 import { BuyButton } from "./buy-button";
+import { ArxRate } from "@/entities/token";
 
 export const BuyForm = ({
-  // renderSelectCoin,
+  renderSelectCoin,
   renderCoinAmountInput,
   renderMaxBalance,
   permitSettings,
@@ -44,7 +42,6 @@ export const BuyForm = ({
   const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
   const [amount, setAmount] = useState<string>("");
   const arxToken = getTokenBySymbolSafe("ARX", targetChainId);
-  const usdcToken = getTokenBySymbolSafe("USDC", targetChainId);
 
   const availableTokens = getTokensByChainIdSafe(targetChainId);
   const [token, setToken] = useState<Token | null>(
@@ -53,51 +50,17 @@ export const BuyForm = ({
 
   const debouncedAmount = useDebounceValue(amount, 300);
 
-  const cfg = useMemo(
-    () => addressesByChain[targetChainId] || {},
-    [targetChainId],
-  );
-
-  const { data: priceUSDC } = useReadContract({
-    address: cfg.ARX_TOKEN_SALE as `0x${string}` | undefined,
-    abi: ARX_TOKEN_SALE_ABI,
-    functionName: "priceUSDC",
-    query: {
-      enabled: !!cfg.ARX_TOKEN_SALE,
-    },
-  });
-
-  const arxAmount = useMemo(() => {
-    if (!debouncedAmount || !priceUSDC || !arxToken) return null;
-
-    try {
-      const amountFloat = Number(debouncedAmount);
-      if (!Number.isFinite(amountFloat) || amountFloat <= 0) return null;
-
-      const usdcAmountWei = parseUnits(debouncedAmount, 6);
-      const arxDecimals = arxToken.decimals;
-      const arxAmountWei =
-        (usdcAmountWei * BigInt(10 ** arxDecimals)) / (priceUSDC as bigint);
-
-      return formatUnits(arxAmountWei, arxDecimals);
-    } catch {
-      return null;
-    }
-  }, [debouncedAmount, priceUSDC, arxToken]);
-
   const handleResetInput = useCallback(() => {
     setAmount("");
   }, []);
 
-  // const handleTokenChange = useCallback(
-  //   (newToken: Token | null) => {
-  //     if (!newToken) return;
-
-  //     setToken(newToken);
-  //     handleResetInput();
-  //   },
-  //   [handleResetInput],
-  // );
+  const handleTokenChange = useCallback(
+    (newToken: Token) => {
+      setToken(newToken);
+      handleResetInput();
+    },
+    [handleResetInput],
+  );
 
   const handleAmountChange = useCallback((newAmount: string) => {
     setAmount(newAmount);
@@ -116,36 +79,24 @@ export const BuyForm = ({
     <div className="flex flex-col gap-2">
       <div className="flex flex-col">
         <div className="flex flex-col gap-2">
-          <div className="border-white-10 flex flex-col gap-2 rounded-2xl border bg-black px-4 py-3 pb-2 md:py-3 md:pb-4">
+          <div className="border-white-10 flex flex-col gap-2 rounded-xl border bg-black px-4 py-3 pb-2 md:rounded-2xl md:py-3 md:pb-4">
             <div className="flex items-center justify-between gap-2">
               <span className="text-content-70 text-xs sm:text-sm">
                 Pay with
               </span>
-              {usdcToken &&
-                renderMaxBalance(usdcToken, (value) => setAmount(value))}
+              {token && renderMaxBalance(token, (value) => setAmount(value))}
             </div>
             <div className="flex items-center justify-between gap-2">
               <div className="flex-1">
-                <div className="flex h-9 items-center gap-2">
-                  <Image
-                    src={"/tokens/usdc.svg"}
-                    alt="USDC token logo"
-                    width={36}
-                    height={36}
-                    className="size-6 sm:size-7 md:size-8 lg:size-9"
-                  />
-                  <span className="text-content-70 text-lg font-semibold lg:text-xl">
-                    USDC
-                  </span>
-                </div>
+                {token && renderSelectCoin(handleTokenChange)}
               </div>
               <div className="flex-1">
-                {usdcToken &&
-                  renderCoinAmountInput(usdcToken, amount, handleAmountChange)}
+                {token &&
+                  renderCoinAmountInput(token, amount, handleAmountChange)}
               </div>
             </div>
           </div>
-          <div className="border-white-10 flex items-center justify-between gap-2 rounded-2xl border bg-black px-4 py-3 pb-2 md:py-3 md:pb-4">
+          <div className="border-white-10 flex items-center justify-between gap-2 rounded-xl border bg-black px-4 py-3 pb-2 md:rounded-2xl md:py-3 md:pb-4">
             <div className="flex flex-1 flex-col gap-2">
               <span className="text-content-70 text-xs sm:text-sm">Buy</span>
               <div className="flex h-9 items-center gap-2">
@@ -156,16 +107,16 @@ export const BuyForm = ({
                     width={36}
                     height={36}
                     className="size-6 sm:size-7 md:size-8 lg:size-9"
+                    priority
+                    fetchPriority="high"
                   />
-                  {token && (
-                    <Image
-                      src={token.logoURI || "/tokens/eth.svg"}
-                      alt={`${token.symbol} token logo`}
-                      width={16}
-                      height={16}
-                      className="border-input absolute -right-1 -bottom-1 size-4 rounded-full border-2 lg:size-5"
-                    />
-                  )}
+                  <Image
+                    src={"/tokens/eth.svg"}
+                    alt={`ETH token logo`}
+                    width={16}
+                    height={16}
+                    className="border-input absolute -right-1 -bottom-1 size-4 rounded-full border-2 lg:size-5"
+                  />
                 </div>
                 <span className="text-content-70 text-lg font-semibold lg:text-xl">
                   ARX
@@ -173,11 +124,7 @@ export const BuyForm = ({
               </div>
             </div>
             <div className="flex-1 text-right">
-              {arxAmount && (
-                <div className="text-content-70 text-lg">
-                  ~{Number(arxAmount).toFixed(2)} {arxToken?.symbol || "ARX"}
-                </div>
-              )}
+              {token && <ArxRate token={token} amount={debouncedAmount} />}
             </div>
           </div>
         </div>
@@ -189,7 +136,7 @@ export const BuyForm = ({
 
       {token && (
         <BuyButton
-          token={usdcToken}
+          token={token}
           amount={debouncedAmount}
           permitSettings={permitSettings}
           onResetInput={handleResetInput}

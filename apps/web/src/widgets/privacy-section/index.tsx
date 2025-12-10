@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import { SpotlightCard } from "@arx/ui/components";
-import Image from "next/image";
 
 const cards = [
   {
@@ -38,12 +38,11 @@ const Card = ({
           <p className="text-content-70 text-base md:text-lg">{text}</p>
         </div>
         <div className="flex flex-1 items-end justify-center">
-          <Image
+          <img
             src={image}
+            fetchPriority="high"
             alt={`${title} feature illustration showing Arx app interface`}
-            width={300}
-            height={600}
-            className="object-contain"
+            className="h-auto w-full max-w-[300px] object-contain"
           />
         </div>
       </div>
@@ -53,12 +52,12 @@ const Card = ({
 
 export const PrivacySection = () => {
   return (
-    <div className="flex flex-col items-center gap-10 py-10 md:gap-25 md:py-30">
+    <div className="flex flex-col items-center gap-10 px-4 py-10 md:gap-25 md:px-0 md:py-30">
       <div className="flex flex-col items-center">
-        <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+        <h1 className="flex items-center gap-2 text-[38px] leading-[105%] font-semibold md:text-[60px]">
           Privacy is value.
         </h1>
-        <h1 className="text-content-50 text-center text-[32px] leading-[105%] font-semibold md:text-[60px]">
+        <h1 className="text-content-50 text-center text-[38px] leading-[105%] font-semibold md:text-[60px]">
           Ownership is the product.
         </h1>
       </div>

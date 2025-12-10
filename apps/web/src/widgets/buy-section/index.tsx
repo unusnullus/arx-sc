@@ -5,15 +5,15 @@ export const BuySection = () => {
   return (
     <div
       id="buy"
-      className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-stretch md:gap-10 md:py-30"
+      className="flex flex-col items-center justify-between gap-10 px-4 md:flex-row md:items-stretch md:gap-10 md:py-30"
     >
       <div className="flex flex-1 items-center">
         <div className="flex max-w-[484px] flex-col items-center gap-6 md:items-start">
           <div className="flex flex-col items-center md:items-start">
-            <h1 className="flex items-center gap-2 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+            <h1 className="flex items-center gap-2 text-[38px] leading-[105%] font-semibold md:text-[60px]">
               Buy $ARX token.
             </h1>
-            <h1 className="text-content-50 text-[32px] leading-[105%] font-semibold md:text-[60px]">
+            <h1 className="text-content-50 text-[38px] leading-[105%] font-semibold md:text-[60px]">
               Stake. Govern.
             </h1>
           </div>

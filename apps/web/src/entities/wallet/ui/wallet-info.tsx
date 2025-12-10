@@ -77,7 +77,7 @@ export const WalletInfo = ({
         <PopoverTrigger asChild>
           <Button
             className={cn(
-              "bg-white-10 hover:bg-white-15 text-content-100 h-12 rounded-[100px] px-6 py-3 text-base",
+              "bg-white-10 hover:bg-white-15 text-content-100 h-9 rounded-[100px] px-4 py-[10px] text-base md:h-12 md:px-6 md:py-3",
             )}
             aria-label={`Connected wallet: ${formattedAddress}`}
             aria-haspopup="dialog"
@@ -94,6 +94,7 @@ export const WalletInfo = ({
                   role="img"
                   priority
                   aria-hidden="false"
+                  fetchPriority="high"
                 />
               )}
               <span

@@ -18,6 +18,7 @@
   --content-70: #ffffffb2;
   --content-50: #ffffff80;
   --content-20: #ffffff33;
+  --white-20: #ffffff33;
   --white-15: #ffffff26;
   --white-10: #ffffff1a;
   --white-7: #ffffff12;
@@ -40,15 +41,13 @@
   --color-content-70: var(--content-70);
   --color-content-50: var(--content-50);
   --color-content-20: var(--content-20);
+  --color-white-20: var(--white-20);
   --color-white-15: var(--white-15);
   --color-white-10: var(--white-10);
   --color-white-7: var(--white-7);
   --color-white-5: var(--white-5);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-white-10: var(--white-10);
-  --color-white-7: var(--white-7);
-  --color-white-5: var(--white-5);
   --color-success: var(--success);
   --color-error: var(--error);
   --color-purple-linear-gradient: var(--purple-linear-gradient);
@@ -147,7 +146,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(1) {
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(0.375px);
   mask: linear-gradient(
     to top,
     rgba(0, 0, 0, 0),
@@ -165,7 +164,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(2) {
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(0.75px);
   mask: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 10%,
@@ -183,7 +182,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(3) {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(1.5px);
   mask: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 15%,
@@ -201,7 +200,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(4) {
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(3px);
   mask: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 20%,
@@ -219,7 +218,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(5) {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
   mask: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 40%,
@@ -237,7 +236,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(6) {
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
   mask: linear-gradient(to top, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 80%);
   -webkit-mask: linear-gradient(
     to top,
@@ -247,7 +246,7 @@ body {
 }
 
 .progressive-blur-container > .blur-filter:nth-child(7) {
-  backdrop-filter: blur(48px);
+  backdrop-filter: blur(24px);
   mask: linear-gradient(to top, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%);
   -webkit-mask: linear-gradient(
     to top,

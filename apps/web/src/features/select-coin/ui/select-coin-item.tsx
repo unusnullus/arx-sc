@@ -84,13 +84,15 @@ export const SelectCoinItem = ({
           width={32}
           height={32}
           role="img"
+          priority
+          fetchPriority="high"
           aria-hidden="false"
         />
         <div>
           <p className="text-sm font-medium" aria-label="Token symbol">
             {symbol}
           </p>
-          <p className="text-muted-foreground text-xs" aria-label="Token name">
+          <p className="text-content-70 text-xs" aria-label="Token name">
             {name}
           </p>
         </div>
