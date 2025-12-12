@@ -13,6 +13,7 @@
     "@arx/abi": "workspace:*",
     "@arx/config": "workspace:*",
     "@arx/ui": "workspace:*",
+    "@hookform/resolvers": "^5.2.2",
     "@rainbow-me/rainbowkit": "^2.2.8",
     "@tanstack/react-query": "^5.90.2",
     "class-variance-authority": "^0.7.1",
@@ -22,8 +23,10 @@
     "next": "15.5.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.68.0",
     "viem": "^2.37.9",
     "wagmi": "^2.17.5",
+    "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

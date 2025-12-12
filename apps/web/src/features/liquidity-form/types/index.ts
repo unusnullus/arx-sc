@@ -1,6 +1,5 @@
+import { Token } from "@arx/config";
 import { ReactElement } from "react";
-
-import { Token } from "@/shared/config";
 
 export interface LiquidityFormProps {
   renderSelectCoin: (onSelect: (token: Token) => void) => ReactElement;

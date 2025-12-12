@@ -9,6 +9,8 @@ export type ChainAddresses = {
   SILO_TREASURY?: `0x${string}`;
   RATE_POOL?: `0x${string}`;
   ARX_ZAPPER?: `0x${string}`;
+  ARX_GOVERNOR?: `0x${string}`;
+  ARX_TIMELOCK?: `0x${string}`;
 };
 
 export const addressesByChain: Record<number, ChainAddresses> = {
@@ -30,6 +32,14 @@ export const addressesByChain: Record<number, ChainAddresses> = {
       | `0x${string}`
       | undefined,
     SILO_TREASURY: process.env.NEXT_PUBLIC_SILO_TREASURY as
+      | `0x${string}`
+      | undefined,
+    RATE_POOL: process.env.NEXT_PUBLIC_RATE_POOL as `0x${string}` | undefined,
+    ARX_ZAPPER: process.env.NEXT_PUBLIC_ARX_ZAPPER as `0x${string}` | undefined,
+    ARX_GOVERNOR: process.env.NEXT_PUBLIC_ARX_GOVERNOR as
+      | `0x${string}`
+      | undefined,
+    ARX_TIMELOCK: process.env.NEXT_PUBLIC_ARX_TIMELOCK as
       | `0x${string}`
       | undefined,
   },
@@ -55,6 +65,12 @@ export const addressesByChain: Record<number, ChainAddresses> = {
       | undefined,
     RATE_POOL: process.env.NEXT_PUBLIC_RATE_POOL as `0x${string}` | undefined,
     ARX_ZAPPER: process.env.NEXT_PUBLIC_ARX_ZAPPER as `0x${string}` | undefined,
+    ARX_GOVERNOR: process.env.NEXT_PUBLIC_ARX_GOVERNOR as
+      | `0x${string}`
+      | undefined,
+    ARX_TIMELOCK: process.env.NEXT_PUBLIC_ARX_TIMELOCK as
+      | `0x${string}`
+      | undefined,
   },
   // Base Sepolia (example placeholders)
   84532: {
@@ -70,6 +86,14 @@ export const addressesByChain: Record<number, ChainAddresses> = {
       | `0x${string}`
       | undefined,
     SILO_TREASURY: process.env.NEXT_PUBLIC_SILO_TREASURY as
+      | `0x${string}`
+      | undefined,
+    RATE_POOL: process.env.NEXT_PUBLIC_RATE_POOL as `0x${string}` | undefined,
+    ARX_ZAPPER: process.env.NEXT_PUBLIC_ARX_ZAPPER as `0x${string}` | undefined,
+    ARX_GOVERNOR: process.env.NEXT_PUBLIC_ARX_GOVERNOR as
+      | `0x${string}`
+      | undefined,
+    ARX_TIMELOCK: process.env.NEXT_PUBLIC_ARX_TIMELOCK as
       | `0x${string}`
       | undefined,
   },
