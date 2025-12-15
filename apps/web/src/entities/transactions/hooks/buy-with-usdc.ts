@@ -7,7 +7,6 @@ import {
   useChainId,
   usePublicClient,
   useWalletClient,
-  useSwitchChain,
 } from "wagmi";
 import { toast } from "@arx/ui/components";
 import { parseUnits } from "viem";
@@ -22,13 +21,9 @@ export interface BuyWithUSDCParams {
 export const useBuyWithUSDC = () => {
   const { address } = useAccount();
   const currentChainId = useChainId();
-  const targetChainId = useMemo(
-    () => Number(process.env.NEXT_PUBLIC_CHAIN_ID || FALLBACK_CHAIN_ID),
-    [],
-  );
+  const targetChainId = currentChainId ?? FALLBACK_CHAIN_ID;
   const publicClient = usePublicClient({ chainId: targetChainId });
   const { data: wallet } = useWalletClient();
-  const { switchChain } = useSwitchChain();
   const [isLoading, setIsLoading] = useState(false);
 
   const cfg = useMemo(
@@ -36,25 +31,12 @@ export const useBuyWithUSDC = () => {
     [targetChainId],
   );
 
-  const ensureChain = useCallback(async () => {
-    if (currentChainId !== targetChainId && switchChain) {
-      try {
-        await switchChain({ chainId: targetChainId });
-      } catch (error) {
-        console.error("Failed to switch chain:", error);
-        throw error;
-      }
-    }
-  }, [currentChainId, targetChainId, switchChain]);
-
   const buyWithUSDC = useCallback(
     async ({ amount }: BuyWithUSDCParams) => {
       if (!wallet || !publicClient || !address) {
         toast.error("Wallet not connected");
         return;
       }
-
-      await ensureChain();
 
       const sale = cfg.ARX_TOKEN_SALE as `0x${string}` | undefined;
       const usdc = cfg.USDC as `0x${string}` | undefined;
@@ -104,7 +86,7 @@ export const useBuyWithUSDC = () => {
         setIsLoading(false);
       }
     },
-    [wallet, publicClient, address, ensureChain, cfg],
+    [wallet, publicClient, address, cfg],
   );
 
   return {

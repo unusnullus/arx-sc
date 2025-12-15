@@ -1,22 +1,25 @@
 
+
 > web@0.1.0 build /Users/pepelvlad/Documents/work/arx-sc/apps/web
 > next build
 
-   ▲ Next.js 15.5.4
+   [1m[38;2;173;127;168m▲ Next.js 15.5.7[39m[22m
    - Environments: .env
+   - Experiments (use with caution):
+     · optimizePackageImports
 
-   Creating an optimized production build ...
- ⚠ Compiled with warnings in 15.1s
+ [37m[1m [22m[39m Creating an optimized production build ...
+ ⚠ Compiled with warnings in 15.8s
 
 ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
 Import trace for requested module:
 ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/metaMask.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fbo4g3hqwuwobcuy6nizpqarwq/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__of2tb3tobov66nig7wxtv5wtwu/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx
 
 ../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
@@ -26,33 +29,59 @@ Import trace for requested module:
 ../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/lib/tools.js
 ../../node_modules/.pnpm/pino@7.11.0/node_modules/pino/pino.js
 ../../node_modules/.pnpm/@walletconnect+logger@2.1.2/node_modules/@walletconnect/logger/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@4.1.11/node_modules/@walletconnect/universal-provider/dist/index.es.js
-../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_u3qzqo62w7wsvl6enb3sx6gwly/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+../../node_modules/.pnpm/@walletconnect+universal-provider@2.21.1_bufferutil@4.0.9_typescript@5.9.3_utf-8-validate@5.0.10_zod@3.25.76/node_modules/@walletconnect/universal-provider/dist/index.es.js
+../../node_modules/.pnpm/@walletconnect+ethereum-provider@2.21.1_@types+react@19.1.16_bufferutil@4.0.9_react@19.1.0_ty_3uf2rskld3p4qrefpaexymh57q/node_modules/@walletconnect/ethereum-provider/dist/index.es.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/walletConnect.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fbo4g3hqwuwobcuy6nizpqarwq/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__of2tb3tobov66nig7wxtv5wtwu/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx
 
- ⚠ Compiled with warnings in 10.1s
+ ⚠ Compiled with warnings in 12.4s
 
 ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
 Module not found: Can't resolve '@react-native-async-storage/async-storage' in '/Users/pepelvlad/Documents/work/arx-sc/node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es'
 
 Import trace for requested module:
 ../../node_modules/.pnpm/@metamask+sdk@0.33.1_bufferutil@4.0.9_utf-8-validate@5.0.10/node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/metaMask.js
-../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_jyp5egmn5dcztjzzp5d4uz73dq/node_modules/@wagmi/connectors/dist/esm/exports/index.js
-../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fiq27zp3tako4rgy6sn3ykarju/node_modules/wagmi/dist/esm/exports/connectors.js
-../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__amxtlqcjkx6va5yuc3wk2bezje/node_modules/@rainbow-me/rainbowkit/dist/index.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/metaMask.js
+../../node_modules/.pnpm/@wagmi+connectors@5.11.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16_@wag_fsekxtvacgjb4qbp2jn3s7yqwa/node_modules/@wagmi/connectors/dist/esm/exports/index.js
+../../node_modules/.pnpm/wagmi@2.17.5_@tanstack+query-core@5.90.2_@tanstack+react-query@5.90.2_react@19.1.0__@types+re_fbo4g3hqwuwobcuy6nizpqarwq/node_modules/wagmi/dist/esm/exports/connectors.js
+../../node_modules/.pnpm/@rainbow-me+rainbowkit@2.2.8_@tanstack+react-query@5.90.2_react@19.1.0__@types+react@19.1.16__of2tb3tobov66nig7wxtv5wtwu/node_modules/@rainbow-me/rainbowkit/dist/index.js
 ./src/providers.tsx
 
- ✓ Compiled successfully in 25.2s
-   Skipping validation of types
-   Skipping linting
-   Collecting page data ...
-   Generating static pages (0/3) ...
- ✓ Generating static pages (3/3)
-   Finalizing page optimization ...
-   Collecting build traces ...
- ELIFECYCLE  Command failed with exit code 130.
+ [32m[1m✓[22m[39m Compiled successfully in 29.0s
+ [37m[1m [22m[39m Skipping validation of types
+ [37m[1m [22m[39m Skipping linting
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m...[39m[2K[1G[?25h[33m [33m[1m⚠[22m[39m Using edge runtime on a page currently disables static generation for that page[39m
+[?25l [36m.[39m [2K[1G[?25h    [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/16)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/16)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (8/16)  [36m[==  ][39m[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (16/16)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                                 [4mSize[24m  [4mFirst Load JS[24m  [4m[24m  [4m[24m
+┌ ○ /                                     4.6 kB         [37m[1m525 kB[22m[39m
+├ ○ /_not-found                            998 B         [37m[1m106 kB[22m[39m
+├ ○ /apple-icon.png                          0 B            [37m[1m0 B[22m[39m
+├ ○ /arxnet                                141 B         [37m[1m105 kB[22m[39m
+├ ○ /buy                                 1.35 kB         [37m[1m522 kB[22m[39m
+├ ○ /governance                          20.1 kB         [37m[1m411 kB[22m[39m
+├ ƒ /governance/[proposalId]             3.68 kB         [37m[1m394 kB[22m[39m
+├ ○ /icon0.svg                               0 B            [37m[1m0 B[22m[39m
+├ ○ /icon1.png                               0 B            [37m[1m0 B[22m[39m
+├ ○ /liquidity                           8.15 kB         [37m[1m509 kB[22m[39m
+├ ○ /login                                 141 B         [37m[1m105 kB[22m[39m
+├ ○ /manifest.json                           0 B            [37m[1m0 B[22m[39m
+├ ○ /messenger                             141 B         [37m[1m105 kB[22m[39m
+├ ƒ /opengraph-image                       141 B         [37m[1m105 kB[22m[39m
+└ ○ /sitemap.xml                           141 B         [37m[1m105 kB[22m[39m
++ First Load JS shared by all             [37m[1m105 kB[22m[39m
+  ├ chunks/6708-4cb2b3163e02f8de.js      45.9 kB
+  ├ chunks/81ece718-10a91ae140f8e950.js  54.2 kB
+  └ other shared chunks (total)          4.49 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[?25h

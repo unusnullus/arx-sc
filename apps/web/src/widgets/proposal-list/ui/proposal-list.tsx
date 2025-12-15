@@ -51,7 +51,6 @@ export const ProposalList = () => {
     );
   }
 
-  console.log(filteredProposals);
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -61,7 +60,7 @@ export const ProposalList = () => {
         <ProposalStatusFilter value={filter} onChange={setFilter} />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex max-h-[600px] flex-col gap-4 overflow-y-auto">
         {filteredProposals.map((proposal) => (
           <ProposalCard key={proposal.id.toString()} proposal={proposal} />
         ))}

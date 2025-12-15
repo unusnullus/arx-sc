@@ -15,9 +15,14 @@ import {
 } from "@arx/ui/components";
 import { useGetRecentTransactions } from "@/entities/transactions";
 import { ExternalLink } from "lucide-react";
+import { useAccount } from "wagmi";
+import { etherscanBaseUrl, FALLBACK_CHAIN_ID } from "@arx/config";
 
 export const RecentTransaction = () => {
-  const { transactions, isLoading, error } = useGetRecentTransactions();
+  const { chainId } = useAccount();
+  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
+  const { transactions, isLoading, error } =
+    useGetRecentTransactions(targetChainId);
 
   if (isLoading) {
     return (
@@ -123,7 +128,7 @@ export const RecentTransaction = () => {
                       size="icon"
                       onClick={() =>
                         window.open(
-                          `https://sepolia.etherscan.io/tx/${tx}`,
+                          `${etherscanBaseUrl(targetChainId)}/tx/${tx}`,
                           "_blank",
                         )
                       }

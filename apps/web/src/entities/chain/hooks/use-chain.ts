@@ -17,7 +17,7 @@ export const useChain = (
 
   const { chainId } = useAccount();
   const {
-    switchChain: wagmiSwitchChain,
+    switchChainAsync: wagmiSwitchChain,
     isPending,
     chains,
     error,

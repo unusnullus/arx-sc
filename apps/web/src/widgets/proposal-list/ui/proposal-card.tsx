@@ -61,7 +61,8 @@ export const ProposalCard = ({ proposal }: ProposalCardProps) => {
           <div className="border-white-10 text-content-50 flex flex-wrap items-center gap-4 border-t pt-4 text-xs">
             <div>
               <span className="font-medium">ID:</span>{" "}
-              {formatProposalId(proposal.id)}
+              {formatProposalId(proposal.id).slice(0, 6)}...
+              {formatProposalId(proposal.id).slice(-4)}
             </div>
             <div>
               <span className="font-medium">Snapshot:</span>{" "}

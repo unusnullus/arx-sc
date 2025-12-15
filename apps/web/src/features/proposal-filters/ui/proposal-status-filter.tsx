@@ -21,6 +21,10 @@ export const ProposalStatusFilter = ({
   value,
   onChange,
 }: ProposalStatusFilterProps) => {
+  const proposalStates = Object.values(ProposalState).filter(
+    (state): state is ProposalState => typeof state === "number",
+  );
+
   return (
     <Select
       value={value === "all" ? "all" : value.toString()}
@@ -28,14 +32,18 @@ export const ProposalStatusFilter = ({
         onChange(val === "all" ? "all" : (Number(val) as ProposalState))
       }
     >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Filter by status" />
+      <SelectTrigger className="bg-white-10 w-[180px]">
+        <SelectValue placeholder="Filter by status">
+          {value === "all"
+            ? "All"
+            : getProposalStateLabel(value as ProposalState)}
+        </SelectValue>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="max-h-[300px]">
         <SelectItem value="all">All</SelectItem>
-        {Object.values(ProposalState).map((state) => (
+        {proposalStates.map((state) => (
           <SelectItem key={state} value={state.toString()}>
-            {getProposalStateLabel(state as unknown as ProposalState)}
+            {getProposalStateLabel(state)}
           </SelectItem>
         ))}
       </SelectContent>

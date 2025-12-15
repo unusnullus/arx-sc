@@ -42,7 +42,6 @@ export const useProposalDetails = (proposalId: bigint) => {
         (p) => Number(p.id) === Number(proposalId),
       );
 
-      console.log(proposalExists);
       if (!proposalExists) {
         return null;
       }
@@ -247,8 +246,6 @@ export const useProposalDetails = (proposalId: bigint) => {
       | undefined;
     return receipt;
   }, [data, address]);
-
-  console.log(proposal);
 
   return {
     proposal,

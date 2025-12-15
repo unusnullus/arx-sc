@@ -116,6 +116,8 @@ export const BuyForm = ({
                     width={16}
                     height={16}
                     className="border-input absolute -right-1 -bottom-1 size-4 rounded-full border-2 lg:size-5"
+                    priority
+                    fetchPriority="high"
                   />
                 </div>
                 <span className="text-content-70 text-lg font-semibold lg:text-xl">
