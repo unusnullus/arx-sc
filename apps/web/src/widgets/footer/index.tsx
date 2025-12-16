@@ -3,12 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DownloadApp } from "./download-app";
-import { etherscanBaseUrl, FALLBACK_CHAIN_ID } from "@arx/config";
+import {
+  addressesByChain,
+  etherscanBaseUrl,
+  FALLBACK_CHAIN_ID,
+} from "@arx/config";
 import { useAccount } from "wagmi";
+import { useMemo } from "react";
 
 export const Footer = () => {
   const { chainId } = useAccount();
   const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
+
+  const cfg = useMemo(
+    () => addressesByChain[targetChainId] || {},
+    [targetChainId],
+  );
+
+  const etherscanUrl = useMemo(
+    () => etherscanBaseUrl(targetChainId),
+    [targetChainId],
+  );
 
   return (
     <footer className="flex flex-col gap-8 px-4 py-20 md:gap-12 md:px-0">
@@ -57,7 +72,7 @@ export const Footer = () => {
                   target: "_blank",
                 },
                 {
-                  href: `${etherscanBaseUrl(targetChainId)}/address/0x45B19ac7E4fDC7428a206482E94267EC7baA1221`,
+                  href: `${etherscanUrl}/address/${cfg.ARX}`,
                   label: "Etherscan",
                   target: "_blank",
                 },
