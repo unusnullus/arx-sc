@@ -12,8 +12,12 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@arx/ui/components";
+import { etherscanBaseUrl, FALLBACK_CHAIN_ID } from "@arx/config";
+import { useAccount } from "wagmi";
 
 export const AppHeader = () => {
+  const { chainId } = useAccount();
+  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
   const lastScrollY = useRef(0);
@@ -45,7 +49,7 @@ export const AppHeader = () => {
   const navLinks = [
     { href: "https://www.arx.pro/", label: "Arx.Pro", target: "_blank" },
     {
-      href: "https://sepolia.etherscan.io/address/0x45B19ac7E4fDC7428a206482E94267EC7baA1221",
+      href: `${etherscanBaseUrl(targetChainId)}/address/0x45B19ac7E4fDC7428a206482E94267EC7baA1221`,
       label: "Etherscan",
       target: "_blank",
     },
