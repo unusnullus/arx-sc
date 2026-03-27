@@ -13,15 +13,20 @@ import { format, setMinutes } from "date-fns";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useReadContract } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
 import { useMemo } from "react";
-import { FALLBACK_CHAIN_ID, addressesByChain } from "@arx/config";
+import {
+  FALLBACK_CHAIN_ID,
+  addressesByChain,
+  etherscanBaseUrl,
+} from "@arx/config";
 import { ARX_TOKEN_SALE_ABI } from "@arx/abi";
 import { formatUnits } from "viem";
 import { truncateDecimals } from "@arx/ui/lib";
 
 export const TokenInfo = () => {
-  const targetChainId = FALLBACK_CHAIN_ID;
+  const { chainId } = useAccount();
+  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
 
   const cfg = useMemo(
     () => addressesByChain[targetChainId] || {},
@@ -56,7 +61,7 @@ export const TokenInfo = () => {
             <Tooltip useTouch>
               <TooltipTrigger asChild>
                 <Link
-                  href="https://sepolia.etherscan.io/address/0xA4DDb0963792972C6D832aF6C88F9bd4fe30064D"
+                  href={`${etherscanBaseUrl(targetChainId)}/address/${cfg.ARX}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open token details on Etherscan"

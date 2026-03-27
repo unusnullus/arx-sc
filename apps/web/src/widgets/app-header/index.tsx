@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, ChevronRight } from "lucide-react";
@@ -12,11 +12,29 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@arx/ui/components";
+import {
+  addressesByChain,
+  etherscanBaseUrl,
+  FALLBACK_CHAIN_ID,
+} from "@arx/config";
+import { useAccount } from "wagmi";
 
 export const AppHeader = () => {
+  const { chainId } = useAccount();
+  const targetChainId = chainId ?? FALLBACK_CHAIN_ID;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
   const lastScrollY = useRef(0);
+
+  const cfg = useMemo(
+    () => addressesByChain[targetChainId] || {},
+    [targetChainId],
+  );
+
+  const etherscanUrl = useMemo(
+    () => etherscanBaseUrl(targetChainId),
+    [targetChainId],
+  );
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -45,7 +63,7 @@ export const AppHeader = () => {
   const navLinks = [
     { href: "https://www.arx.pro/", label: "Arx.Pro", target: "_blank" },
     {
-      href: "https://sepolia.etherscan.io/address/0x45B19ac7E4fDC7428a206482E94267EC7baA1221",
+      href: `${etherscanUrl}/address/${cfg.ARX}`,
       label: "Etherscan",
       target: "_blank",
     },

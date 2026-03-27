@@ -8,7 +8,6 @@ import {
   useChainId,
   usePublicClient,
   useWalletClient,
-  useSwitchChain,
 } from "wagmi";
 import { toast } from "@arx/ui/components";
 import { parseUnits } from "viem";
@@ -38,30 +37,15 @@ export interface ZapAndBuyWithPermitParams extends ZapAndBuyParams {
 export const useZapAndBuy = () => {
   const { address } = useAccount();
   const currentChainId = useChainId();
-  const targetChainId = useMemo(
-    () => Number(process.env.NEXT_PUBLIC_CHAIN_ID || FALLBACK_CHAIN_ID),
-    [],
-  );
+  const targetChainId = currentChainId ?? FALLBACK_CHAIN_ID;
   const publicClient = usePublicClient({ chainId: targetChainId });
   const { data: wallet } = useWalletClient();
-  const { switchChain } = useSwitchChain();
   const [isLoading, setIsLoading] = useState(false);
 
   const cfg = useMemo(
     () => addressesByChain[targetChainId] || {},
     [targetChainId],
   );
-
-  const ensureChain = useCallback(async () => {
-    if (currentChainId !== targetChainId && switchChain) {
-      try {
-        await switchChain({ chainId: targetChainId });
-      } catch (error) {
-        console.error("Failed to switch chain:", error);
-        throw error;
-      }
-    }
-  }, [currentChainId, targetChainId, switchChain]);
 
   const calculateMinUsdcOut = useCallback(
     (quoted: bigint, slippageBps: bigint): bigint => {
@@ -130,8 +114,6 @@ export const useZapAndBuy = () => {
         return;
       }
 
-      await ensureChain();
-
       const zap = cfg.ARX_ZAPPER as `0x${string}` | undefined;
       const usdc = cfg.USDC as `0x${string}` | undefined;
       const weth9 = cfg.WETH9 as `0x${string}` | undefined;
@@ -195,7 +177,6 @@ export const useZapAndBuy = () => {
       wallet,
       publicClient,
       address,
-      ensureChain,
       cfg,
       calculateMinUsdcOut,
       buildPath,
@@ -221,8 +202,6 @@ export const useZapAndBuy = () => {
         toast.error("Permit not supported for native tokens");
         return;
       }
-
-      await ensureChain();
 
       const zap = cfg.ARX_ZAPPER as `0x${string}` | undefined;
       const usdc = cfg.USDC as `0x${string}` | undefined;
@@ -261,7 +240,7 @@ export const useZapAndBuy = () => {
             minUsdcOut,
             address,
             deadline,
-            address, // owner
+            address,
             permitParams.value,
             permitParams.deadline,
             permitParams.v,
@@ -281,15 +260,7 @@ export const useZapAndBuy = () => {
         setIsLoading(false);
       }
     },
-    [
-      wallet,
-      publicClient,
-      address,
-      ensureChain,
-      cfg,
-      calculateMinUsdcOut,
-      buildPath,
-    ],
+    [wallet, publicClient, address, cfg, calculateMinUsdcOut, buildPath],
   );
 
   return {

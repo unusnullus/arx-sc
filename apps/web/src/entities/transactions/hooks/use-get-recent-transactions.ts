@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { usePublicClient } from "wagmi";
 import { formatUnits } from "viem";
 
-import { addressesByChain, FALLBACK_CHAIN_ID } from "@arx/config";
+import { addressesByChain } from "@arx/config";
 import { ARX_TOKEN_SALE_ABI } from "@arx/abi";
 
 export interface RecentTransaction {
@@ -18,11 +18,7 @@ export interface RecentTransaction {
   status: "success" | "failed";
 }
 
-export const useGetRecentTransactions = () => {
-  const targetChainId = useMemo(
-    () => Number(process.env.NEXT_PUBLIC_CHAIN_ID || FALLBACK_CHAIN_ID),
-    [],
-  );
+export const useGetRecentTransactions = (targetChainId: number) => {
   const publicClient = usePublicClient({ chainId: targetChainId });
 
   const cfg = useMemo(
