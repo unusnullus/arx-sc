@@ -5,11 +5,50 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
+/// @notice Uniswap V3 swap router interface (exactInput).
+interface ISwapRouterV3 {
+    struct ExactInputParams {
+        bytes path; // token/fee hops encoded per Uniswap spec
+        address recipient; // final recipient of the swapped output
+        uint256 deadline; // timestamp after which tx reverts
+        uint256 amountIn; // exact input amount
+        uint256 amountOutMinimum; // slippage protection
+    }
+
+    function exactInput(ExactInputParams calldata params)
+        external
+        payable
+        returns (uint256 amountOut);
+}
+
 /// @title ClaimVault
 /// @notice Non-custodial escrow for claimable ERC-20 transfers (hashlock coupons).
 /// @dev Sender locks tokens under hashlock; receiver claims with secret; sender can refund after expiry.
 contract ClaimVault is ReentrancyGuard {
     using SafeERC20 for IERC20;
+
+    /// @notice Fixed fee retained by the vault per transfer (3 tokens, 6 decimals).
+    /// @dev Assumes USDC and USDT both use 6 decimals.
+    uint256 public constant FEE_6_DECIMALS = 3_000_000;
+
+    /// @notice Owner allowed to configure swap paths.
+    address public immutable owner;
+
+    /// @notice USDC token address used as swap output for non-stable inputs.
+    IERC20 public immutable USDC;
+    /// @notice USDT token address (may be provided as input).
+    IERC20 public immutable USDT;
+    /// @notice WETH token used as the intermediate hop for swaps.
+    IERC20 public immutable WETH;
+    /// @notice Uniswap V3 router used to swap tokens into USDC.
+    ISwapRouterV3 public immutable swapRouter;
+
+    /// @notice Default Uniswap V3 fee tier for tokenIn -> WETH hop.
+    uint24 public tokenToWethFee;
+    /// @notice Default Uniswap V3 fee tier for WETH -> USDC hop.
+    uint24 public wethToUsdcFee;
+    /// @notice Optional per-token override fee tier for tokenIn -> WETH hop (0 means use default).
+    mapping(address => uint24) public tokenToWethFeeOverride;
 
     struct Transfer {
         address sender;
@@ -35,9 +74,16 @@ contract ClaimVault is ReentrancyGuard {
     );
     event TransferClaimed(bytes32 indexed transferId, address indexed receiver);
     event TransferRefunded(bytes32 indexed transferId);
+    event FeesSet(uint24 tokenToWethFee, uint24 wethToUsdcFee);
+    event TokenToWethFeeOverrideSet(address indexed tokenIn, uint24 fee);
 
     error ZeroAddress();
     error ZeroAmount();
+    error NotOwner();
+    error InvalidUSDCPath();
+    error InsufficientUSDCOut();
+    error InsufficientAfterFee();
+    error FeesNotSet();
     error TransferNotFound();
     error AlreadyClaimed();
     error HashlockMismatch();
@@ -45,9 +91,74 @@ contract ClaimVault is ReentrancyGuard {
     error NotExpired();
     error NotSender();
 
+    constructor(IERC20 usdc_, IERC20 usdt_, IERC20 weth_, ISwapRouterV3 swapRouter_) {
+        if (
+            address(usdc_) == address(0) || address(usdt_) == address(0)
+                || address(weth_) == address(0) || address(swapRouter_) == address(0)
+        ) {
+            revert ZeroAddress();
+        }
+        owner = msg.sender;
+        USDC = usdc_;
+        USDT = usdt_;
+        WETH = weth_;
+        swapRouter = swapRouter_;
+    }
+
+    modifier onlyOwner() {
+        if (msg.sender != owner) revert NotOwner();
+        _;
+    }
+
+    /// @notice Set default Uniswap V3 fee tiers for tokenIn->WETH and WETH->USDC hops.
+    /// @dev Common tiers are 500 (0.05%), 3000 (0.30%), 10000 (1%).
+    function setDefaultFees(uint24 tokenToWethFee_, uint24 wethToUsdcFee_) external onlyOwner {
+        tokenToWethFee = tokenToWethFee_;
+        wethToUsdcFee = wethToUsdcFee_;
+        emit FeesSet(tokenToWethFee_, wethToUsdcFee_);
+    }
+
+    /// @notice Set per-token fee tier override for tokenIn->WETH (0 means use default).
+    function setTokenToWethFeeOverride(address tokenIn, uint24 fee) external onlyOwner {
+        if (tokenIn == address(0)) revert ZeroAddress();
+        tokenToWethFeeOverride[tokenIn] = fee;
+        emit TokenToWethFeeOverrideSet(tokenIn, fee);
+    }
+
+    /// @notice Return the last token in a Uniswap V3 path (the output token).
+    function _lastTokenInPath(bytes memory path) internal pure returns (address token) {
+        bytes memory p = path; // copy to memory for assembly
+        assembly {
+            let len := mload(p)
+            token := shr(96, mload(add(add(p, 32), sub(len, 20))))
+        }
+    }
+
+    function _pathTokenToWethToUsdc(address tokenIn) internal view returns (bytes memory path) {
+        uint24 fee1 = tokenToWethFeeOverride[tokenIn];
+        if (fee1 == 0) fee1 = tokenToWethFee;
+        if (fee1 == 0 || wethToUsdcFee == 0) revert FeesNotSet();
+        // tokenIn (20) + fee (3) + WETH (20) + fee (3) + USDC (20)
+        path = abi.encodePacked(tokenIn, fee1, address(WETH), wethToUsdcFee, address(USDC));
+        // Sanity check: path must end in USDC
+        if (_lastTokenInPath(path) != address(USDC)) revert InvalidUSDCPath();
+    }
+
+    /// @notice Ensure allowance for `spender` is at least `amount`.
+    /// @dev Resets to 0 first when needed and uses SafeERC20.forceApprove to handle non-standard tokens.
+    function _resetAndApprove(IERC20 token, address spender, uint256 amount) internal {
+        uint256 current = token.allowance(address(this), spender);
+        if (current < amount) {
+            if (current > 0) token.forceApprove(spender, 0);
+            token.forceApprove(spender, amount);
+        }
+    }
+
     /// @notice Create a new hashlock transfer (escrow tokens until claim or refund).
-    /// @param token ERC-20 token address.
-    /// @param amount Amount to escrow.
+    /// @dev
+    /// - If `token` is USDC: retains 3 USDC and escrows (amount - 3 USDC) in USDC.
+    /// - If `token` is USDT: retains 3 USDT and escrows (amount - 3 USDT) in USDT.
+    /// - Otherwise: swaps token->WETH->USDC, retains 3 USDC, escrows (usdcOut - 3 USDC) in USDC.
     /// @param hashlock keccak256(secret); claim succeeds when caller provides preimage.
     /// @param expiry Unix timestamp after which sender can refund; claim only before expiry.
     /// @return transferId Id to use for claim/refund.
@@ -59,20 +170,54 @@ contract ClaimVault is ReentrancyGuard {
         if (token == address(0)) revert ZeroAddress();
         if (amount == 0) revert ZeroAmount();
 
+        address escrowToken;
+        uint256 escrowAmount;
+
+        if (token == address(USDC) || token == address(USDT)) {
+            if (amount < FEE_6_DECIMALS) revert InsufficientUSDCOut();
+
+            IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+
+            escrowToken = token;
+            escrowAmount = amount - FEE_6_DECIMALS;
+            if (escrowAmount == 0) revert InsufficientAfterFee();
+        } else {
+            bytes memory path = _pathTokenToWethToUsdc(token);
+
+            IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+            _resetAndApprove(IERC20(token), address(swapRouter), amount);
+
+            uint256 usdcOut = swapRouter.exactInput(
+                ISwapRouterV3.ExactInputParams({
+                    path: path,
+                    recipient: address(this),
+                    deadline: block.timestamp,
+                    amountIn: amount,
+                    amountOutMinimum: FEE_6_DECIMALS + 1
+                })
+            );
+
+            if (usdcOut < FEE_6_DECIMALS) revert InsufficientUSDCOut();
+
+            escrowToken = address(USDC);
+            escrowAmount = usdcOut - FEE_6_DECIMALS;
+
+            if (escrowAmount == 0) revert InsufficientAfterFee();
+        }
+
         transferId = bytes32(_nextTransferId);
         _nextTransferId++;
 
         transfers[transferId] = Transfer({
             sender: msg.sender,
-            token: token,
-            amount: amount,
+            token: escrowToken,
+            amount: escrowAmount,
             hashlock: hashlock,
             expiry: expiry,
             claimed: false
         });
 
-        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
-        emit TransferCreated(transferId, msg.sender, token, amount, hashlock, expiry);
+        emit TransferCreated(transferId, msg.sender, escrowToken, escrowAmount, hashlock, expiry);
     }
 
     /// @notice Claim a transfer by revealing the secret; funds go to receiver.
