@@ -399,6 +399,30 @@ contract ClaimVaultSwapRouterTest is Test {
         assertEq(usdc.balanceOf(address(vault)), fee);
     }
 
+    function test_swapPath_WETH_skipsTokenToWethHop() public {
+        ClaimVault wethVault = new ClaimVault(
+            IERC20(address(usdc)), IERC20(address(usdt)), IERC20(address(weth)), ISwapRouterV3(address(router))
+        );
+        // Only WETH->USDC fee is needed for WETH input
+        wethVault.setDefaultFees(0, 3000);
+
+        uint256 amountIn = 2e18;
+        uint64 expiry = uint64(block.timestamp + 1 days);
+        uint256 fee = wethVault.FEE_6_DECIMALS();
+        uint256 expectedEscrow = 10 * 1e6 - fee;
+
+        weth.mint(sender, amountIn);
+        vm.startPrank(sender);
+        weth.approve(address(wethVault), amountIn);
+        bytes32 transferId = wethVault.createTransfer(address(weth), amountIn, hashlock, expiry);
+        vm.stopPrank();
+
+        (address tSender, address tToken, uint256 tAmount,,,) = wethVault.transfers(transferId);
+        assertEq(tSender, sender);
+        assertEq(tToken, address(usdc));
+        assertEq(tAmount, expectedEscrow);
+    }
+
     function test_swapPath_revertFeesNotSet() public {
         ClaimVault freshVault = new ClaimVault(
             IERC20(address(usdc)), IERC20(address(usdt)), IERC20(address(weth)), ISwapRouterV3(address(router))
@@ -409,5 +433,64 @@ contract ClaimVaultSwapRouterTest is Test {
         vm.expectRevert(ClaimVault.FeesNotSet.selector);
         freshVault.createTransfer(address(link), 1e18, hashlock, uint64(block.timestamp + 1 days));
         vm.stopPrank();
+    }
+}
+
+contract ClaimVaultFeesWithdrawTest is Test {
+    ClaimVault vault;
+    MockUSDC usdc;
+    MockERC20 usdt;
+    MockERC20 weth;
+    RevertingSwapRouter router;
+
+    address sender = address(0x30);
+    address feeRecipient = address(0x31);
+    bytes32 hashlock = keccak256(abi.encode(keccak256("fee-secret")));
+
+    function setUp() public {
+        usdc = new MockUSDC();
+        usdt = new MockERC20("USDT", "USDT", 6);
+        weth = new MockERC20("WETH", "WETH", 18);
+        router = new RevertingSwapRouter();
+        vault = new ClaimVault(
+            IERC20(address(usdc)), IERC20(address(usdt)), IERC20(address(weth)), ISwapRouterV3(address(router))
+        );
+        usdc.mint(sender, 1_000_000e6);
+    }
+
+    function test_withdrawCollectedFees_USDC_onlyWithdrawsFeePortion() public {
+        uint256 amount = 100e6;
+        uint256 fee = vault.FEE_6_DECIMALS();
+
+        vm.startPrank(sender);
+        usdc.approve(address(vault), amount);
+        bytes32 transferId = vault.createTransfer(address(usdc), amount, hashlock, uint64(block.timestamp + 1 days));
+        vm.stopPrank();
+
+        // Fee tracked separately from escrow.
+        assertEq(vault.collectedFees(address(usdc)), fee);
+
+        // Owner (this test contract) withdraws fees to another wallet.
+        vault.withdrawCollectedFees(address(usdc), feeRecipient, fee);
+        assertEq(usdc.balanceOf(feeRecipient), fee);
+        assertEq(vault.collectedFees(address(usdc)), 0);
+
+        // Escrow is still claimable after fee withdrawal.
+        vault.claim(transferId, abi.encode(keccak256("fee-secret")), sender);
+        assertEq(usdc.balanceOf(sender), 1_000_000e6 - amount + (amount - fee));
+    }
+
+    function test_setFee6Decimals_changesChargedFee() public {
+        vault.setFee6Decimals(1_000_000); // 1 USDC
+        uint256 amount = 10e6;
+
+        vm.startPrank(sender);
+        usdc.approve(address(vault), amount);
+        bytes32 transferId = vault.createTransfer(address(usdc), amount, hashlock, uint64(block.timestamp + 1 days));
+        vm.stopPrank();
+
+        (,, uint256 escrowAmount,,,) = vault.transfers(transferId);
+        assertEq(escrowAmount, amount - 1_000_000);
+        assertEq(vault.collectedFees(address(usdc)), 1_000_000);
     }
 }
