@@ -27,9 +27,13 @@ interface ISwapRouterV3 {
 contract ClaimVault is ReentrancyGuard {
     using SafeERC20 for IERC20;
 
-    /// @notice Fixed fee retained by the vault per transfer (3 tokens, 6 decimals).
+    /// @notice Fee retained by the vault per transfer, in 6-decimal units.
     /// @dev Assumes USDC and USDT both use 6 decimals.
-    uint256 public constant FEE_6_DECIMALS = 3_000_000;
+    uint256 public FEE_6_DECIMALS;
+
+    /// @notice Fees collected by the vault per token (only for tokens charged as fees).
+    /// @dev Used to allow safe withdrawals without touching escrowed balances.
+    mapping(address => uint256) public collectedFees;
 
     /// @notice Owner allowed to configure swap paths.
     address public immutable owner;
@@ -76,14 +80,18 @@ contract ClaimVault is ReentrancyGuard {
     event TransferRefunded(bytes32 indexed transferId);
     event FeesSet(uint24 tokenToWethFee, uint24 wethToUsdcFee);
     event TokenToWethFeeOverrideSet(address indexed tokenIn, uint24 fee);
+    event Fee6DecimalsSet(uint256 fee6Decimals);
+    event CollectedFeesWithdrawn(address indexed token, address indexed to, uint256 amount);
 
     error ZeroAddress();
     error ZeroAmount();
+    error ZeroFee();
     error NotOwner();
     error InvalidUSDCPath();
     error InsufficientUSDCOut();
     error InsufficientAfterFee();
     error FeesNotSet();
+    error InsufficientCollectedFees();
     error TransferNotFound();
     error AlreadyClaimed();
     error HashlockMismatch();
@@ -103,6 +111,7 @@ contract ClaimVault is ReentrancyGuard {
         USDT = usdt_;
         WETH = weth_;
         swapRouter = swapRouter_;
+        FEE_6_DECIMALS = 3_000_000;
     }
 
     modifier onlyOwner() {
@@ -118,11 +127,54 @@ contract ClaimVault is ReentrancyGuard {
         emit FeesSet(tokenToWethFee_, wethToUsdcFee_);
     }
 
+    /// @notice Set the per-transfer fee (6 decimals).
+    function setFee6Decimals(uint256 fee6Decimals) external onlyOwner {
+        if (fee6Decimals == 0) revert ZeroFee();
+
+        FEE_6_DECIMALS = fee6Decimals;
+
+        emit Fee6DecimalsSet(fee6Decimals);
+    }
+
     /// @notice Set per-token fee tier override for tokenIn->WETH (0 means use default).
     function setTokenToWethFeeOverride(address tokenIn, uint24 fee) external onlyOwner {
         if (tokenIn == address(0)) revert ZeroAddress();
         tokenToWethFeeOverride[tokenIn] = fee;
         emit TokenToWethFeeOverrideSet(tokenIn, fee);
+    }
+
+    /// @notice Withdraw collected fees for a given token to `to`.
+    /// @dev This only withdraws amounts tracked in `collectedFees`, not arbitrary balances.
+    function withdrawCollectedFees(address token, address to, uint256 amount)
+        external
+        onlyOwner
+        nonReentrant
+    {
+        if (token == address(0) || to == address(0)) revert ZeroAddress();
+        if (amount == 0) revert ZeroAmount();
+
+        uint256 available = collectedFees[token];
+
+        if (amount > available) revert InsufficientCollectedFees();
+
+        collectedFees[token] = available - amount;
+        IERC20(token).safeTransfer(to, amount);
+
+        emit CollectedFeesWithdrawn(token, to, amount);
+    }
+
+    /// @notice Withdraw all collected fees for a given token to `to`.
+    function withdrawAllCollectedFees(address token, address to) external onlyOwner nonReentrant {
+        if (token == address(0) || to == address(0)) revert ZeroAddress();
+
+        uint256 available = collectedFees[token];
+
+        if (available == 0) revert InsufficientCollectedFees();
+
+        collectedFees[token] = 0;
+        IERC20(token).safeTransfer(to, available);
+
+        emit CollectedFeesWithdrawn(token, to, available);
     }
 
     /// @notice Return the last token in a Uniswap V3 path (the output token).
@@ -135,6 +187,14 @@ contract ClaimVault is ReentrancyGuard {
     }
 
     function _pathTokenToWethToUsdc(address tokenIn) internal view returns (bytes memory path) {
+        if (tokenIn == address(WETH)) {
+            if (wethToUsdcFee == 0) revert FeesNotSet();
+            // WETH (20) + fee (3) + USDC (20)
+            path = abi.encodePacked(address(WETH), wethToUsdcFee, address(USDC));
+            if (_lastTokenInPath(path) != address(USDC)) revert InvalidUSDCPath();
+            return path;
+        }
+
         uint24 fee1 = tokenToWethFeeOverride[tokenIn];
         if (fee1 == 0) fee1 = tokenToWethFee;
         if (fee1 == 0 || wethToUsdcFee == 0) revert FeesNotSet();
@@ -181,6 +241,7 @@ contract ClaimVault is ReentrancyGuard {
             escrowToken = token;
             escrowAmount = amount - FEE_6_DECIMALS;
             if (escrowAmount == 0) revert InsufficientAfterFee();
+            collectedFees[token] += FEE_6_DECIMALS;
         } else {
             bytes memory path = _pathTokenToWethToUsdc(token);
 
@@ -203,6 +264,7 @@ contract ClaimVault is ReentrancyGuard {
             escrowAmount = usdcOut - FEE_6_DECIMALS;
 
             if (escrowAmount == 0) revert InsufficientAfterFee();
+            collectedFees[address(USDC)] += FEE_6_DECIMALS;
         }
 
         transferId = bytes32(_nextTransferId);
